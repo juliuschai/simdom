@@ -15,4 +15,10 @@ class DomainController extends Controller
     {
         
     }
+
+    function viewNewDomain(Request $request)
+    {
+        return view('domain.form');
+    }
+
 }

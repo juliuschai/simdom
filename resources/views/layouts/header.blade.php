@@ -25,7 +25,7 @@
 
     <!-- Icon -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="{{ asset('css/icons/font-awesome.css') }}" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link href="{{ asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -52,8 +52,8 @@
                 <!--MENU ADMIN-->  
                 <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Register</a>
                 <ul>       
-                    <li><a href="?cat=administrator&page=register">Form Register Domain</a></li>
-                    <li><a href="?cat=administrator&page=register_server">Form Register Server</a></li> 
+                    <li><a href="{{ route('domain.new') }}">Form Register Domain</a></li>
+                    <li><a href="{{ route('server.new') }}">Form Register Server</a></li> 
                 </ul>
                 </li>
                 <li class="dropdown"><a href="#"><span class="icon-pencil"></span>Profil</a>

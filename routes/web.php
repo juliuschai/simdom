@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Domain management
 Route::get('domain/permintaan/baru', 'PermintaanController@lihatPermintaanBaru')->name('domain.permintaan.baru'); //
 Route::post('domain/permintaan/baru', 'PermintaanController@simpanPermintaanBaru')->name('domain.permintaan.baru');
-// Server management
 
+Route::get('/domain/new', 'DomainController@viewNewDomain')->name('domain.new');
+// Server management
+Route::get('/server/new', 'ServerController@viewNewServer')->name('server.new');
 // Admin
