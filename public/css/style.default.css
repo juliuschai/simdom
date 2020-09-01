@@ -260,7 +260,12 @@ ul.list-nostyle li span, ol.list-nostyle li span { vertical-align: top; }
 
 /* Tables */
 .dataTables_wrapper { position: relative; }
-.dataTables_length, .dataTables_info { background: #eee; padding: 10px; font-size: 11px; border: 1px solid #ddd; }
+.dataTables_length, .dataTables_info { 
+	/* background: #eee;  */
+	padding: 10px; 
+	font-size: 11px; 
+	/* border: 1px solid #ddd;  */
+}
 .dataTables_length { border-bottom: 0; }
 .dataTables_info { border-top: 0; }
 .dataTables_filter { position: absolute; top: 12px; right: 10px; }
