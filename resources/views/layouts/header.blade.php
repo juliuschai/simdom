@@ -1,6 +1,7 @@
 @auth
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,10 +18,11 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap" rel="stylesheet" >
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.default.css') }}" rel="stylesheet">
 
     <!-- Icon -->
@@ -29,77 +31,86 @@
 
     <!-- Bootstrap -->
     <link href="{{ asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}"
+        rel="stylesheet">
     <link href="{{ asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 </head>
+
 <body>
-    <div class="mainwrapper fullwrapper">
+    <div id="app" class="mainwrapper fullwrapper">
         <!--NAVIGASI MENU UTAMA-->
         <div class="leftpanel">
-    	
+
             <div class="logopanel">
                 <h4><a href="dashboard.php"><?php echo "Sistem Informasi Domain ITS"; ?></a></h4>
             </div>
-            
+
             <div class="datewidget">Hari ini: <?php echo date("d M Y"); ?></div>
-            
+
             <div class="leftmenu">
-            <ul class="nav nav-tabs nav-stacked">
-                <li class="active"><a href="dashboard.php"><span class="icon-align-justify"></span> Dashboard</a></li>
-                <!--MENU ADMIN-->  
-                <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Register</a>
-                <ul>       
-                    <li><a href="{{ route('domain.new') }}">Form Register Domain</a></li>
-                    <li><a href="{{ route('server.new') }}">Form Register Server</a></li> 
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="active"><a href="dashboard.php"><span class="icon-align-justify"></span> Dashboard</a>
+                    </li>
+                    <!--MENU ADMIN-->
+                    <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Register</a>
+                        <ul>
+                            <li><a href="{{ route('domain.new') }}">Form Register Domain</a></li>
+                            <li><a href="{{ route('server.new') }}">Form Register Server</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span class="icon-pencil"></span>Profil</a>
+                        <ul>
+                            <li><a href="?cat=administrator&page=datadomain">Lihat Profil Domain</a></li>
+                            <li><a href="?cat=administrator&page=dataserver">Lihat Profil Server</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span class="icon-briefcase"></span>Monitoring</a>
+                        <ul>
+                            <li><a href="?cat=administrator&page=monitor">Form Monitoring Domain</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span class="icon-inbox"></span>Report</a>
+                        <ul>
+                            <li><a href="?cat=administrator&page=report">Data Report</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span class="icon-signal"></span>Grafik</a>
+                        <ul>
+                            <li><a href="?cat=administrator&page=grafik">Lihat Grafik Domain</a></li>
+                            <li><a href="?cat=administrator&page=grafik">Lihat Grafik Server</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span class="icon-user"></span>User</a>
+                        <ul>
+                            <li><a href="?cat=administrator&page=user">Form user</a></li>
+                        </ul>
+                    </li>
                 </ul>
-                </li>
-                <li class="dropdown"><a href="#"><span class="icon-pencil"></span>Profil</a>
-                <ul>       
-                    <li><a href="?cat=administrator&page=datadomain">Lihat Profil Domain</a></li>
-                    <li><a href="?cat=administrator&page=dataserver">Lihat Profil Server</a></li> 
-                </ul>
-                </li>
-                <li class="dropdown"><a href="#"><span class="icon-briefcase"></span>Monitoring</a>
-                <ul>       
-                    <li><a href="?cat=administrator&page=monitor">Form Monitoring Domain</a></li> 
-                </ul>
-                </li>
-                <li class="dropdown"><a href="#"><span class="icon-inbox"></span>Report</a>
-                <ul>       
-                    <li><a href="?cat=administrator&page=report">Data Report</a></li> 
-                </ul>
-                </li>
-                <li class="dropdown"><a href="#"><span class="icon-signal"></span>Grafik</a>
-                <ul>       
-                    <li><a href="?cat=administrator&page=grafik">Lihat Grafik Domain</a></li>
-                    <li><a href="?cat=administrator&page=grafik">Lihat Grafik Server</a></li> 
-                </ul>
-                </li>
-                <li class="dropdown"><a href="#"><span class="icon-user"></span>User</a>
-                <ul>       
-                    <li><a href="?cat=administrator&page=user">Form user</a></li> 
-                </ul>
-                </li>
-            </ul>
             </div>
         </div>
 
         <div class="rightpanel">
 
             <div class="headerpanel">
-            <a href="" class="showmenu"></a>
+                <a href="" class="showmenu"></a>
                 <div class="headerright">
-                    <span  style="color:#FFF">
+                    <span style="color:#FFF">
                         <?php echo "Selamat Datang Kembali Zahra";?>
                     </span>
-                    <div class="dropdown userinfo"> <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Profil Info</a>
+                    <div class="dropdown userinfo"> <a class="dropdown-toggle" data-toggle="dropdown" data-target="#"
+                            href="/page.html">Profil Info</a>
                         <ul class="dropdown-menu">
-                        <li><a href="dashboard.php?cat=web&page=chgpwd"><span class="icon-wrench"></span> Ubah Password</a></li>
-                        <li class="divider"></li>
-                        <li><a href="dashboard.php?cat=web&page=logout"><span class="icon-off"></span> Keluar</a></li>
+                            <li><a href="dashboard.php?cat=web&page=chgpwd"><span class="icon-wrench"></span> Ubah
+                                    Password</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{route('logout')}}" onclick="
+                                event.preventDefault(); 
+                                document.getElementById('logout-form').submit();
+                                "><span class="icon-off"></span>Keluar</a></li>
                         </ul>
                     </div>
                 </div>
@@ -109,14 +120,14 @@
                 <ul class="breadcrumb">
                     <li></li>
                 </ul>
-            </div> 
+            </div>
 
             <div class="pagetitle">
-        	    <h1><?php echo "Aplikasi Domain Berbasis Web"; ?></h1> 
+                <h1><?php echo "Aplikasi Domain Berbasis Web"; ?></h1>
             </div>
 
             <div class="maincontent">
-                <div class="contentinner content-dashboard">            
+                <div class="contentinner content-dashboard">
                     <div class="row-fluid">
                         <main>
                             @yield('content')
@@ -126,19 +137,23 @@
             </div>
 
         </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
 
     </div>
-        
-  @yield('scripts')
-  <script src="{{ asset('js/assets/prettify.js') }}" defer></script>
-  <script src="{{ asset('js/assets/jquery-1.10.1.min.js') }}" defer></script>
-  <script src="{{ asset('js/assets/jquery.alerts.js') }}" defer></script>
-  <script src="{{ asset('js/assets/bootstrap.min.js') }}" defer></script>
-  <script src="{{ asset('js/assets/custom.js') }}" defer></script>
-  <script src="{{ asset('js/assets/jquery.flot.min.js') }}" defer></script>
-  <script src="{{ asset('js/assets/jquery.flot.resize.min.js') }}" defer></script>
-  <script src="{{ asset('js/assets/jquery.js') }}" defer></script>
+
+    @yield('scripts')
+    <script src="{{ asset('js/assets/prettify.js') }}" defer></script>
+    <script src="{{ asset('js/assets/jquery-1.10.1.min.js') }}" defer></script>
+    <script src="{{ asset('js/assets/jquery.alerts.js') }}" defer></script>
+    <script src="{{ asset('js/assets/bootstrap.min.js') }}" defer></script>
+    <script src="{{ asset('js/assets/custom.js') }}" defer></script>
+    <script src="{{ asset('js/assets/jquery.flot.min.js') }}" defer></script>
+    <script src="{{ asset('js/assets/jquery.flot.resize.min.js') }}" defer></script>
+    <script src="{{ asset('js/assets/jquery.js') }}" defer></script>
 </body>
+
 </html>
 @else
 <script type="text/javascript">

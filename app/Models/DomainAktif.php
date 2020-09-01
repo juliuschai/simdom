@@ -18,12 +18,12 @@ class DomainAktif extends Model
 
     function aliases()
     {
-        $this->sejarah_domain->map(function ($array) {
+        $this->sejarah_domains->map(function ($array) {
             return collect($array)->unique('nama_domain')->all();
         });
     }
 
-    function sejarah_domain()
+    function sejarah_domains()
     {
         return $this->hasMany('App\Models\SejarahDomain', 'domain_aktif_id', 'id');
     }

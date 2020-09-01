@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    static function findOrLogout($id) {
+        $user = User::find($id);
+        if (!$user) Auth::logout();
+        return $user;
+    }
+    
+    function isAdmin() {
+        // TODO:
+        // return $this->tipe === 'admin';
+        return true;
+    }
 }

@@ -1966,31 +1966,36 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["units", "tipeUnits"],
+  props: ["secondOptions", "firstOptions", "value", "nameProp"],
   data: function data() {
     return {
-      // From props
-      tipeUnitTerpilih: null,
-      unitTerpilih: null,
-      unitOptions: {}
+      firstValue: null,
+      secondValue: null,
+      secondOptions: {}
     };
   },
   created: function created() {
-    this.konversiUnits();
+    this.convertSecondOptions();
   },
   methods: {
-    konversiUnits: function konversiUnits() {
-      var _iterator = _createForOfIteratorHelper(this.units),
+    convertSecondOptions: function convertSecondOptions() {
+      var _iterator = _createForOfIteratorHelper(this.secondOptions),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var unit = _step.value;
-          var tipe_id = unit.tipe_unit_id;
-          if (!this.unitOptions[tipe_id]) this.unitOptions[tipe_id] = [];
-          this.unitOptions[tipe_id].push({
-            id: unit.id,
-            nama: unit.nama
+          var secondOption = _step.value;
+
+          if (value && secondOption.id === value) {
+            firstValue = secondOption.tipe_unit_id;
+            secondValue = secondOption.id;
+          }
+
+          var tipe_id = secondOption.tipe_unit_id;
+          if (!this.secondOptions[tipe_id]) this.secondOptions[tipe_id] = [];
+          this.secondOptions[tipe_id].push({
+            id: secondOption.id,
+            nama: secondOption.nama
           });
         }
       } catch (err) {
@@ -37639,8 +37644,8 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.tipeUnitTerpilih,
-            expression: "tipeUnitTerpilih"
+            value: _vm.firstValue,
+            expression: "firstValue"
           }
         ],
         on: {
@@ -37653,57 +37658,57 @@ var render = function() {
                 var val = "_value" in o ? o._value : o.value
                 return val
               })
-            _vm.tipeUnitTerpilih = $event.target.multiple
+            _vm.firstValue = $event.target.multiple
               ? $$selectedVal
               : $$selectedVal[0]
           }
         }
       },
-      _vm._l(_vm.tipeUnits, function(tipeUnit, idx) {
-        return _c("option", { key: idx, domProps: { value: tipeUnit.id } }, [
-          _vm._v(_vm._s(tipeUnit.nama))
+      _vm._l(_vm.firstOptions, function(firstOption, idx) {
+        return _c("option", { key: idx, domProps: { value: firstOption.id } }, [
+          _vm._v(_vm._s(firstOption.nama))
         ])
       }),
       0
     ),
     _vm._v(" "),
-    _vm.tipeUnitTerpilih
-      ? _c(
-          "select",
+    _c(
+      "select",
+      {
+        directives: [
           {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.unitTerpilih,
-                expression: "unitTerpilih"
-              }
-            ],
-            attrs: { name: "unit" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.unitTerpilih = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(_vm.unitOptions[_vm.tipeUnitTerpilih], function(unit, idx) {
-            return _c("option", { key: idx, domProps: { value: unit.id } }, [
-              _vm._v(_vm._s(unit.nama))
-            ])
-          }),
-          0
+            name: "model",
+            rawName: "v-model",
+            value: _vm.secondValue,
+            expression: "secondValue"
+          }
+        ],
+        attrs: { name: _vm.nameProp },
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.secondValue = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      _vm._l(_vm.secondOptions[_vm.firstValue], function(secondOption, idx) {
+        return _c(
+          "option",
+          { key: idx, domProps: { value: secondOption.id } },
+          [_vm._v(_vm._s(secondOption.nama))]
         )
-      : _vm._e()
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = []

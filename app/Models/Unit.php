@@ -13,15 +13,21 @@ class Unit extends Model
      */
     public $timestamps = false;
 
-    static function viewUnitBuilder() {
-        return Unit::join('tipe_units', 'tipe_units.id', '=', 'units.unit_type_id')
-            ->select(['units.id', 'units.nama', 'tipe_units.nama as unit_type']);
+    static function viewUnitBuilder()
+    {
+        return Unit::join(
+            'tipe_units',
+            'tipe_units.id',
+            '=',
+            'units.unit_type_id'
+        )->select(['units.id', 'units.nama', 'tipe_units.nama as unit_type']);
     }
 
     /**
      * Get Unit list with ascending names
      */
-    static function getDefault() {
+    static function getDefault()
+    {
         return Unit::orderBy('nama')->get();
     }
 

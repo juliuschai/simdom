@@ -203,7 +203,7 @@
 
 @section('scripts')
 <script src="{{ asset('js/domain/form.js') }}" defer></script>
-<script src="{{ asset('js/form/view.js') }}" defer></script>
+<script src="{{ asset('js/fieldset.js') }}" defer></script>
 <script src="{{ asset('js/form/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 @endsection

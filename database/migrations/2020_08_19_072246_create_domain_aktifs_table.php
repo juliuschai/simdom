@@ -15,13 +15,13 @@ class CreateDomainAktifsTable extends Migration
     {
         Schema::create('domain_aktifs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pj');
-            $table->string('nama_ins');
-            $table->string('no_telp', 30);
-            $table->string('email');
-            $table->string('nama_domain');
-            $table->string('jenis_domain');
-            $table->boolean('status')->default(true);
+            $table->foreignId('user_id')->constrained()->onUpdate('CASCADE');
+            $table->foreignId('unit_id')->constrained()->onUpdate('CASCADE');
+            $table->string('nama_domain', 60);
+            $table->string('nama_panjang');
+            $table->string('alias');
+            $table->foreignId('tipe_server_id')->constrained()->onUpdate('CASCADE');
+            $table->boolean('aktif')->default(true);
             $table->timestamps();
         });
     }

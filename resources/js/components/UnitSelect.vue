@@ -1,45 +1,49 @@
-<!-- Mengambil properti units{tipeUnits: [], units: []} -->
+<!-- Mengambil properti secondOptions{firstOptions: [], secondOptions: []} -->
 <template>
   <div>
-    <select v-model="tipeUnitTerpilih">
+    <select v-model="firstValue">
       <option
-        v-for="(tipeUnit, idx) in tipeUnits"
+        v-for="(firstOption, idx) in firstOptions"
         :key="idx"
-        :value="tipeUnit.id"
-      >{{ tipeUnit.nama }}</option>
+        :value="firstOption.id"
+      >{{ firstOption.nama }}</option>
     </select>
-    <select v-model="unitTerpilih" v-if="tipeUnitTerpilih" name="unit">
+    <select v-model="secondValue" :name="nameProp">
       <option
-        v-for="(unit, idx) in unitOptions[tipeUnitTerpilih]"
+        v-for="(secondOption, idx) in secondOptions[firstValue]"
         :key="idx"
-        :value="unit.id"
-      >{{unit.nama}}</option>
+        :value="secondOption.id"
+      >{{secondOption.nama}}</option>
     </select>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["units", "tipeUnits"],
+  props: ["secondOptions", "firstOptions", "value", "nameProp"],
 
   data() {
     return {
-      tipeUnitTerpilih: null,
-      unitTerpilih: null,
-      unitOptions: {},
+      firstValue: null,
+      secondValue: null,
+      secondOptions: {},
     };
   },
   created() {
-    this.konversiUnits();
+    this.convertSecondOptions();
   },
   methods: {
-    konversiUnits: function () {
-      for (let unit of this.units) {
-        let tipe_id = unit.tipe_unit_id;
-        if (!this.unitOptions[tipe_id]) this.unitOptions[tipe_id] = [];
-        this.unitOptions[tipe_id].push({
-          id: unit.id,
-          nama: unit.nama,
+    convertSecondOptions: function () {
+      for (let secondOption of this.secondOptions) {
+        if (value && secondOption.id === value) {
+          firstValue = secondOption.tipe_unit_id;
+          secondValue = secondOption.id;
+        }
+        let tipe_id = secondOption.tipe_unit_id;
+        if (!this.secondOptions[tipe_id]) this.secondOptions[tipe_id] = [];
+        this.secondOptions[tipe_id].push({
+          id: secondOption.id,
+          nama: secondOption.nama,
         });
       }
     },

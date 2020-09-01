@@ -10,16 +10,18 @@ class CreateSejarahDomainsTable extends Migration
     {
         Schema::create('sejarah_domains', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('domain_aktif_id')->nullable();
-            $table->foreign('domain_aktif_id')->references('id')->on('domain_aktifs')->onUpdate('CASCADE')->onDelete('SET NULL');
-            $table->string('nama_pj');
-            $table->string('nama_ins');
-            $table->string('no_telp', 30);
-            $table->string('email');
-            $table->date('tgl_pengajuan', 50);
-            $table->string('nama_domain');
-            $table->string('jenis_domain');
-            $table->enum('status', ['menunggu', 'diterima', 'ditolak'])->default('menunggu');
+            $table->foreignId('domain_aktif_id')->nullable()->constrained()->onUpdate('CASCADE');
+            $table->foreignId('user_id')->constrained()->onUpdate('CASCADE');
+            $table->foreignId('unit_id')->constrained()->onUpdate('CASCADE');
+            $table->string('nama_domain', 60);
+            $table->string('nama_panjang');
+            $table->string('surat')->nullable(); // PART: max path character amount
+            $table->foreignId('tipe_server_id')->constrained()->onUpdate('CASCADE');
+            $table->enum('status', ['menunggu', 'diterima', 'selesai', 'ditolak'])->default('menunggu');
+            $table->timestamp('waktu_konfirmasi')->nullable()->default(null)
+                ->comment('waktu admin memverifikasi permintaan');
+            $table->timestamp('waktu_selesai')->nullable()->default(null)
+                ->comment('waktu IKTI selesai melakukan/memenuhi permintaan');
             $table->timestamps();
         });
     }

@@ -17,8 +17,25 @@ class SejarahDomain extends Model
      * jenis_domain
      * status (menunggu,diterima,ditolak)
      */
+
+    static function permintaanDomainBaru($req)
+    {
+        SejarahDomain::create([
+            'nama_domain' => $req->namaDomain,
+            'unit_id' => $req->unit,
+            'surat' => null, // PART:
+            'tipe_server' => $req->tipeServer, // PART:
+            'kapasitas' => $req->kapasitas,
+            'keterangan' => $req->keterangan,
+        ]);
+    }
+
     function domain_aktif()
     {
-        return $this->belongsTo('App\Models\DomainAktif', 'domain_aktif_id', 'id');
+        return $this->belongsTo(
+            'App\Models\DomainAktif',
+            'domain_aktif_id',
+            'id'
+        );
     }
 }
