@@ -21,13 +21,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 // Domain management
-Route::get('domain/permintaan/baru', 'PermintaanController@formPermintaanBaru')->name('domain.permintaan.baru'); //
-Route::post('domain/permintaan/baru', 'PermintaanController@simpanPermintaanBaru')->name('domain.permintaan.baru');
+Route::get('/domain/permintaan/baru', 'PermintaanController@formPermintaanBaru')->name('domain.permintaan.baru'); //
+Route::post('/domain/permintaan/baru', 'PermintaanController@simpanPermintaanBaru')->name('domain.permintaan.baru');
 
-Route::get('domain/baru', 'DomainController@formDomainBaru')->name('domain.new');
-Route::post('domain/baru', 'DomainController@simpanDomainBaru')->name('domain.new');
+Route::get('/domain/baru', 'DomainController@formDomainBaru')->name('domain.baru');
+Route::post('/domain/baru', 'DomainController@simpanDomainBaru')->name('domain.baru');
 // Server management
-Route::get('server/new', 'ServerController@formNewServer')->name('server.new');
+Route::get('/domain/list', 'DomainController@listDomain')->name('domain.list');
+Route::get('/domain/data', 'DomainController@listDomainData')->name('domain.data');
+Route::post('/domain/delete/{id}', 'DomainController@deleteDomain')->name('domain.delete');
+// Server management
+Route::get('/server/new', 'ServerController@formNewServer')->name('server.new');
+Route::get('/server/list', 'ServerController@listServer')->name('server.list');
+Route::get('/server/data', 'ServerController@listServerData')->name('server.data');
+Route::post('/server/delete/{id}', 'ServerController@deleteServer')->name('server.delete');
 // Admin
     
 // });
