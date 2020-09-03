@@ -13,6 +13,11 @@ class Unit extends Model
      */
     public $timestamps = false;
 
+    static function getSorted()
+    {
+        return Unit::orderBy('nama')->get();
+    }
+
     static function viewUnitBuilder()
     {
         return Unit::join(
@@ -21,14 +26,6 @@ class Unit extends Model
             '=',
             'units.unit_type_id'
         )->select(['units.id', 'units.nama', 'tipe_units.nama as unit_type']);
-    }
-
-    /**
-     * Get Unit list with ascending names
-     */
-    static function getDefault()
-    {
-        return Unit::orderBy('nama')->get();
     }
 
     function tipeUnit()

@@ -1939,16 +1939,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-//
-//
-//
-//
 //
 //
 //
@@ -1966,42 +1956,53 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["secondOptions", "firstOptions", "value", "nameProp"],
+  props: ["seconds", "firsts", "optionValue", "nameProp"],
   data: function data() {
     return {
       firstValue: null,
       secondValue: null,
-      secondOptions: {}
+      secOpts: {}
     };
   },
   created: function created() {
-    this.convertSecondOptions();
+    this.convertSeconds();
   },
   methods: {
-    convertSecondOptions: function convertSecondOptions() {
-      var _iterator = _createForOfIteratorHelper(this.secondOptions),
-          _step;
+    convertSeconds: function convertSeconds() {
+      var _this = this;
 
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var secondOption = _step.value;
+      // for (const second of this.seconds) {
+      //   const tipe_id = second.tipe_unit_id;
+      //   if (!this.secOpts[tipe_id]) this.secOpts[tipe_id] = [];
+      //   this.secOpts[tipe_id].push({
+      //     id: second.id,
+      //     nama: second.nama,
+      //   });
+      //   if (this.optionValue && second.id == this.optionValue) {
+      //     this.firstValue = second.tipe_unit_id;
+      //     this.secondValue = second.id;
+      //   }
+      // }
+      // Convert from array of options into an array of array of options
+      this.seconds.map(function (elm, idx) {
+        var tipe_unit_id = elm.tipe_unit_id,
+            id = elm.id,
+            nama = elm.nama;
+        if (!_this.secOpts[tipe_unit_id]) _this.secOpts[tipe_unit_id] = [];
 
-          if (value && secondOption.id === value) {
-            firstValue = secondOption.tipe_unit_id;
-            secondValue = secondOption.id;
-          }
+        _this.secOpts[tipe_unit_id].push({
+          id: id,
+          nama: nama
+        });
+      }); // Select option, if the optionValue is defined
 
-          var tipe_id = secondOption.tipe_unit_id;
-          if (!this.secondOptions[tipe_id]) this.secondOptions[tipe_id] = [];
-          this.secondOptions[tipe_id].push({
-            id: secondOption.id,
-            nama: secondOption.nama
-          });
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
+      var selSecond = this.seconds.find(function (val, idx) {
+        return _this.optionValue && val.id == _this.optionValue;
+      });
+
+      if (selSecond) {
+        this.firstValue = selSecond.tipe_unit_id;
+        this.secondValue = selSecond.id;
       }
     }
   }
@@ -37664,9 +37665,9 @@ var render = function() {
           }
         }
       },
-      _vm._l(_vm.firstOptions, function(firstOption, idx) {
-        return _c("option", { key: idx, domProps: { value: firstOption.id } }, [
-          _vm._v(_vm._s(firstOption.nama))
+      _vm._l(_vm.firsts, function(firstOpt, idx) {
+        return _c("option", { key: idx, domProps: { value: firstOpt.id } }, [
+          _vm._v(_vm._s(firstOpt.nama))
         ])
       }),
       0
@@ -37700,12 +37701,10 @@ var render = function() {
           }
         }
       },
-      _vm._l(_vm.secondOptions[_vm.firstValue], function(secondOption, idx) {
-        return _c(
-          "option",
-          { key: idx, domProps: { value: secondOption.id } },
-          [_vm._v(_vm._s(secondOption.nama))]
-        )
+      _vm._l(_vm.secOpts[_vm.firstValue], function(secOpt, idx) {
+        return _c("option", { key: idx, domProps: { value: secOpt.id } }, [
+          _vm._v(_vm._s(secOpt.nama))
+        ])
       }),
       0
     )
@@ -49907,7 +49906,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('example-component-2', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-Vue.component('unit-select', __webpack_require__(/*! ./components/UnitSelect.vue */ "./resources/js/components/UnitSelect.vue")["default"]);
+Vue.component('two-select', __webpack_require__(/*! ./components/UnitSelect.vue */ "./resources/js/components/UnitSelect.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

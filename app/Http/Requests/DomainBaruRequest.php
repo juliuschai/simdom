@@ -24,10 +24,11 @@ class DomainBaruRequest extends FormRequest
     public function rules()
     {
         return [
-            'namaDomain' => 'required|string|max:254',
             'unit' => 'required|exists:units,id',
             'surat' => 'nullable|mimes:pdf,jpeg,jpg,png|max:2000',
-            'tipeServer' => 'required|string', // PART:
+            'namaDomain' => 'required|string|max:60',
+            'namaPanjang' => 'required|string|max:254',
+            'tipeServer' => 'required|exists:tipe_servers,id',
             'kapasitas' => 'required|integer',
             'keterangan' => 'required|string|max:254',
         ];

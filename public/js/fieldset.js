@@ -4,7 +4,7 @@ $(document).ready(function () {
     var opacity;
     var current = 1;
     var steps = $("fieldset").length;
-    console.log(steps);
+
     setProgressBar(current);
 
     $(".next").click(function () {

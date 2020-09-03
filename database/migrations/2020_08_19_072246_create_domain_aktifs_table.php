@@ -17,13 +17,13 @@ class CreateDomainAktifsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('CASCADE');
             $table->foreignId('unit_id')->constrained()->onUpdate('CASCADE');
-            $table->string('ip_domain', 60);
+            $table->string('ip_domain', 16)->nullable();
             $table->string('nama_domain', 60);
             $table->string('nama_panjang');
             $table->string('alias');
             $table->foreignId('tipe_server_id')->constrained()->onUpdate('CASCADE');
             $table->integer('kapasitas');
-            $table->boolean('aktif')->default(true);
+            $table->enum('aktif', ['aktif', 'menunggu', 'nonaktif'])->default('aktif');
             $table->timestamps();
         });
     }

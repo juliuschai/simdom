@@ -13,10 +13,10 @@ class CreateSejarahDomainsTable extends Migration
             $table->foreignId('domain_aktif_id')->nullable()->constrained()->onUpdate('CASCADE');
             $table->foreignId('user_id')->constrained()->onUpdate('CASCADE');
             $table->foreignId('unit_id')->constrained()->onUpdate('CASCADE');
-            $table->string('ip_domain', 60);
+            $table->string('ip_domain', 16)->nullable();
             $table->string('nama_domain', 60);
             $table->string('nama_panjang');
-            $table->string('surat')->nullable(); // PART: max path character amount
+            $table->string('surat')->nullable();
             $table->foreignId('tipe_server_id')->constrained()->onUpdate('CASCADE');
             $table->integer('kapasitas');
             $table->enum('status', ['menunggu', 'diterima', 'selesai', 'ditolak'])->default('menunggu');

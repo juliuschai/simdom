@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SejarahDomain extends Model
 {
+    protected $guarded = [];
+
     /**
      * domain_aktif_id
      * nama_pj
@@ -20,22 +22,48 @@ class SejarahDomain extends Model
 
     static function permintaanDomainBaru($req)
     {
-        SejarahDomain::create([
-            'nama_domain' => $req->namaDomain,
+        if ($req->has('surat')) {
+            $file = $req->file('surat');
+            $filename = substr(
+                date("hms") . '_' . $file->getClientOriginalName(),
+                250
+            );
+            $file_path = $file->storeAs('surat', $filename, 'local');
+        } else {
+            $file_path = null;
+        }
+
+        $permintaan = SejarahDomain::create([
+            'user_id' => auth()->id(),
             'unit_id' => $req->unit,
-            'surat' => null, // PART:
-            'tipe_server' => $req->tipeServer, // PART:
+            'surat' => $file_path,
+            'nama_domain' => $req->namaDomain,
+            'nama_panjang' => $req->namaPanjang,
+            'tipe_server_id' => $req->tipeServer,
             'kapasitas' => $req->kapasitas,
             'keterangan' => $req->keterangan,
         ]);
+
+        return $permintaan;
     }
 
-    function domain_aktif()
+    function user()
     {
-        return $this->belongsTo(
-            'App\Models\DomainAktif',
-            'domain_aktif_id',
-            'id'
-        );
+        return $this->belongsTo('App\User');
+    }
+
+    function unit()
+    {
+        return $this->belongsTo('App\Models\Unit');
+    }
+
+    function tipeServer()
+    {
+        return $this->belongsTo('App\Models\TipeServer');
+    }
+
+    function domainAktif()
+    {
+        return $this->belongsTo('App\Models\DomainAktif');
     }
 }

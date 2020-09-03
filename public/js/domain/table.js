@@ -1,5 +1,5 @@
 var domainTableElm = $('#domainTable');
-// Setup - add a text input to each footer cell
+
 // var types = domainTableElm.data('types');
 // $.each(types, function() {
 // 	$('#searchTypeSelect')
@@ -20,7 +20,6 @@ domainTableElm.DataTable({
 	processing: true,
 	serverSide: true,
 	ajax: domainTableElm.data('ajaxurl'),
-	deferLoading: domainTableElm.data("length"),
 	columnDefs:[
 		{
 			"targets": 0,

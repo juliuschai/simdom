@@ -5,10 +5,9 @@
 	<div class="row justify-content-center">
 		<div class="col-md-12 col-sm-12 text-center p-0 mt-3 mb-2">
 			<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-				<h2 id="heading">Registrasi Domain</h2>
+				<h2 id="heading">Permintaan Domain</h2>
 				<p>Silahkan mengengkapi formulir berikut</p>
-				<form id="msform" action="{{route('domain.baru')}}" method="POST" enctype="multipart/form-data">
-					@csrf
+				<div id="msform">
 					<!-- progressbar -->
 					<ul id="progressbar">
 						<li class="active" id="account"><strong>Data Diri</strong></li>
@@ -21,6 +20,13 @@
 							@foreach ($errors->all() as $error)
 							<li>{{ $error }}</li>
 							@endforeach
+						</ul>
+					</div>
+					@endif
+					@if (session()->has('message'))
+					<div class="alert alert-success">
+						<ul>
+							<li>{{ session()->get('message') }}</li>
 						</ul>
 					</div>
 					@endif
@@ -41,8 +47,8 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
 								<i style="padding-left: 1px" class="fa fa-user domain"></i>
 								<div class="col-md-6">
-									<input id="namaPic" type="text" class="form-control" value="{{$user->nama}}"
-										disabled>
+									<input id="namaPic" type="text" class="form-control"
+										value="{{$permintaan->user->nama}}" disabled>
 								</div>
 							</div>
 
@@ -51,18 +57,18 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('User Integra') }}</label>
 								<i class="fa fa-address-card domain"></i>
 								<div class="col-md-6">
-									<input id="integraPic" type="text" class="form-control" value="{{$user->integra}}"
-										disabled>
+									<input id="integraPic" type="text" class="form-control"
+										value="{{$permintaan->user->integra}}" disabled>
 								</div>
 							</div>
 
 							<div class="form-group row">
-								<label for="emailPic" class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}
-									<p style="color: red" class="d-inline">*</p></label>
+								<label for="emailPic"
+									class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}</label>
 								<i class="fa fa-envelope domain"></i>
 								<div class="col-md-6">
-									<input id="emailPic" type="text" class="form-control" value="{{$user->email}}"
-										disabled>
+									<input id="emailPic" type="text" class="form-control"
+										value="{{$permintaan->user->email}}" disabled>
 								</div>
 							</div>
 
@@ -71,8 +77,8 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('Sivitas Akademika') }}</label>
 								<i class="fa fa-users domain"></i>
 								<div class="col-md-6">
-									<input id="sivitas" type="text" class="form-control" value="{{$user->group}}"
-										disabled>
+									<input id="sivitas" type="text" class="form-control"
+										value="{{$permintaan->user->group}}" disabled>
 								</div>
 							</div>
 
@@ -81,7 +87,8 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('No. WA') }}</label>
 								<i class="fa fa-mobile fa-2x domain"></i>
 								<div class="col-md-6">
-									<input id="noWa" type="text" class="form-control" value="{{$user->no_wa}}" disabled>
+									<input id="noWa" type="text" class="form-control"
+										value="{{$permintaan->user->no_wa}}" disabled>
 								</div>
 							</div>
 						</div> <input type="button" name="next" class="next action-button" value="Next" />
@@ -100,12 +107,11 @@
 
 							<div class="form-group row">
 								<label for="namaDomain"
-									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}<p
-										style="color: red" class="d-inline">*</p></label>
+									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}</label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
-									<input id="namaDomain" type="text" name="namaDomain" value="{{old('namaDomain')}}"
-										class="form-control">
+									<input id="namaDomain" type="text" name="namaDomain"
+										value="{{$permintaan->nama_domain}}" class="form-control" disabled>
 								</div>
 							</div>
 
@@ -116,19 +122,19 @@
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
 									<input id="namaPanjang" type="text" name="namaPanjang"
-										value="{{old('namaPanjang')}}" class="form-control">
+										value="{{$permintaan->nama_panjang}}" class="form-control" disabled>
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="unit"
-									class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}<p
-										style="color: red" class="d-inline">*</p></label>
+									class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}</label>
 								<i class="fa fa-window-maximize domain"></i>
 								<div class="col-md-6">
-									<two-select id="unit" :seconds="{{$units}}" :firsts="{{$tipeUnits}}"
-										option-value="{{old('unit')??'1'}}" name-prop="unit">
-									</two-select>
+									<input id="tipeUnit" type="text" value="{{$permintaan->unit->tipeUnit->nama}}"
+										class="form-control" disabled>
+									<input id="unit" type="text" value="{{$permintaan->unit->nama}}"
+										class="form-control" disabled>
 								</div>
 							</div>
 
@@ -136,53 +142,94 @@
 								<label for="surat"
 									class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}</label>
 								<i class="fa fa-file booking"></i>
+								@if(isset($permintaan->surat))
 								<div class="col-md-6">
-									<input style="border: none;" id="surat" type="file" name="surat"
-										class="form-control">
+									<a href="{{route('surat.get', ['id' => $permintaan->id])}}" target="_blank"><button
+											style="background-color: #0067ac !important; color: white !important;"
+											class="btn">View</button></a>
+									<a href="{{route('surat.download', ['id' => $permintaan->id])}}"
+										target="_blank"><button
+											style="background-color: #0067ac !important; color: white !important;"
+											class="btn">Download</button></a>
 								</div>
+								@else
+								<div class="col-md-6">
+									Tidak ada surat
+								</div>
+								@endif
 							</div>
 
 							<div class="form-group row">
 								<label for="tipeServer"
-									class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}
-									<p style="color: red" class="d-inline">*</p></label>
+									class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}</label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<select id="tipeServer" name="tipeServer" class="form-control"
-										data-value="{{old('tipeServer')}}??'1'">
-										@foreach ($servers as $server)
-										<option value="{{$server->id}}">{{$server->nama}}</option>
-										@endforeach
-									</select>
+									<input id="tipeServer" type="text" class="form-control"
+										value="{{$permintaan->tipeServer->nama_server}}" disabled>
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="kapasitas"
-									class="col-md-4 col-form-label text-md-left">{{ __('Kapasitas (Kuota DB)') }}<p
-										style="color: red" class="d-inline">*</p></label>
+									class="col-md-4 col-form-label text-md-left">{{ __('Kapasitas (Kuota DB)') }}</label>
 								<i class="fa fa-database domain"></i>
 								<div class="col-md-6">
-									<input id="kapasitas" type="text" name="kapasitas"
-										value="{{old('kapasitas')??'64'}}" class="form-control">(GB)
+									<input id="kapasitas" type="text" value="{{$permintaan->kapasitas}}"
+										class="form-control" disabled>(GB)
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="keterangan"
-									class="col-md-4 col-form-label text-md-left">{{ __('Keterangan') }}<p
-										style="color: red" class="d-inline">*</p></label>
+									class="col-md-4 col-form-label text-md-left">{{ __('Keterangan') }}</label>
 								<i class="fa fa-inbox domain"></i>
 								<div class="col-md-6">
-									<textarea id="keterangan" type="text" name="keterangan" class="form-control"
-										placeholder="Permohonan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
+									<textarea id="keterangan" type="text" class="form-control"
+										disabled>{{$permintaan->keterangan}}</textarea>
 								</div>
 							</div>
-
+							@if(auth()->user()->isAdmin())
+							@if($permintaan->status == 'menunggu' 
+							|| $permintaan->status == 'ditolak')
+							<form method="POST" action="{{route('permintaan.terima', $permintaan->id)}}">
+								@csrf
+								<div class="form-group row">
+									<label for="ipAddress"
+										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
+									<i class="fa fa-inbox domain"></i>
+									<div class="col-md-6">
+										<input id="ipAddress" name="ipAddress" type="text" value="{{$permintaan->ip_domain}}"
+											class="form-control">
+									</div>
+								</div>
+								<button type="submit" class="next action-button">Terima</button>
+							</form>
+							@endif
+							@if($permintaan->status == 'diterima')
+							<form method="POST" action="{{route('permintaan.selesai', $permintaan->id)}}">
+								@csrf
+								<div class="form-group row">
+									<label for="ipAddress"
+										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
+									<i class="fa fa-inbox domain"></i>
+									<div class="col-md-6">
+										<input id="ipAddress" name="ipAddress" type="text" value="{{$permintaan->ip_domain}}"
+											class="form-control">
+									</div>
+								</div>
+								<button type="submit" class="next action-button">Selesai</button>
+							</form>
+							@endif
+							@if($permintaan->status == 'menunggu' 
+							|| $permintaan->status == 'diterima')
+							<form method="POST" action="{{route('permintaan.tolak', $permintaan->id)}}">
+								@csrf
+								<button type="submit" class="previous action-button-previous">Tolak</button>
+							</form>
+							@endif
+							@endif {{-- isAdmin condition --}}
+							<button type="button" class="previous action-button-previous">Prev</button>
 						</div>
-						<button type="button" class="next action-button" onclick="submitForm()">Buat</button>
-						{{-- <input type="button" name="next" class="next action-button" value="Next" />  --}}
-						<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
 					</fieldset>
 					{{-- Tampilkan selesai view --}}
 					<fieldset>
@@ -200,7 +247,7 @@
 							</div>
 						</div>
 					</fieldset>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -211,5 +258,4 @@
 <script src="{{ asset('js/form/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
-<script src="{{ asset('js/domain/baru.js') }}" defer></script>
 @endsection

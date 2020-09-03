@@ -1,50 +1,64 @@
-<!-- Mengambil properti secondOptions{firstOptions: [], secondOptions: []} -->
+<!-- Mengambil properti seconds{firsts: [], seconds: []} -->
 <template>
   <div>
     <select v-model="firstValue">
-      <option
-        v-for="(firstOption, idx) in firstOptions"
-        :key="idx"
-        :value="firstOption.id"
-      >{{ firstOption.nama }}</option>
+      <option v-for="(firstOpt, idx) in firsts" :key="idx" :value="firstOpt.id">{{ firstOpt.nama }}</option>
     </select>
     <select v-model="secondValue" :name="nameProp">
       <option
-        v-for="(secondOption, idx) in secondOptions[firstValue]"
+        v-for="(secOpt, idx) in secOpts[firstValue]"
         :key="idx"
-        :value="secondOption.id"
-      >{{secondOption.nama}}</option>
+        :value="secOpt.id"
+      >{{secOpt.nama}}</option>
     </select>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["secondOptions", "firstOptions", "value", "nameProp"],
+  props: ["seconds", "firsts", "optionValue", "nameProp"],
 
   data() {
     return {
       firstValue: null,
       secondValue: null,
-      secondOptions: {},
+      secOpts: {},
     };
   },
   created() {
-    this.convertSecondOptions();
+    this.convertSeconds();
   },
   methods: {
-    convertSecondOptions: function () {
-      for (let secondOption of this.secondOptions) {
-        if (value && secondOption.id === value) {
-          firstValue = secondOption.tipe_unit_id;
-          secondValue = secondOption.id;
-        }
-        let tipe_id = secondOption.tipe_unit_id;
-        if (!this.secondOptions[tipe_id]) this.secondOptions[tipe_id] = [];
-        this.secondOptions[tipe_id].push({
-          id: secondOption.id,
-          nama: secondOption.nama,
-        });
+    convertSeconds: function () {
+      // for (const second of this.seconds) {
+      //   const tipe_id = second.tipe_unit_id;
+      //   if (!this.secOpts[tipe_id]) this.secOpts[tipe_id] = [];
+      //   this.secOpts[tipe_id].push({
+      //     id: second.id,
+      //     nama: second.nama,
+      //   });
+
+      //   if (this.optionValue && second.id == this.optionValue) {
+      //     this.firstValue = second.tipe_unit_id;
+      //     this.secondValue = second.id;
+      //   }
+      // }
+
+      // Convert from array of options into an array of array of options
+      this.seconds.map((elm, idx) => {
+        const { tipe_unit_id, id, nama } = elm;
+        if (!this.secOpts[tipe_unit_id]) this.secOpts[tipe_unit_id] = [];
+        this.secOpts[tipe_unit_id].push({ id, nama });
+      });
+
+      // Select option, if the optionValue is defined
+      const selSecond = this.seconds.find((val, idx) => {
+        return this.optionValue && val.id == this.optionValue;
+      });
+
+      if (selSecond) {
+        this.firstValue = selSecond.tipe_unit_id;
+        this.secondValue = selSecond.id;
       }
     },
   },

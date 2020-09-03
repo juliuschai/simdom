@@ -21,7 +21,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('example-component-2', require('./components/ExampleComponent.vue').default);
-Vue.component('unit-select', require('./components/UnitSelect.vue').default);
+Vue.component('two-select', require('./components/UnitSelect.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

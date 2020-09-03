@@ -12,6 +12,11 @@ class TipeUnit extends Model
      */
     public $timestamps = false;
 
+    static function getSorted()
+    {
+        return TipeUnit::orderBy('nama')->get();
+    }
+
     function units()
     {
         return $this->hasMany('App\Models\Unit', 'tipe_unit_id', 'id');

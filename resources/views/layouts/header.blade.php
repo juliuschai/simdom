@@ -58,7 +58,7 @@
                     <!--MENU ADMIN-->
                     <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Register</a>
                         <ul>
-                            <li><a href="{{ route('domain.new') }}">Form Register Domain</a></li>
+                            <li><a href="{{ route('domain.baru') }}">Form Register Domain</a></li>
                             <li><a href="{{ route('server.new') }}">Form Register Server</a></li>
                         </ul>
                     </li>

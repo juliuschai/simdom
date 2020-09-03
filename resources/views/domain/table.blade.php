@@ -38,7 +38,6 @@
     
 	<table id="domainTable" 
         class="table table-bordered table-striped table-bordered table-hover dataTable"
-		data-length="{{ $length }}"
 		data-ajaxurl="{{ route('domain.data') }}" 
 	>
 		<thead class="thead-custom-blue">
@@ -55,22 +54,7 @@
                 <th scope="col">Aksi</th>
 			</tr>
 		</thead>
-		<tbody>
-			@foreach ($domains as $domain)
-			<tr>
-				<td>{{ $domain->id }}</td>
-				<td>{{ $domain->name_pj }}</td>
-                <td>{{ $domain->name_ins }}</td>
-                <td>{{ $domain->no_tlp }}</td>
-				<td>{{ $domain->name_domain }}</td>
-                <td>{{ $domain->jenis_domain }}</td>
-                <td>{{ $domain->kp_sekarang }}</td>
-				<td>{{ $domain->ip_domain }}</td>
-                <td>{{ $domain->tgl_input }}</td>
-                <td></td>
-			</tr>
-			@endforeach
-        </tbody>
+		<tbody></tbody>
         <!-- <tfoot>
 			<tr>
 				<th></th>
@@ -87,13 +71,11 @@
 		</tfoot> -->
 	</table>
 	</div>
-<!-- </div> -->
-<!-- </div> -->
 @endsection
 
 @section('scripts')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" defer/>
 <script src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js" defer></script>
 <script src="{{asset('js/util/datatablesPlugin.js') }}" defer></script>
-<script src="{{asset('js/domain/view.js') }}" defer></script>
+<script src="{{asset('js/domain/table.js') }}" defer></script>
 @endsection
