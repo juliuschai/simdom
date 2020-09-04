@@ -20,7 +20,7 @@ class SejarahDomain extends Model
      * status (menunggu,diterima,ditolak)
      */
 
-    static function permintaanDomainBaru($req)
+    static function permintaanBaru($req, $domain_id)
     {
         if ($req->has('surat')) {
             $file = $req->file('surat');
@@ -34,6 +34,7 @@ class SejarahDomain extends Model
         }
 
         $permintaan = SejarahDomain::create([
+            'domain_aktif_id' => $domain_id,
             'user_id' => auth()->id(),
             'unit_id' => $req->unit,
             'surat' => $file_path,
@@ -42,6 +43,7 @@ class SejarahDomain extends Model
             'tipe_server_id' => $req->tipeServer,
             'kapasitas' => $req->kapasitas,
             'keterangan' => $req->keterangan,
+            'ip_domain' => $req->ipAddress,
         ]);
 
         return $permintaan;

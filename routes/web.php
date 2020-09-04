@@ -34,20 +34,24 @@ Route::group([
     Route::group(['middleware' => ['adminOrOwner']], function () {
         Route::get('/domain/list', 'DomainController@listDomain')->name('domain.list');
         Route::get('/domain/data', 'DomainController@listDomainData')->name('domain.data');
-        Route::post('/domain/delete/{id}', 'DomainController@deleteDomain')->name('domain.delete');
-        Route::get('domain/{domain}')->name('domain.edit');
-
+        Route::get('/domain/{domain}', 'DomainController@formEditDomain')->name('domain.edit');
+        Route::post('/domain/{domain}', 'DomainController@saveEditDomain')->name('domain.edit');
+        
         Route::get('/server/list', 'ServerController@listServer')->name('server.list');
         Route::get('/server/data', 'ServerController@listServerData')->name('server.data');
-        Route::post('/server/delete/{id}', 'ServerController@deleteServer')->name('server.delete');
-
+        Route::post('/server/{id}/delete', 'ServerController@deleteServer')->name('server.delete');
+        
+        // hanya bisa dilakukan jika permintaan belum diproses (masih dalam status menunggu)
+        Route::post('/permintaan/{permintaan}/hapus', 'PermintaanController@hapusPermintaan')->name('permintaan.hapus');
         Route::get('/permintaan/{permintaan}', 'PermintaanController@lihatPermintaan')->name('permintaan.lihat');
     });
 
     Route::group(['middleware' => ['admin']], function () {
         // Admin
-        Route::post('/permintaan/terima/{permintaan}', 'PermintaanController@terimaPermintaan')->name('permintaan.terima');
-        Route::post('/permintaan/selesai/{permintaan}', 'PermintaanController@selesaiPermintaan')->name('permintaan.selesai');
-        Route::post('/permintaan/tolak/{permintaan}', 'PermintaanController@tolakPermintaan')->name('permintaan.tolak');
+        Route::post('/permintaan/{permintaan}/terima', 'PermintaanController@terimaPermintaan')->name('permintaan.terima');
+        Route::post('/permintaan/{permintaan}/selesai', 'PermintaanController@selesaiPermintaan')->name('permintaan.selesai');
+        Route::post('/permintaan/{permintaan}/tolak', 'PermintaanController@tolakPermintaan')->name('permintaan.tolak');
+        // TODO: Route::post('/domain/{domain}/nonaktif', 'DomainController@setnonaktifDomain')->name('domain.aktif.setnonaktif');
+        // TODO: Route::post('/domain/{domain}/aktif', 'DomainController@setaktifDomain')->name('domain.aktif.setaktif');
     });
 });

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DomainBaruRequest;
+use App\Http\Requests\PermintaanRequest;
 use App\Models\DomainAktif;
 use App\Models\SejarahDomain;
 use App\Models\TipeServer;
@@ -32,28 +32,53 @@ class DomainController extends Controller
         );
     }
 
-    function simpanDomainBaru(DomainBaruRequest $req)
+    function simpanDomainBaru(PermintaanRequest $req)
     {
-        $permintaan = SejarahDomain::permintaanDomainBaru($req);
+        $permintaan = SejarahDomain::permintaanBaru($req, null);
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
-    function editDomain(DomainAktif $domain, DomainBaruRequest $req) 
+    function formEditDomain(DomainAktif $domain)
     {
-        $domain->status = 'menunggu';
+        $user = User::findOrLogout(auth()->id());
+        $units = Unit::getSorted();
+        $tipeUnits = TipeUnit::getSorted();
+        $servers = TipeServer::get(['id', 'nama_server as nama']);
+
+        return view(
+            'domain.edit',
+            compact('user', 'units', 'tipeUnits', 'servers', 'domain')
+        );
+    }
+
+    function saveEditDomain(DomainAktif $domain, PermintaanRequest $req)
+    {
+        dd($req->ipAddress);
+        if ($domain->aktif == 'menunggu') {
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'Domain sedang dirubah, tunggu perubahan domain selesai' .
+                    'dilakukan atau hapus permintaan perubahan jika permintaan belum diverifikasi',
+                ]);
+        }
+        $req->ipAddress = $domain->ip_domain;
+        $domain->aktif = 'menunggu';
         $domain->save();
-        // TODO: 
+
+        $permintaan = SejarahDomain::permintaanBaru($req, $domain->id);
+        return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
-    function listDomainData() {
-        $model = Domain::viewDomainList()
-            ->newQuery();
+    function listDomainData()
+    {
+        $model = Domain::viewDomainList()->newQuery();
 
-        return DataTables::eloquent($model)
-            ->toJson();
+        return DataTables::eloquent($model)->toJson();
     }
 
-    function listDomain(Request $request) {
+    function listDomain(Request $request)
+    {
         $domains = Domain::viewDomainList()
             ->orderBy('id')
             ->paginate('10');

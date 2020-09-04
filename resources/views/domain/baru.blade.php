@@ -57,8 +57,7 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="emailPic" class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}
-									<p style="color: red" class="d-inline">*</p></label>
+								<label for="emailPic" class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}</label>
 								<i class="fa fa-envelope domain"></i>
 								<div class="col-md-6">
 									<input id="emailPic" type="text" class="form-control" value="{{$user->email}}"
@@ -211,5 +210,5 @@
 <script src="{{ asset('js/form/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
-<script src="{{ asset('js/domain/baru.js') }}" defer></script>
+<script src="{{ asset('js/domain/form.js') }}" defer></script>
 @endsection

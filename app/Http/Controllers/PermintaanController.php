@@ -14,6 +14,21 @@ class PermintaanController extends Controller
         return view('permintaan.lihat', compact('permintaan'));
     }
 
+    function hapusPermintaan(SejarahDomain $permintaan)
+    {
+        if ($permintaan->status != 'menunggu') {
+            abort('403', 'Permintaan yang sudah diproses tidak bisa dihapus!');
+        }
+
+        $domain = Domain::find($permintaan->domain_aktif_id);
+        $domain->aktif = 'aktif';
+        $domain->save();
+
+        $permintaan->delete();
+
+        return redirect()->route('home');
+    }
+
     function terimaPermintaan(SejarahDomain $permintaan, Request $req)
     {
         $permintaan->status = 'diterima';
