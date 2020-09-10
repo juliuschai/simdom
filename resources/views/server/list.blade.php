@@ -20,7 +20,7 @@
 		</a>
 	</div>
 
-	<table id="serverTable" class="table table-bordered table-striped table-bordered table-hover dataTable"
+	<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
 		data-ajaxurl="{{ route('server.data') }}">
 		<thead class="thead-custom-blue">
 			<tr>

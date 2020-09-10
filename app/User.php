@@ -34,6 +34,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    static function selectList()
+    {
+        return User::select([
+            'id',
+            'nama',
+            'email',
+            'integra',
+            'no_wa',
+            'group',
+            'role',
+            'email_notification',
+        ]);
+    }
+
     static function findOrLogout($id)
     {
         $user = User::find($id);

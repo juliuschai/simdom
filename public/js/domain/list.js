@@ -1,11 +1,11 @@
-var domainTableElm = $('#domainTable');
+var tableElm = $('#tableElm');
 
 var editBtn = $('#editBtnTemplate');
 
-domainTableElm.DataTable({
+tableElm.DataTable({
 	processing: true,
 	serverSide: true,
-	ajax: domainTableElm.data('ajaxurl'),
+	ajax: tableElm.data('ajaxurl'),
 	columns: [
 		{
 			title: 'Id',
@@ -84,10 +84,7 @@ domainTableElm.DataTable({
 			searchable: false,
 			visible: true,
 			render: function (data, type, full, meta) {
-				let resultHTML = '<div style="white-space: nowrap;">'
-				resultHTML += editBtn.createButton(full.id).html();
-				resultHTML += '</div>'
-				return resultHTML;
+				return editBtn.createButton(full.id).html();
 			}
 		}
 	],

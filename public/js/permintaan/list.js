@@ -1,11 +1,11 @@
-var permintaanTableElm = $('#permintaanTable');
+var tableElm = $('#tableElm');
 
 var editBtn = $('#editBtnTemplate');
 
-permintaanTableElm.DataTable({
+tableElm.DataTable({
 	processing: true,
 	serverSide: true,
-	ajax: permintaanTableElm.data('ajaxurl'),
+	ajax: tableElm.data('ajaxurl'),
 	columns: [
 		{
 			title: 'Id',
@@ -81,10 +81,7 @@ permintaanTableElm.DataTable({
 			searchable: false,
 			visible: true,
 			render: function (data, type, full, meta) {
-				let resultHTML = '<div style="white-space: nowrap;">'
-				resultHTML += editBtn.createButton(full.id).html();
-				resultHTML += '</div>'
-				return resultHTML;
+				return editBtn.createButton(full.id).html();
 			}
 		}
 	],

@@ -22,32 +22,32 @@ class ServerController extends Controller
         return view('server.list');
     }
 
-    function formServerBaru()
+    function formBaru()
     {
         $server = new TipeServer();
         return view('server.form', compact('server'));
     }
 
-    function simpanServerBaru(ServerRequest $req)
+    function simpanBaru(ServerRequest $req)
     {
         $server = TipeServer::serverBaru($req);
 
         return redirect()->route('server.edit', ['server' => $server->id]);
     }
 
-    function formEditServer(TipeServer $server)
+    function formEdit(TipeServer $server)
     {
         return view('server.form', compact('server'));
     }
 
-    function saveEditServer(TipeServer $server, ServerRequest $req)
+    function saveEdit(TipeServer $server, ServerRequest $req)
     {
         $server->perbaharuiDariRequest($req);
 
         return redirect()->route('server.edit', ['server' => $server->id]);
     }
 
-    function hapusServer(TipeServer $server)
+    function hapus(TipeServer $server)
     {
         $server->delete();
 

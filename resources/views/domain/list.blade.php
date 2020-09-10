@@ -21,7 +21,7 @@
 		</a>
 	</div>
 
-	<table id="domainTable" class="table table-bordered table-striped table-bordered table-hover dataTable"
+	<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
 		data-ajaxurl="{{ route('domain.data') }}">
 		<thead class="thead-custom-blue">
 			<tr>

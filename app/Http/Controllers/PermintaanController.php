@@ -22,25 +22,25 @@ class PermintaanController extends Controller
         return view('permintaan.list');
     }
 
-    function lihatPermintaan(SejarahDomain $permintaan)
+    function lihat(SejarahDomain $permintaan)
     {
         return view('permintaan.lihat', compact('permintaan'));
     }
 
-    function hapusPermintaan(SejarahDomain $permintaan)
+    function hapus(SejarahDomain $permintaan)
     {
         if ($permintaan->status != 'menunggu') {
             abort('403', 'Permintaan yang sudah diproses tidak bisa dihapus!');
         }
 
-        $this->tolakPermintaan($permintaan);
+        $this->tolak($permintaan);
 
         $permintaan->delete();
 
         return redirect()->route('permintaan.list'); // PART: change route to permintaan list
     }
 
-    function terimaPermintaan(SejarahDomain $permintaan, Request $req)
+    function terima(SejarahDomain $permintaan, Request $req)
     {
         $permintaan->status = 'diterima';
         $permintaan->ip_domain = $req->ipAddress;
@@ -53,7 +53,7 @@ class PermintaanController extends Controller
             ->with('message', 'Permintan berhasil diterima');
     }
 
-    function selesaiPermintaan(SejarahDomain $permintaan, Request $req)
+    function selesai(SejarahDomain $permintaan, Request $req)
     {
         $permintaan->status = 'selesai';
         $permintaan->ip_domain = $req->ipAddress;
@@ -69,7 +69,7 @@ class PermintaanController extends Controller
             ->with('message', 'Permintan selesai');
     }
 
-    function tolakPermintaan(SejarahDomain $permintaan)
+    function tolak(SejarahDomain $permintaan)
     {
         $permintaan->status = 'ditolak';
         $permintaan->waktu_konfirmasi = null;

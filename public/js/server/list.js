@@ -1,11 +1,11 @@
-var serverTableElm = $('#serverTable');
+var tableElm = $('#tableElm');
 
 var editBtn = $('#editBtnTemplate');
 
-serverTableElm.DataTable({
+tableElm.DataTable({
 	processing: true,
 	serverSide: true,
-	ajax: serverTableElm.data('ajaxurl'),
+	ajax: tableElm.data('ajaxurl'),
 	columns: [
 		{
 			data: 'id',
@@ -44,10 +44,7 @@ serverTableElm.DataTable({
 			searchable: false,
 			visible: true,
 			render: function (data, type, full, meta) {
-				let resultHTML = '<div style="white-space: nowrap;">';
-				resultHTML += editBtn.createButton(full.id).html();
-				resultHTML += '</div>'
-				return resultHTML;
+				return editBtn.createButton(full.id).html();
 			}
 		}
 	],

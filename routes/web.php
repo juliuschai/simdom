@@ -35,8 +35,8 @@ Route::group(
                 Route::get('/domain/list', 'DomainController@list')->name('domain.list');
                 Route::get('/domain/data', 'DomainController@listData')->name('domain.data');
 
-                Route::get('/domain/baru', 'DomainController@formDomainBaru')->name('domain.baru');
-                Route::post('/domain/baru', 'DomainController@simpanDomainBaru')->name('domain.baru');
+                Route::get('/domain/baru', 'DomainController@formBaru')->name('domain.baru');
+                Route::post('/domain/baru', 'DomainController@simpanBaru')->name('domain.baru');
 
                 // Permintaan
                 Route::get('/permintaan/list', 'PermintaanController@list')->name('permintaan.list');
@@ -48,12 +48,12 @@ Route::group(
                     ],
                     function () {
                         // Domain management
-                        Route::get('/domain/{domain}/edit', 'DomainController@formEditDomain')->name('domain.edit');
-                        Route::post('/domain/{domain}/edit', 'DomainController@saveEditDomain')->name('domain.edit');
+                        Route::get('/domain/{domain}/edit', 'DomainController@formEdit')->name('domain.edit');
+                        Route::post('/domain/{domain}/edit', 'DomainController@saveEdit')->name('domain.edit');
 
                         // hanya bisa dilakukan jika permintaan belum diproses (masih dalam status menunggu)
-                        Route::get('/permintaan/{permintaan}/lihat', 'PermintaanController@lihatPermintaan')->name('permintaan.lihat');
-                        Route::post('/permintaan/{permintaan}/hapus', 'PermintaanController@hapusPermintaan')->name('permintaan.hapus');
+                        Route::get('/permintaan/{permintaan}/lihat', 'PermintaanController@lihat')->name('permintaan.lihat');
+                        Route::post('/permintaan/{permintaan}/hapus', 'PermintaanController@hapus')->name('permintaan.hapus');
                     }
                 );
 
@@ -66,22 +66,26 @@ Route::group(
                         Route::get('/server/list', 'ServerController@list')->name('server.list');
                         Route::get('/server/data', 'ServerController@listData')->name('server.data');
 
-                        Route::get('/server/baru', 'ServerController@formServerBaru')->name('server.baru');
-                        Route::post('/server/baru', 'ServerController@simpanServerBaru')->name('server.baru');
-                        Route::get('/server/{server}/edit', 'ServerController@formEditServer')->name('server.edit');
-                        Route::post('/server/{server}/edit', 'ServerController@saveEditServer')->name('server.edit');
-                        Route::post('/server/{server}/hapus', 'ServerController@hapusServer')->name('server.hapus');
+                        Route::get('/server/baru', 'ServerController@formBaru')->name('server.baru');
+                        Route::post('/server/baru', 'ServerController@simpanBaru')->name('server.baru');
+                        Route::get('/server/{server}/edit', 'ServerController@formEdit')->name('server.edit');
+                        Route::post('/server/{server}/edit', 'ServerController@saveEdit')->name('server.edit');
+                        Route::post('/server/{server}/hapus', 'ServerController@hapus')->name('server.hapus');
 
                         // Ubah status Permintaan
-                        Route::post('/permintaan/{permintaan}/terima', 'PermintaanController@terimaPermintaan')->name('permintaan.terima');
-                        Route::post('/permintaan/{permintaan}/selesai', 'PermintaanController@selesaiPermintaan')->name('permintaan.selesai');
-                        Route::post('/permintaan/{permintaan}/tolak', 'PermintaanController@tolakPermintaan')->name('permintaan.tolak');
+                        Route::post('/permintaan/{permintaan}/terima', 'PermintaanController@terima')->name('permintaan.terima');
+                        Route::post('/permintaan/{permintaan}/selesai', 'PermintaanController@selesai')->name('permintaan.selesai');
+                        Route::post('/permintaan/{permintaan}/tolak', 'PermintaanController@tolak')->name('permintaan.tolak');
 
                         // Set domain nonaktif
-                        Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasiDomain')->name('domain.nonaktifasi');
+                        Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasi')->name('domain.nonaktifasi');
 
+                        // User management
                         Route::get('/user/list', 'UserController@list')->name('user.list');
                         Route::get('/user/data', 'UserController@listData')->name('user.data');
+                        Route::get('/user/{user}/lihat', 'UserController@lihat')->name('user.lihat');
+                        Route::post('/user/{user}/role/{role}', 'UserController@setRole')->name('user.role');
+                        Route::post('/user/{user}/notif/{notif}', 'UserController@setNotif')->name('user.notif');
                     }
                 );
             }

@@ -28,7 +28,7 @@ class DomainController extends Controller
         return view('domain.list');
     }
 
-    function formDomainBaru()
+    function formBaru()
     {
         $user = User::findOrLogout(auth()->id());
         $units = Unit::getSorted();
@@ -40,13 +40,13 @@ class DomainController extends Controller
         );
     }
 
-    function simpanDomainBaru(PermintaanRequest $req)
+    function simpanBaru(PermintaanRequest $req)
     {
         $permintaan = SejarahDomain::permintaanBaru($req, null);
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
-    function formEditDomain(DomainAktif $domain)
+    function formEdit(DomainAktif $domain)
     {
         $user = User::findOrLogout(auth()->id());
         $units = Unit::getSorted();
@@ -59,7 +59,7 @@ class DomainController extends Controller
         );
     }
 
-    function saveEditDomain(DomainAktif $domain, PermintaanRequest $req)
+    function saveEdit(DomainAktif $domain, PermintaanRequest $req)
     {
         if ($domain->aktif == 'menunggu') {
             return redirect()
@@ -77,7 +77,7 @@ class DomainController extends Controller
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
-    function nonaktifasiDomain(DomainAktif $domain)
+    function nonaktifasi(DomainAktif $domain)
     {
         SejarahDomain::customPermintaan(
             $domain,

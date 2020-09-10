@@ -21,7 +21,7 @@
 		</a>
 	</div>
 
-	<table id="permintaanTable" class="table table-bordered table-striped table-bordered table-hover dataTable"
+	<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
 		data-ajaxurl="{{route('permintaan.data')}}">
 		<thead class="thead-custom-blue">
 			<tr>

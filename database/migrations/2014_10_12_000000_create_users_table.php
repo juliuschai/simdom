@@ -22,16 +22,18 @@ class CreateUsersTable extends Migration
             $table->string('no_wa', 20);
             $table->string('group', 20);
             $table->enum('role', ['user', 'admin'])->default('user');
+            $table->boolean('email_notification')->default(false);
             $table->timestamps();
         });
 
         DB::table('users')->insert([
             'sub' => '51D15B2E-FE38-41A8-A8A6-43A2745C4B31',
-            'email' => 'julius.18051@mhs.its.ac.id',
-            'nama' => 'Julius',
-            'integra' => '05111840000082',
-            'no_wa' => '089604058768',
-            'group' => 'Mahasiswa',
+            'email' => 'lorem',
+            'nama' => 'lorem',
+            'integra' => 'lorem',
+            'no_wa' => 'lorem',
+            'group' => 'lorem',
+            'role' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
