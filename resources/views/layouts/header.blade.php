@@ -59,20 +59,21 @@
                     <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Register</a>
                         <ul>
                             <li><a href="{{ route('domain.baru') }}">Form Register Domain</a></li>
-                            <li><a href="{{ route('server.new') }}">Form Register Server</a></li>
+                            <li><a href="{{ route('server.baru') }}">Form Register Server</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a href="#"><span class="icon-pencil"></span>Profil</a>
                         <ul>
-                            <li><a href="?cat=administrator&page=datadomain">Lihat Profil Domain</a></li>
-                            <li><a href="?cat=administrator&page=dataserver">Lihat Profil Server</a></li>
+                            <li><a href="{{route('domain.list')}}">Lihat Profil Domain</a></li>
+                            <li><a href="{{route('permintaan.list')}}">Lihat Profil Permintaan</a></li>
+                            <li><a href="{{route('server.list')}}">Lihat Profil Server</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#"><span class="icon-briefcase"></span>Monitoring</a>
+                    {{-- <li class="dropdown"><a href="#"><span class="icon-briefcase"></span>Monitoring</a>
                         <ul>
                             <li><a href="?cat=administrator&page=monitor">Form Monitoring Domain</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="dropdown"><a href="#"><span class="icon-inbox"></span>Report</a>
                         <ul>
                             <li><a href="?cat=administrator&page=report">Data Report</a></li>
@@ -86,7 +87,7 @@
                     </li>
                     <li class="dropdown"><a href="#"><span class="icon-user"></span>User</a>
                         <ul>
-                            <li><a href="?cat=administrator&page=user">Form user</a></li>
+                            <li><a href="{{route('user.list')}}">Form user</a></li>
                         </ul>
                     </li>
                 </ul>

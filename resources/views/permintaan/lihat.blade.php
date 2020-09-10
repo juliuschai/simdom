@@ -41,7 +41,7 @@
 									<h6 class="steps">Tahap 1 - 3</h6>
 								</div>
 							</div>
-							<small>Silahkan update data diri di myits</small>
+							<small>Silahkan perbaharui data diri di myits</small>
 							<div class="form-group row">
 								<label for="namaPic"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
@@ -114,6 +114,9 @@
 										value="{{$permintaan->nama_domain}}" class="form-control" disabled>
 								</div>
 							</div>
+							<a target="_blank" href="{{route('domain.edit', ['domain' => $permintaan->domain_aktif_id])}}" >
+								Lihat record domain aktif dari {{$permintaan->nama_domain}}
+							</a>
 
 							<div class="form-group row">
 								<label for="namaPanjang"
@@ -188,8 +191,19 @@
 										disabled>{{$permintaan->keterangan}}</textarea>
 								</div>
 							</div>
+
+							<div class="form-group row">
+								<label for="status"
+									class="col-md-4 col-form-label text-md-left">{{ __('Status') }}</label>
+								<i class="fa fa-database domain"></i>
+								<div class="col-md-6">
+									<input id="status" type="text" value="{{$permintaan->status}}" class="form-control"
+										disabled>
+								</div>
+							</div>
+
 							@if(auth()->user()->isAdmin())
-							@if($permintaan->status == 'menunggu' 
+							@if($permintaan->status == 'menunggu'
 							|| $permintaan->status == 'ditolak')
 							<form method="POST" action="{{route('permintaan.terima', $permintaan->id)}}">
 								@csrf
@@ -198,8 +212,8 @@
 										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
 									<i class="fa fa-inbox domain"></i>
 									<div class="col-md-6">
-										<input id="ipAddress" name="ipAddress" type="text" value="{{$permintaan->ip_domain}}"
-											class="form-control">
+										<input id="ipAddress" name="ipAddress" type="text"
+											value="{{$permintaan->ip_domain}}" class="form-control">
 									</div>
 								</div>
 								<button type="submit" class="next action-button">Terima</button>
@@ -213,18 +227,28 @@
 										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
 									<i class="fa fa-inbox domain"></i>
 									<div class="col-md-6">
-										<input id="ipAddress" name="ipAddress" type="text" value="{{$permintaan->ip_domain}}"
-											class="form-control">
+										<input id="ipAddress" name="ipAddress" type="text"
+											value="{{$permintaan->ip_domain}}" class="form-control">
 									</div>
 								</div>
 								<button type="submit" class="next action-button">Selesai</button>
 							</form>
 							@endif
-							@if($permintaan->status == 'menunggu' 
+							@if($permintaan->status == 'menunggu'
 							|| $permintaan->status == 'diterima')
-							<form method="POST" action="{{route('permintaan.tolak', $permintaan->id)}}">
+							<form id="tolakForm" method="POST" action="{{route('permintaan.tolak', $permintaan->id)}}">
 								@csrf
-								<button type="submit" class="previous action-button-previous">Tolak</button>
+								<button type="button" class="previous action-button-previous" onclick="
+								if (confirm('Anda yakin menolak permintaan?')) {document.getElementById('tolakForm').submit();}
+								">Tolak</button>
+							</form>
+							@endif
+							@if($permintaan->status == 'menunggu')
+							<form id="hapusForm" method="POST" action="{{route('permintaan.hapus', $permintaan->id)}}">
+								@csrf
+								<button type="button" class="previous action-button-previous" onclick="
+								if (confirm('Anda akan menghapus permintaan! Lanjutkan?')) {document.getElementById('hapusForm').submit();}
+								">Hapus</button>
 							</form>
 							@endif
 							@endif {{-- isAdmin condition --}}

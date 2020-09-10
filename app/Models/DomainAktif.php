@@ -18,19 +18,22 @@ class DomainAktif extends Model
      * status
      */
 
-    static function viewDomainList()
+    static function selectList()
     {
-        return DomainAktif::join('users', '')->select([
-            'id',
-            'name_pj',
-            'name_ins',
-            'no_tlp',
-            'name_domain',
-            'jenis_domain',
-            'kp_sekarang',
-            'ip_domain',
-            'tgl_input',
-        ]);
+        return DomainAktif::join('users', 'users.id', '=', 'domain_aktifs.user_id')
+            ->join('tipe_servers', 'tipe_servers.id', '=', 'domain_aktifs.tipe_server_id')
+            ->join('units', 'units.id', '=', 'domain_aktifs.unit_id')
+            ->select([
+                'domain_aktifs.id',
+                'users.nama as user_nama',
+                'units.nama as unit_nama',
+                'domain_aktifs.alias',
+                'tipe_servers.nama_server',
+                'domain_aktifs.kapasitas',
+                'domain_aktifs.ip_domain',
+                'domain_aktifs.aktif',
+                'domain_aktifs.created_at',
+            ]);
     }
 
     // Buat domain aktif dari sebuah sejarah

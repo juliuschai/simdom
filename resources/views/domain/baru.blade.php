@@ -35,7 +35,7 @@
 									<h6 class="steps">Tahap 1 - 3</h6>
 								</div>
 							</div>
-							<small>Silahkan update data diri di myits</small>
+							<small>Silahkan perbaharui data diri di myits</small>
 							<div class="form-group row">
 								<label for="namaPic"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>

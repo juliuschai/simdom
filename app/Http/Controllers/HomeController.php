@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Auth::loginUsingId(1);
         return view('home');
     }
 }

@@ -4,11 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\DomainAktif;
 use App\Models\SejarahDomain;
-use App\User;
 use Illuminate\Http\Request;
+
+use DataTables;
 
 class PermintaanController extends Controller
 {
+    function listData()
+    {
+        $model = SejarahDomain::selectList()->newQuery();
+
+        return DataTables::eloquent($model)->toJson();
+    }
+
+    function list()
+    {
+        return view('permintaan.list');
+    }
+
     function lihatPermintaan(SejarahDomain $permintaan)
     {
         return view('permintaan.lihat', compact('permintaan'));
@@ -20,13 +33,11 @@ class PermintaanController extends Controller
             abort('403', 'Permintaan yang sudah diproses tidak bisa dihapus!');
         }
 
-        $domain = Domain::find($permintaan->domain_aktif_id);
-        $domain->aktif = 'aktif';
-        $domain->save();
+        $this->tolakPermintaan($permintaan);
 
         $permintaan->delete();
 
-        return redirect()->route('home');
+        return redirect()->route('permintaan.list'); // PART: change route to permintaan list
     }
 
     function terimaPermintaan(SejarahDomain $permintaan, Request $req)
@@ -64,6 +75,10 @@ class PermintaanController extends Controller
         $permintaan->waktu_konfirmasi = null;
         $permintaan->waktu_selesai = null;
         $permintaan->save();
+
+        $domain = DomainAktif::find($permintaan->domain_aktif_id);
+        $domain->aktif = 'aktif';
+        $domain->save();
 
         return redirect()
             ->back()

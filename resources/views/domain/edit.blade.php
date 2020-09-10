@@ -43,7 +43,7 @@
                                     <h6 class="steps">Tahap 1 - 3</h6>
                                 </div>
                             </div>
-                            <small>Silahkan update data diri di myits</small>
+                            <small>Silahkan perbaharui data diri di myits</small>
                             <div class="form-group row">
                                 <label for="namaPic"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
@@ -121,7 +121,8 @@
                                     class="col-md-4 col-form-label text-md-left">{{ __('Aliases') }}</label>
                                 <i class="fa fa-sticky-note-o domain"></i>
                                 <div class="col-md-6">
-                                    <input id="aliases" type="text" class="form-control" value="{{$domain->alias}}" disabled>
+                                    <input id="aliases" type="text" class="form-control" value="{{$domain->alias}}"
+                                        disabled>
                                 </div>
                             </div>
 
@@ -202,6 +203,16 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="statusAktif"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Status Aktif') }}</label>
+                                <i class="fa fa-inbox domain"></i>
+                                <div class="col-md-6">
+                                    <input id="statusAktif" type="text" value="{{$domain->aktif}}" class="form-control"
+                                        disabled>
+                                </div>
+                            </div>
+
                         </div>
                         <button type="button" class="next action-button" onclick="submitForm()">Buat</button>
                         {{-- <input type="button" name="next" class="next action-button" value="Next" />  --}}
@@ -224,6 +235,15 @@
                         </div>
                     </fieldset>
                 </form>
+                @if($domain->aktif != 'nonaktif')
+                <form id="nonaktifasiForm" action="{{route('domain.nonaktifasi', ['domain' => $domain->id])}}"
+                    method="POST">
+                    @csrf
+                    <button type="button" class="btn btn-danger" onclick="
+                    if (confirm('Domain akan dinonaktifkan! Lanjutkan?')) {document.getElementById('nonaktifasiForm').submit();}
+                    ">Non-Aktifasi</button>
+                </form>
+                @endif
             </div>
         </div>
     </div>

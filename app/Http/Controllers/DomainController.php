@@ -16,8 +16,16 @@ use DataTables;
 
 class DomainController extends Controller
 {
-    function setNonAktif()
+    function listData()
     {
+        $model = DomainAktif::selectList()->newQuery();
+
+        return DataTables::eloquent($model)->toJson();
+    }
+
+    function list(Request $request)
+    {
+        return view('domain.list');
     }
 
     function formDomainBaru()
@@ -53,7 +61,6 @@ class DomainController extends Controller
 
     function saveEditDomain(DomainAktif $domain, PermintaanRequest $req)
     {
-        dd($req->ipAddress);
         if ($domain->aktif == 'menunggu') {
             return redirect()
                 ->back()
@@ -70,28 +77,20 @@ class DomainController extends Controller
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
-    function listDomainData()
+    function nonaktifasiDomain(DomainAktif $domain)
     {
-        $model = Domain::viewDomainList()->newQuery();
+        SejarahDomain::customPermintaan(
+            $domain,
+            auth()->id(),
+            'Set domain menjadi nonaktif',
+            true
+        );
 
-        return DataTables::eloquent($model)->toJson();
-    }
+        $domain->aktif = 'nonaktif';
+        $domain->save();
 
-    function listDomain(Request $request)
-    {
-        $domains = Domain::viewDomainList()
-            ->orderBy('id')
-            ->paginate('10');
-
-        $length = Domain::count();
-        return view('domain.list', compact(['domains', 'length']));
-    }
-
-    function deleteDomain(Request $request)
-    {
-        $id = $request['id'];
-        Domain::destroy($id);
-
-        return redirect()->route('domain.list');
+        return redirect()
+            ->back()
+            ->with('message', 'Status Domain: nonaktif');
     }
 }
