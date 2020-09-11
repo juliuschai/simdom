@@ -34,6 +34,7 @@ class DomainController extends Controller
         $units = Unit::getSorted();
         $tipeUnits = TipeUnit::getSorted();
         $servers = TipeServer::get(['id', 'nama_server as nama']);
+
         return view(
             'domain.baru',
             compact('user', 'units', 'tipeUnits', 'servers')
@@ -43,6 +44,7 @@ class DomainController extends Controller
     function simpanBaru(PermintaanRequest $req)
     {
         $permintaan = SejarahDomain::permintaanBaru($req, null);
+
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
@@ -77,11 +79,33 @@ class DomainController extends Controller
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
+    function formTransfer(DomainAktif $domain)
+    {
+        $pemilik = $domain->user;
+
+        return view('domain.transfer', compact('pemilik'));
+    }
+
+    function saveTransfer(DomainAktif $domain, Request $req)
+    {
+        $user = User::findOrFail($req->id);
+
+        SejarahDomain::permintaanDariDomain(
+            $domain,
+            "Transfer kepemilikan domain dari {$domain->user->email}-{$domain->user->integra} ke {$user->email}-{$user->integra}",
+            true
+        );
+
+        $domain->user_id = $user->id;
+        $domain->save();
+
+        return redirect()->route('domain.list');
+    }
+
     function nonaktifasi(DomainAktif $domain)
     {
-        SejarahDomain::customPermintaan(
+        SejarahDomain::permintaanDariDomain(
             $domain,
-            auth()->id(),
             'Set domain menjadi nonaktif',
             true
         );

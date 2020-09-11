@@ -39,18 +39,18 @@ class DomainAktif extends Model
     // Buat domain aktif dari sebuah sejarah
     static function simpanDariSejarah(SejarahDomain $per)
     {
-        // Jika membuat domain baru
         if (!$per->domain_aktif_id) {
+        // Jika membuat domain baru
             $domain = new DomainAktif();
             $domain->alias = $per->nama_domain;
+            $domain->user_id = $per->user_id;
         } else {
-            // Jika memperbaharui sebuah domain
+        // Jika memperbaharui sebuah domain
             $domain = DomainAktif::find($per->domain_aktif_id);
             $domain->alias = $domain->aliases();
         }
 
         $domain->fill([
-            'user_id' => auth()->id(),
             'unit_id' => $per->unit_id,
             'ip_domain' => $per->ip_domain,
             'nama_domain' => $per->nama_domain,

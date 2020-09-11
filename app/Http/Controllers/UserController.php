@@ -21,27 +21,23 @@ class UserController extends Controller
         return view('user.list');
     }
 
-    /**
-     * Link will die by the end of the month
-     */
-    function tempAdm()
-    {
-        $date = mktime(17, 59, 59, 7, 31, 2020);
-        if (strtotime('now') < $date) {
-            $user = User::findOrFail(auth()->id());
-            $user->is_admin = true;
-            $user->save();
-            return "authorized";
-        } else {
-            // If it's past this month, disable route
-            abort(404);
-        }
-    }
-
     // Start CRUD users
     function lihat(User $user)
     {
         return view('user.lihat', compact('user'));
+    }
+
+    function cari(Request $request)
+    {
+        $user = null;
+        if ($request->has('email')) {
+            // Request by email
+            $user = User::where('email', $request->email)->first();
+        } elseif ($request->has('integra')) {
+            // Request by integra
+            $user = User::where('integra', $request->integra)->first();
+        }
+        return $user->toJSON();
     }
 
     function setRole(User $user, string $role)

@@ -42,14 +42,17 @@ Route::group(
                 Route::get('/permintaan/list', 'PermintaanController@list')->name('permintaan.list');
                 Route::get('/permintaan/data', 'PermintaanController@listData')->name('permintaan.data');
 
+                Route::get('/user/cari', 'UserController@cari')->name('user.cari');
                 Route::group(
                     [
                         'middleware' => ['adminOrOwner'],
                     ],
                     function () {
-                        // Domain management
+                        // Domain management dari pemilik
                         Route::get('/domain/{domain}/edit', 'DomainController@formEdit')->name('domain.edit');
                         Route::post('/domain/{domain}/edit', 'DomainController@saveEdit')->name('domain.edit');
+                        Route::get('/domain/{domain}/transfer', 'DomainController@formTransfer')->name('domain.transfer');
+                        Route::post('/domain/{domain}/transfer', 'DomainController@saveTransfer')->name('domain.transfer');
 
                         // hanya bisa dilakukan jika permintaan belum diproses (masih dalam status menunggu)
                         Route::get('/permintaan/{permintaan}/lihat', 'PermintaanController@lihat')->name('permintaan.lihat');

@@ -77,16 +77,15 @@ class SejarahDomain extends Model
      * @param string keterangan keterangan yang diinginkan
      * @param bool selesai anggap permintaan sudah selesai dilakukan dan langsung merubah domain aktif
      */
-    static function customPermintaan(
+    static function permintaanDariDomain(
         DomainAktif $domain,
-        int $user_id,
         string $keterangan,
         bool $langsung
     ) {
         $permintaan = new SejarahDomain();
         $permintaan->fill([
             'domain_aktif_id' => $domain->id,
-            'user_id' => $user_id,
+            'user_id' => auth()->id(),
             'unit_id' => $domain->unit_id,
             'surat' => null,
             'nama_domain' => $domain->nama_domain,
@@ -104,7 +103,6 @@ class SejarahDomain extends Model
                 'waktu_konfirmasi' => now(),
                 'waktu_selesai' => now(),
             ]);
-            DomainAktif::simpanDariSejarah($permintaan);
         }
 
         $permintaan->save();

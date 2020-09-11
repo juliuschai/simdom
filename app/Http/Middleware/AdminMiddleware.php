@@ -15,7 +15,12 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // TODO: 
-        return $next($request);
+        // If user is admin
+        $user = auth()->user();
+        if ($user->role == 'admin') {
+            return $next($request);
+        }
+
+        abort(403);
     }
 }
