@@ -60,17 +60,13 @@
 
     {{-- Role settings --}}
     @if($user->role != 'admin')
-    <form method="POST" action="{{ route('user.role', [
-        'user' => $user->id,
-        'role' => 'admin']) }}">
+    <form method="POST" action="{{ route('user.role', ['user' => $user->id, 'role' => 'admin']) }}">
         @csrf
         <button type="submit" class="btn btn-danger">Jadikan Admin</button>
     </form>
     @endif
     @if($user->role != 'user')
-    <form method="POST" action="{{ route('user.role', [
-        'user' => $user->id,
-        'role' => 'user']) }}">
+    <form method="POST" action="{{ route('user.role', ['user' => $user->id, 'role' => 'user']) }}">
         @csrf
         <button type="submit" class="btn btn-success">Jadikan User</button>
     </form>
@@ -78,16 +74,12 @@
 
     {{-- Email notification --}}
     @if($user->email_notification)
-    <form method="POST" action="{{ route('user.notif', [
-        'user' => $user->id,
-        'notif' => 'false']) }}">
+    <form method="POST" action="{{ route('user.notif', ['user' => $user->id, 'notif' => 'false']) }}">
         @csrf
         <button type="submit" class="btn btn-warning">Hentikan email notifikasi user</button>
     </form>
     @else
-    <form method="POST" action="{{ route('user.notif', [
-        'user' => $user->id,
-        'notif' => 'true']) }}">
+    <form method="POST" action="{{ route('user.notif', ['user' => $user->id, 'notif' => 'true']) }}">
         @csrf
         <button type="submit" class="btn btn-danger">Email notifikasi user untuk permintaan baru</button>
     </form>

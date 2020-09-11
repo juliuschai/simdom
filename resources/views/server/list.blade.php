@@ -2,8 +2,6 @@
 
 @section('content')
 
-<!-- <div class="right_col booking" role="main"> -->
-<!-- <div class="container-fluid"> -->
 <div class="col-md-12 col-sm-12">
 	<h2 class="table-title">Data Server</h2>
 	@if(session()->has('message'))

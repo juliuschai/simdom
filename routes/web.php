@@ -24,7 +24,7 @@ Route::group(
         Route::get('/', 'OIDCController@login')->name('login');
         Route::get('/home', 'HomeController@index')->name('home');
 
-        Route::get('/logout', function() { auth()->logout(); })->name('logout');
+        Route::get('/logout', 'OIDCController@logout')->name('logout');
 
         Route::group(
             [
@@ -86,6 +86,14 @@ Route::group(
                         Route::get('/user/{user}/lihat', 'UserController@lihat')->name('user.lihat');
                         Route::post('/user/{user}/role/{role}', 'UserController@setRole')->name('user.role');
                         Route::post('/user/{user}/notif/{notif}', 'UserController@setNotif')->name('user.notif');
+
+                        // Unit management
+                        Route::get('/unit/list', 'UnitController@list')->name('unit.list');
+                        Route::get('/unit/data', 'UnitController@listData')->name('unit.data');
+                        Route::get('/unit/baru', 'UnitController@formBaru')->name('unit.baru');
+                        Route::post('/unit/baru', 'UnitController@simpanBaru')->name('unit.baru');
+                        Route::get('/unit/{unit}/edit', 'UnitController@formEdit')->name('unit.edit');
+                        Route::post('/unit/{unit}/edit', 'UnitController@simpanEdit')->name('unit.edit');
                     }
                 );
             }

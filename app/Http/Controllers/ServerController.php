@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServerRequest;
 use App\Models\TipeServer;
-use Illuminate\Http\Request;
 
 use DataTables;
 
@@ -25,6 +24,7 @@ class ServerController extends Controller
     function formBaru()
     {
         $server = new TipeServer();
+
         return view('server.form', compact('server'));
     }
 

@@ -100,7 +100,7 @@
                 <a href="" class="showmenu"></a>
                 <div class="headerright">
                     <span style="color:#FFF">
-                        <?php echo "Selamat Datang Kembali Zahra";?>
+                        {{ __('Selamat Datang Kembali') }} {{ auth()->user()->nama }}
                     </span>
                     <div class="dropdown userinfo"> <a class="dropdown-toggle" data-toggle="dropdown" data-target="#"
                             href="/page.html">Profil Info</a>
