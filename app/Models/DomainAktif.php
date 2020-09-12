@@ -59,7 +59,7 @@ class DomainAktif extends Model
             'unit_id' => $per->unit_id,
             'ip_domain' => $per->ip_domain,
             'nama_domain' => $per->nama_domain,
-            'nama_panjang' => $per->nama_panjang,
+            'deskripsi' => $per->deskripsi,
             'tipe_server_id' => $per->tipe_server_id,
             'kapasitas' => $per->kapasitas,
             'aktif' => 'aktif',

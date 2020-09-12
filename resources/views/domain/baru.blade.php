@@ -104,18 +104,18 @@
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
 									<input id="namaDomain" type="text" name="namaDomain" value="{{old('namaDomain')}}"
-										class="form-control">
+										class="form-control" placeholder="simdom.its.ac.id; webinar-book.its.ac.id; arek.its.ac.id/wasd">
 								</div>
 							</div>
 
 							<div class="form-group row">
-								<label for="namaPanjang"
-									class="col-md-4 col-form-label text-md-left">{{ __('Nama Panjang') }}<p
+								<label for="deskripsi"
+									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}<p
 										style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
-									<input id="namaPanjang" type="text" name="namaPanjang"
-										value="{{old('namaPanjang')}}" class="form-control">
+									<input id="deskripsi" type="text" name="deskripsi"
+										value="{{old('deskripsi')}}" class="form-control">
 								</div>
 							</div>
 

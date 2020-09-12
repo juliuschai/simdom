@@ -15,7 +15,7 @@ class CreateSejarahDomainsTable extends Migration
             $table->foreignId('unit_id')->constrained()->onUpdate('CASCADE');
             $table->string('ip_domain', 16)->nullable();
             $table->string('nama_domain', 60);
-            $table->string('nama_panjang');
+            $table->string('deskripsi');
             $table->string('surat')->nullable();
             $table->foreignId('tipe_server_id')->constrained()->onUpdate('CASCADE');
             $table->integer('kapasitas');

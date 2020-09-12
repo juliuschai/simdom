@@ -107,7 +107,6 @@
                                     <h2 class="steps">Tahap 2 - 3</h2>
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="namaDomain"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}</label>
@@ -129,12 +128,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="namaPanjang"
-                                    class="col-md-4 col-form-label text-md-left">{{ __('Nama Panjang') }}</label>
+                                <label for="deskripsi"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}</label>
                                 <i class="fa fa-sticky-note-o domain"></i>
                                 <div class="col-md-6">
-                                    <input id="namaPanjang" type="text" name="namaPanjang"
-                                        value="{{$domain->nama_panjang}}" class="form-control">
+                                    <input id="deskripsi" type="text" name="deskripsi"
+                                        value="{{$domain->deskripsi}}" class="form-control">
                                 </div>
                             </div>
 
