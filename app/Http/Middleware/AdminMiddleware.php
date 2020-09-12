@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 
 class AdminMiddleware
@@ -16,7 +17,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         // If user is admin
-        $user = auth()->user();
+        $user = User::findOrLogout(auth()->id());
         if ($user->role == 'admin') {
             return $next($request);
         }

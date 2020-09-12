@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use App\Group;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Its\Sso\OpenIDConnectClient;

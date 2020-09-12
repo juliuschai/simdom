@@ -46,34 +46,34 @@
         <div class="leftpanel">
 
             <div class="logopanel">
-                <h4><a href="dashboard.php"><?php echo "Sistem Informasi Domain ITS"; ?></a></h4>
+                <h4><a href="{{route('home')}}"><?php echo "Sistem Informasi Domain ITS"; ?></a></h4>
             </div>
 
             <div class="datewidget">Hari ini: <?php echo date("d M Y"); ?></div>
 
             <div class="leftmenu">
                 <ul class="nav nav-tabs nav-stacked">
-                    <li class="active"><a href="dashboard.php"><span class="icon-align-justify"></span> Dashboard</a>
+                    <li class="active"><a href="{{route('home')}}"><span class="icon-align-justify"></span> Dashboard</a>
                     </li>
                     <!--MENU ADMIN-->
-                    <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Register</a>
+                    <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Baru</a>
                         <ul>
-                            <li><a href="{{ route('domain.baru') }}">Form Register Domain</a></li>
-                            <li><a href="{{ route('server.baru') }}">Form Register Server</a></li>
+                            <li><a href="{{ route('domain.baru') }}">Form Domain Baru</a></li>
+                            @admin
+                            <li><a href="{{ route('server.baru') }}">Form Server Baru</a></li>
+                            @endadmin
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#"><span class="icon-pencil"></span>Profil</a>
+                    <li class="dropdown"><a href="#"><span class="icon-pencil"></span>List</a>
                         <ul>
-                            <li><a href="{{route('domain.list')}}">Lihat Profil Domain</a></li>
-                            <li><a href="{{route('permintaan.list')}}">Lihat Profil Permintaan</a></li>
-                            <li><a href="{{route('server.list')}}">Lihat Profil Server</a></li>
+                            <li><a href="{{route('domain.list')}}">Lihat List Domain</a></li>
+                            <li><a href="{{route('permintaan.list')}}">Lihat List Permintaan</a></li>
+                            @admin
+                            <li><a href="{{route('server.list')}}">Lihat List Server</a></li>
+                            @endadmin
                         </ul>
                     </li>
-                    {{-- <li class="dropdown"><a href="#"><span class="icon-briefcase"></span>Monitoring</a>
-                        <ul>
-                            <li><a href="?cat=administrator&page=monitor">Form Monitoring Domain</a></li>
-                        </ul>
-                    </li> --}}
+                    @admin
                     <li class="dropdown"><a href="#"><span class="icon-inbox"></span>Report</a>
                         <ul>
                             <li><a href="?cat=administrator&page=report">Data Report</a></li>
@@ -85,11 +85,13 @@
                             <li><a href="?cat=administrator&page=grafik">Lihat Grafik Server</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#"><span class="icon-user"></span>User</a>
+                    <li class="dropdown"><a href="#"><span class="icon-user"></span>Admin List</a>
                         <ul>
-                            <li><a href="{{route('user.list')}}">Form user</a></li>
+                            <li><a href="{{route('user.list')}}">List User</a></li>
+                            <li><a href="{{route('unit.list')}}">List Fakultas/Departemen/Unit</a></li>
                         </ul>
                     </li>
+                    @endadmin
                 </ul>
             </div>
         </div>

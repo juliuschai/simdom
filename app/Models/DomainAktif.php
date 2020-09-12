@@ -36,6 +36,11 @@ class DomainAktif extends Model
             ]);
     }
 
+    static function selectListUser()
+    {
+        return DomainAktif::selectList()->where('user_id', auth()->id());
+    }
+
     // Buat domain aktif dari sebuah sejarah
     static function simpanDariSejarah(SejarahDomain $per)
     {

@@ -92,7 +92,9 @@
                                     <input id="noWa" type="text" class="form-control" value="{{$user->no_wa}}" disabled>
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="Next" />
+                            <a href="{{route('domain.transfer', ['domain' => $domain->id])}}">Ganti PIC domain</a>
+                        </div>
+                    <input type="button" name="next" class="next action-button" value="Next" />
                     </fieldset>
                     {{-- Tampilkan data domain --}}
                     <fieldset>
@@ -146,7 +148,9 @@
                                     </two-select>
                                 </div>
                             </div>
-
+                            @admin
+                            <a href="{{route('domain.list', ['q' => $domain->unit->nama])}}">Lihat semua domain dari unit tersebut</a>
+                            @endadmin
                             <div class="form-group row">
                                 <label for="surat"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}</label>

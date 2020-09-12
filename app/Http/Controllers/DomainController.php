@@ -9,7 +9,6 @@ use App\Models\TipeServer;
 use App\Models\TipeUnit;
 use App\Models\Unit;
 use App\User;
-use App\Models\Domain;
 use Illuminate\Http\Request;
 
 use DataTables;
@@ -18,8 +17,12 @@ class DomainController extends Controller
 {
     function listData()
     {
-        $model = DomainAktif::selectList()->newQuery();
-
+        $user = User::findOrLogout(auth()->id());
+        if ($user->isAdmin()) {
+            $model = DomainAktif::selectList()->newQuery();
+        } else {
+            $model = DomainAktif::selectListUser()->newQuery();
+        }
         return DataTables::eloquent($model)->toJson();
     }
 
@@ -92,7 +95,8 @@ class DomainController extends Controller
 
         SejarahDomain::permintaanDariDomain(
             $domain,
-            "Transfer kepemilikan domain dari {$domain->user->email}-{$domain->user->integra} ke {$user->email}-{$user->integra}",
+            "Transfer kepemilikan domain dari {$domain->user->email} - {$domain->user->integra}" +
+                " ke {$user->email} - {$user->integra}",
             true
         );
 

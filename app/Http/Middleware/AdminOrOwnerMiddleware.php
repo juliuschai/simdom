@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\DomainAktif;
 use App\Models\SejarahDomain;
+use App\User;
 use Closure;
 
 class AdminOrOwnerMiddleware
@@ -18,7 +19,7 @@ class AdminOrOwnerMiddleware
     public function handle($request, Closure $next)
     {
         // If user is admin
-        $user = auth()->user();
+        $user = User::findOrLogout(auth()->id());
         if ($user->role == 'admin') {
             return $next($request);
         }

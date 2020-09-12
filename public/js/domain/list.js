@@ -1,8 +1,9 @@
+// domain list datatabel setup
 var tableElm = $('#tableElm');
 
 var editBtn = $('#editBtnTemplate');
 
-tableElm.DataTable({
+var datatableRes = tableElm.DataTable({
 	processing: true,
 	serverSide: true,
 	ajax: tableElm.data('ajaxurl'),
@@ -15,21 +16,21 @@ tableElm.DataTable({
 			visible: false,
 		},
 		{
-			title: 'Nama Peminta',
+			title: 'Nama PIC',
 			data: 'user_nama',
 			name: 'users.nama',
 			searchable: true,
 			visible: true,
 		},
 		{
-			title: 'Nama Instansi',
+			title: 'Instansi',
 			data: 'unit_nama',
 			name: 'units.nama',
 			searchable: true,
 			visible: true,
 		},
 		{
-			title: 'Nama Domain',
+			title: 'Domain',
 			data: 'alias',
 			name: 'domain_aktifs.alias',
 			searchable: true,
@@ -54,7 +55,7 @@ tableElm.DataTable({
 			visible: true,
 		},
 		{
-			title: 'IP Domain',
+			title: 'IP',
 			data: 'ip_domain',
 			name: 'domain_aktifs.ip_domain',
 			searchable: true,
@@ -89,3 +90,9 @@ tableElm.DataTable({
 		}
 	],
 });
+
+// Domain List search via get params
+let queryString = window.location.search;
+let urlParams = new URLSearchParams(queryString);
+let urlSearch = urlParams.get('q');
+datatableRes.search(urlSearch).draw();

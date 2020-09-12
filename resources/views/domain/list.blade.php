@@ -24,12 +24,12 @@
 		<thead class="thead-custom-blue">
 			<tr>
 				<th scope="col">Id</th>
-				<th scope="col">Nama PJ</th>
-				<th scope="col">Nama Instansi</th>
-				<th scope="col">Nama Domain</th>
+				<th scope="col">Nama PIC</th>
+				<th scope="col">Instansi</th>
+				<th scope="col">Domain</th>
 				<th scope="col">Jenis Domain</th>
 				<th scope="col">Kapasitas DB</th>
-				<th scope="col">IP Domain</th>
+				<th scope="col">IP</th>
 				<th scope="col">Status</th>
 				<th scope="col">Tanggal Rekap</th>
 				<th scope="col">Aksi</th>

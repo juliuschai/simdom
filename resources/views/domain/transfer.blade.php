@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h2>Transfer Pemilik Domain</h2>
+    <h2>Ganti PIC Domain</h2>
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -21,7 +21,7 @@
     </div>
     @endif
 
-    <h4>Pemilik Sekarang</h4>
+    <h4>PIC Sekarang</h4>
     <div class="form-group row">
         <label class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
         <i style="padding-left: 1px" class="fa fa-user domain"></i>
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <h4>Pemilik Baru</h4>
+    <h4>PIC Baru</h4>
     <div class="form-group row">
         <label for="email" class="col-md-4 col-form-label text-md-left">{{ __('Email') }}</label>
         <i style="padding-left: 1px" class="fa fa-user domain"></i>

@@ -48,6 +48,11 @@ class User extends Authenticatable
         ]);
     }
 
+    /**
+     * Cari user yang sedang login, jika tidak ditemukan maka re-login user
+     * @param Number id dari user yang login
+     * @return User user user model yang sekarang login
+     */
     static function findOrLogout($id)
     {
         $user = User::find($id);
@@ -60,8 +65,6 @@ class User extends Authenticatable
 
     function isAdmin()
     {
-        // TODO:
-        // return $this->tipe === 'admin';
-        return true;
+        return $this->role === 'admin';
     }
 }

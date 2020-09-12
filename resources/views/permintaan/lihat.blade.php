@@ -41,7 +41,18 @@
 									<h6 class="steps">Tahap 1 - 3</h6>
 								</div>
 							</div>
-							<small>Silahkan perbaharui data diri di myits</small>
+							@if($permintaan->user->isAdmin())
+							<h6>Perubahan ini dibuat oleh admin</h6>
+							<div class="form-group row">
+								<label for="namaPic"
+									class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
+								<i style="padding-left: 1px" class="fa fa-user domain"></i>
+								<div class="col-md-6">
+									<input id="namaPic" type="text" class="form-control"
+										value="{{$permintaan->user->nama}}" disabled>
+								</div>
+							</div>
+							@else
 							<div class="form-group row">
 								<label for="namaPic"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
@@ -91,6 +102,7 @@
 										value="{{$permintaan->user->no_wa}}" disabled>
 								</div>
 							</div>
+							@endif
 						</div> <input type="button" name="next" class="next action-button" value="Next" />
 					</fieldset>
 					{{-- Tampilkan data domain --}}
@@ -114,9 +126,12 @@
 										value="{{$permintaan->nama_domain}}" class="form-control" disabled>
 								</div>
 							</div>
+
+							@if($permintaan->domain_aktif_id)
 							<a target="_blank" href="{{route('domain.edit', ['domain' => $permintaan->domain_aktif_id])}}" >
 								Lihat record domain aktif dari {{$permintaan->nama_domain}}
 							</a>
+							@endif
 
 							<div class="form-group row">
 								<label for="namaPanjang"
@@ -140,6 +155,9 @@
 										class="form-control" disabled>
 								</div>
 							</div>
+                            @admin
+                            <a href="{{route('domain.list', ['q' => $permintaan->unit->nama])}}">Lihat semua domain dari unit tersebut</a>
+                            @endadmin
 
 							<div class="form-group row">
 								<label for="surat"
@@ -202,7 +220,7 @@
 								</div>
 							</div>
 
-							@if(auth()->user()->isAdmin())
+                            @admin
 							@if($permintaan->status == 'menunggu'
 							|| $permintaan->status == 'ditolak')
 							<form method="POST" action="{{route('permintaan.terima', $permintaan->id)}}">
@@ -251,7 +269,7 @@
 								">Hapus</button>
 							</form>
 							@endif
-							@endif {{-- isAdmin condition --}}
+                            @endadmin
 							<button type="button" class="previous action-button-previous">Prev</button>
 						</div>
 					</fieldset>

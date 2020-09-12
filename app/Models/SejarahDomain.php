@@ -22,8 +22,18 @@ class SejarahDomain extends Model
 
     static function selectList()
     {
-        return SejarahDomain::join('users', 'users.id', '=', 'sejarah_domains.user_id')
-            ->join('tipe_servers', 'tipe_servers.id', '=', 'sejarah_domains.tipe_server_id')
+        return SejarahDomain::join(
+            'users',
+            'users.id',
+            '=',
+            'sejarah_domains.user_id'
+        )
+            ->join(
+                'tipe_servers',
+                'tipe_servers.id',
+                '=',
+                'sejarah_domains.tipe_server_id'
+            )
             ->join('units', 'units.id', '=', 'sejarah_domains.unit_id')
             ->select([
                 'sejarah_domains.id',
@@ -37,6 +47,18 @@ class SejarahDomain extends Model
                 'sejarah_domains.keterangan',
             ])
             ->orderBy('sejarah_domains.created_at', 'DESC');
+    }
+
+    static function selectListUser()
+    {
+        return SejarahDomain::selectList()
+            ->join(
+                'domain_aktifs',
+                'domain_aktifs.id',
+                '=',
+                'sejarah_domains.domain_aktif_id'
+            )
+            ->where('domain_aktifs.user_id', auth()->id());
     }
 
     static function permintaanBaru($req, $domain_id)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DomainAktif;
 use App\Models\SejarahDomain;
+use App\User;
 use Illuminate\Http\Request;
 
 use DataTables;
@@ -12,7 +13,12 @@ class PermintaanController extends Controller
 {
     function listData()
     {
-        $model = SejarahDomain::selectList()->newQuery();
+        $user = User::findOrLogout(auth()->id());
+        if ($user->isAdmin()) {
+            $model = SejarahDomain::selectList()->newQuery();
+        } else {
+            $model = SejarahDomain::selectListUser()->newQuery();
+        }
 
         return DataTables::eloquent($model)->toJson();
     }
