@@ -94,5 +94,7 @@ var datatableRes = tableElm.DataTable({
 // Domain List search via get params
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
+console.log(urlParams);
 let urlSearch = urlParams.get('q');
-datatableRes.search(urlSearch).draw();
+console.log(urlSearch);
+if (urlSearch) datatableRes.search(urlSearch).draw();
