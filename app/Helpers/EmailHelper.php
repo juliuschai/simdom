@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Permintaan;
 use App\User;
 
 class EmailHelper
@@ -38,7 +39,7 @@ class EmailHelper
         });
     }
 
-    static function notifPermintaanBaru(SejarahDomain $permintaan)
+    static function notifPermintaanBaru(Permintaan $permintaan)
     {
         $emails = EmailHelper::getEmailList();
         $data = [
@@ -49,7 +50,7 @@ class EmailHelper
             'domain' => $permintaan->domain,
             'keterangan' => $permintaan->keterangan,
         ];
-        $datas[] = "<a href=\"{$data['link']}\">";
+        $datas[] = "<a href=\"{$data['link']}\">link ke permintaan</a>";
         EmailHelper::emailList('Simdom - Permintaan Baru', $emails, $datas);
     }
 
