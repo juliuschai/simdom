@@ -3,9 +3,9 @@ $(document).ready(function () {
 });
 
 function populate() {
-	// Set tipeServer to old input
-	$tipeServer = $('#tipeServer');
-	$tipeServer.val($tipeServer.data('value'));
+	// Set server to old input
+	$server = $('#server');
+	$server.val($server.data('value'));
 }
 
 function validate() {

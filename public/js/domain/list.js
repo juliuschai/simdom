@@ -11,7 +11,7 @@ var datatableRes = tableElm.DataTable({
 		{
 			title: 'Id',
 			data: 'id',
-			name: 'domain_aktifs.id',
+			name: 'domains.id',
 			searchable: false,
 			visible: false,
 		},
@@ -32,7 +32,7 @@ var datatableRes = tableElm.DataTable({
 		{
 			title: 'Domain',
 			data: 'alias',
-			name: 'domain_aktifs.alias',
+			name: 'domains.alias',
 			searchable: true,
 			visible: true,
 			render: function (data, type, full, meta) {
@@ -43,40 +43,30 @@ var datatableRes = tableElm.DataTable({
 		{
 			title: 'Jenis Domain',
 			data: 'nama_server',
-			name: 'tipe_servers.nama_server',
+			name: 'servers.nama',
 			searchable: true,
 			visible: true,
 		},
 		{
 			title: 'Kapasitas DB',
 			data: 'kapasitas',
-			name: 'domain_aktifs.kapasitas',
+			name: 'domains.kapasitas',
 			searchable: true,
 			visible: true,
 		},
 		{
 			title: 'IP',
-			data: 'ip_domain',
-			name: 'domain_aktifs.ip_domain',
+			data: 'ip',
+			name: 'domains.ip',
 			searchable: true,
 			visible: true,
 		},
 		{
 			title: 'Status',
 			data: 'aktif',
-			name: 'domain_aktifs.aktif',
+			name: 'domains.aktif',
 			searchable: true,
 			visible: true,
-		},
-		{
-			title: 'Tanggal Rekap',
-			data: 'created_at',
-			name: 'domain_aktifs.created_at',
-			searchable: true,
-			visible: true,
-			render: function (data, type, full, meta) {
-				return new Date(data).toLocaleString();
-			},
 		},
 		{
 			title: 'Aksi',
@@ -94,7 +84,5 @@ var datatableRes = tableElm.DataTable({
 // Domain List search via get params
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
-console.log(urlParams);
 let urlSearch = urlParams.get('q');
-console.log(urlSearch);
 if (urlSearch) datatableRes.search(urlSearch).draw();

@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TipeServer extends Model
+class Server extends Model
 {
     protected $guarded = [];
 
     static function selectList()
     {
-        return TipeServer::select([
+        return Server::select([
             'id',
-            'nama_server',
+            'nama',
             'created_at',
             'lokasi_server',
         ]);
@@ -21,7 +21,7 @@ class TipeServer extends Model
     function perbaharuiDariRequest($req)
     {
         $this->fill([
-            'nama_server' => $req->namaServer,
+            'nama' => $req->namaServer,
             'lokasi_server' => $req->lokasiServer,
             'keterangan' => $req->keterangan,
         ]);
@@ -31,8 +31,8 @@ class TipeServer extends Model
 
     static function serverBaru($req)
     {
-        $server = TipeServer::create([
-            'nama_server' => $req->namaServer,
+        $server = Server::create([
+            'nama' => $req->namaServer,
             'lokasi_server' => $req->lokasiServer,
             'keterangan' => $req->keterangan,
         ]);

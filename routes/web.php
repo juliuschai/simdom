@@ -52,7 +52,7 @@ Route::group(
                     function () {
                         // Domain management dari pemilik
                         Route::get('/domain/{domain}/edit', 'DomainController@formEdit')->name('domain.edit');
-                        Route::post('/domain/{domain}/edit', 'DomainController@saveEdit')->name('domain.edit');
+                        Route::post('/domain/{domain}/edit', 'DomainController@simpanEdit')->name('domain.edit');
                         Route::get('/domain/{domain}/transfer', 'DomainController@formTransfer')->name('domain.transfer');
                         Route::post('/domain/{domain}/transfer', 'DomainController@saveTransfer')->name('domain.transfer');
 
@@ -74,7 +74,7 @@ Route::group(
                         Route::get('/server/baru', 'ServerController@formBaru')->name('server.baru');
                         Route::post('/server/baru', 'ServerController@simpanBaru')->name('server.baru');
                         Route::get('/server/{server}/edit', 'ServerController@formEdit')->name('server.edit');
-                        Route::post('/server/{server}/edit', 'ServerController@saveEdit')->name('server.edit');
+                        Route::post('/server/{server}/edit', 'ServerController@simpanEdit')->name('server.edit');
                         Route::post('/server/{server}/hapus', 'ServerController@hapus')->name('server.hapus');
 
                         // Ubah status Permintaan

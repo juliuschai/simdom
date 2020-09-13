@@ -104,18 +104,18 @@
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
 									<input id="namaDomain" type="text" name="namaDomain" value="{{old('namaDomain')}}"
-										class="form-control">
+										class="form-control" placeholder="simdom.its.ac.id; webinar-book.its.ac.id; arek.its.ac.id/wasd">
 								</div>
 							</div>
 
 							<div class="form-group row">
-								<label for="namaPanjang"
-									class="col-md-4 col-form-label text-md-left">{{ __('Nama Panjang') }}<p
+								<label for="deskripsi"
+									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}<p
 										style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
-									<input id="namaPanjang" type="text" name="namaPanjang"
-										value="{{old('namaPanjang')}}" class="form-control">
+									<input id="deskripsi" type="text" name="deskripsi"
+										value="{{old('deskripsi')}}" class="form-control">
 								</div>
 							</div>
 
@@ -142,16 +142,15 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="tipeServer"
-									class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}
+								<label for="server"
+									class="col-md-4 col-form-label text-md-left">{{ __('Server') }}
 									<p style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<select id="tipeServer" name="tipeServer" class="form-control"
-										data-value="{{old('tipeServer')}}??'1'">
-										@foreach ($servers as $server)
-										<option value="{{$server->id}}">{{$server->nama}}</option>
-										@endforeach
+									<select id="server" name="server" class="form-control">
+										<option value="WHS">WHS/Zeus/CPanel</option>
+										<option value="VPS">VPS</option>
+										<option value="Colocation">Colocation</option>
 									</select>
 								</div>
 							</div>

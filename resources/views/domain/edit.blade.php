@@ -107,7 +107,6 @@
                                     <h2 class="steps">Tahap 2 - 3</h2>
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="namaDomain"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}</label>
@@ -129,12 +128,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="namaPanjang"
-                                    class="col-md-4 col-form-label text-md-left">{{ __('Nama Panjang') }}</label>
+                                <label for="deskripsi"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}</label>
                                 <i class="fa fa-sticky-note-o domain"></i>
                                 <div class="col-md-6">
-                                    <input id="namaPanjang" type="text" name="namaPanjang"
-                                        value="{{$domain->nama_panjang}}" class="form-control">
+                                    <input id="deskripsi" type="text" name="deskripsi"
+                                        value="{{$domain->deskripsi}}" class="form-control">
                                 </div>
                             </div>
 
@@ -162,15 +161,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="tipeServer"
-                                    class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}</label>
+                                <label for="server"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Server') }}</label>
                                 <i class="fa fa-server domain"></i>
                                 <div class="col-md-6">
-                                    <select id="tipeServer" name="tipeServer" class="form-control"
-                                        data-value="{{$domain->tipe_server_id}}">
-                                        @foreach ($servers as $server)
-                                        <option value="{{$server->id}}">{{$server->nama}}</option>
-                                        @endforeach
+                                    <select id="server" name="server" class="form-control">
+										<option value="WHS">WHS/Zeus/CPanel</option>
+										<option value="VPS">VPS</option>
+										<option value="Colocation">Colocation</option>
                                     </select>
                                 </div>
                             </div>
@@ -185,13 +183,13 @@
                                 </div>
                             </div>
 
-                            @if($domain->ip_domain)
+                            @if($domain->ip)
                             <div class="form-group row">
                                 <label for="ipAddress"
                                     class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
                                 <i class="fa fa-inbox domain"></i>
                                 <div class="col-md-6">
-                                    <input id="ipAddress" type="text" value="{{$domain->ip_domain}}"
+                                    <input id="ipAddress" type="text" value="{{$domain->ip}}"
                                         class="form-control" disabled>
                                 </div>
                             </div>
