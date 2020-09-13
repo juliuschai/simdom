@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PermintaanRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
-use App\Models\Server;
 use App\Models\TipeUnit;
 use App\Models\Unit;
 use App\User;
@@ -34,15 +33,15 @@ class DomainController extends Controller
     function formBaru()
     {
         $user = User::findOrLogout(auth()->id());
-        $units = Unit::getSorted();
-        $tipeUnits = TipeUnit::getSorted();
+        $units = Unit::getDropdownOptions();
+        $tipeUnits = TipeUnit::getDropdownOptions();
 
         return view('domain.baru', compact('user', 'units', 'tipeUnits'));
     }
 
     function simpanBaru(PermintaanRequest $req)
     {
-        $permintaan = Permintaan::permintaanBaru($req, null);
+        $permintaan = Permintaan::permintaanBaru($req);
 
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
@@ -50,13 +49,12 @@ class DomainController extends Controller
     function formEdit(Domain $domain)
     {
         $user = User::findOrLogout(auth()->id());
-        $units = Unit::getSorted();
-        $tipeUnits = TipeUnit::getSorted();
-        $servers = Server::get(['id', 'nama as nama']);
+        $units = Unit::getDropdownOptions();
+        $tipeUnits = TipeUnit::getDropdownOptions();
 
         return view(
             'domain.edit',
-            compact('user', 'units', 'tipeUnits', 'servers', 'domain')
+            compact('user', 'units', 'tipeUnits', 'domain')
         );
     }
 
@@ -66,15 +64,18 @@ class DomainController extends Controller
             return redirect()
                 ->back()
                 ->withErrors([
-                    'Domain sedang dirubah, tunggu perubahan domain selesai' .
+                    'Domain sedang dirubah, tunggu perubahan domain selesai ' .
                     'dilakukan atau hapus permintaan perubahan jika permintaan belum diverifikasi',
                 ]);
         }
-        $req->ipAddress = $domain->ip;
+
+        $req->ip = $domain->ip;
+        $req->namaDomain = $domain->nama_domain;
         $domain->aktif = 'menunggu';
         $domain->save();
 
         $permintaan = Permintaan::permintaanBaru($req, $domain->id);
+
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 

@@ -1930,10 +1930,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UnitSelect.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UnitSelect.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1955,13 +1955,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["seconds", "firsts", "optionValue", "nameProp"],
+  props: ["seconds", "firsts", "firstVal", "secondVal", "secondNameProp", "firstNameProp", "textboxNameProp"],
   data: function data() {
     return {
-      firstValue: null,
-      secondValue: null,
-      secOpts: {}
+      secondOpts: {}
     };
   },
   created: function created() {
@@ -1971,39 +1974,14 @@ __webpack_require__.r(__webpack_exports__);
     convertSeconds: function convertSeconds() {
       var _this = this;
 
-      // for (const second of this.seconds) {
-      //   const tipe_id = second.tipe_unit_id;
-      //   if (!this.secOpts[tipe_id]) this.secOpts[tipe_id] = [];
-      //   this.secOpts[tipe_id].push({
-      //     id: second.id,
-      //     nama: second.nama,
-      //   });
-      //   if (this.optionValue && second.id == this.optionValue) {
-      //     this.firstValue = second.tipe_unit_id;
-      //     this.secondValue = second.id;
-      //   }
-      // }
       // Convert from array of options into an array of array of options
       this.seconds.map(function (elm, idx) {
-        var tipe_unit_id = elm.tipe_unit_id,
-            id = elm.id,
-            nama = elm.nama;
-        if (!_this.secOpts[tipe_unit_id]) _this.secOpts[tipe_unit_id] = [];
+        var second_val = elm.second_val,
+            first_val = elm.first_val;
+        if (!_this.secondOpts[first_val]) _this.secondOpts[first_val] = [];
 
-        _this.secOpts[tipe_unit_id].push({
-          id: id,
-          nama: nama
-        });
-      }); // Select option, if the optionValue is defined
-
-      var selSecond = this.seconds.find(function (val, idx) {
-        return _this.optionValue && val.id == _this.optionValue;
+        _this.secondOpts[first_val].push(second_val);
       });
-
-      if (selSecond) {
-        this.firstValue = selSecond.tipe_unit_id;
-        this.secondValue = selSecond.id;
-      }
     }
   }
 });
@@ -37622,10 +37600,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UnitSelect.vue?vue&type=template&id=1430b76a&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UnitSelect.vue?vue&type=template&id=1430b76a& ***!
-  \*************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2& ***!
+  \************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37638,6 +37616,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.secondVal,
+          expression: "secondVal"
+        }
+      ],
+      attrs: { type: "text", name: _vm.textboxNameProp },
+      domProps: { value: _vm.secondVal },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.secondVal = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
     _c(
       "select",
       {
@@ -37645,10 +37646,11 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.firstValue,
-            expression: "firstValue"
+            value: _vm.firstVal,
+            expression: "firstVal"
           }
         ],
+        attrs: { name: _vm.firstNameProp },
         on: {
           change: function($event) {
             var $$selectedVal = Array.prototype.filter
@@ -37659,15 +37661,15 @@ var render = function() {
                 var val = "_value" in o ? o._value : o.value
                 return val
               })
-            _vm.firstValue = $event.target.multiple
+            _vm.firstVal = $event.target.multiple
               ? $$selectedVal
               : $$selectedVal[0]
           }
         }
       },
       _vm._l(_vm.firsts, function(firstOpt, idx) {
-        return _c("option", { key: idx, domProps: { value: firstOpt.id } }, [
-          _vm._v(_vm._s(firstOpt.nama))
+        return _c("option", { key: idx, domProps: { value: firstOpt } }, [
+          _vm._v(_vm._s(firstOpt))
         ])
       }),
       0
@@ -37680,11 +37682,11 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.secondValue,
-            expression: "secondValue"
+            value: _vm.secondVal,
+            expression: "secondVal"
           }
         ],
-        attrs: { name: _vm.nameProp },
+        attrs: { name: _vm.secondNameProp },
         on: {
           change: function($event) {
             var $$selectedVal = Array.prototype.filter
@@ -37695,15 +37697,15 @@ var render = function() {
                 var val = "_value" in o ? o._value : o.value
                 return val
               })
-            _vm.secondValue = $event.target.multiple
+            _vm.secondVal = $event.target.multiple
               ? $$selectedVal
               : $$selectedVal[0]
           }
         }
       },
-      _vm._l(_vm.secOpts[_vm.firstValue], function(secOpt, idx) {
-        return _c("option", { key: idx, domProps: { value: secOpt.id } }, [
-          _vm._v(_vm._s(secOpt.nama))
+      _vm._l(_vm.secondOpts[_vm.firstVal], function(secondOpt, idx) {
+        return _c("option", { key: idx, domProps: { value: secondOpt } }, [
+          _vm._v(_vm._s(secondOpt))
         ])
       }),
       0
@@ -49906,7 +49908,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('example-component-2', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-Vue.component('two-select', __webpack_require__(/*! ./components/UnitSelect.vue */ "./resources/js/components/UnitSelect.vue")["default"]);
+Vue.component('two-select-with-textbox', __webpack_require__(/*! ./components/TwoSelectsWithTextbox.vue */ "./resources/js/components/TwoSelectsWithTextbox.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50033,17 +50035,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/UnitSelect.vue":
-/*!************************************************!*\
-  !*** ./resources/js/components/UnitSelect.vue ***!
-  \************************************************/
+/***/ "./resources/js/components/TwoSelectsWithTextbox.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/TwoSelectsWithTextbox.vue ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _UnitSelect_vue_vue_type_template_id_1430b76a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UnitSelect.vue?vue&type=template&id=1430b76a& */ "./resources/js/components/UnitSelect.vue?vue&type=template&id=1430b76a&");
-/* harmony import */ var _UnitSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UnitSelect.vue?vue&type=script&lang=js& */ "./resources/js/components/UnitSelect.vue?vue&type=script&lang=js&");
+/* harmony import */ var _TwoSelectsWithTextbox_vue_vue_type_template_id_6068c9f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2& */ "./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2&");
+/* harmony import */ var _TwoSelectsWithTextbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TwoSelectsWithTextbox.vue?vue&type=script&lang=js& */ "./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -50053,9 +50055,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _UnitSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _UnitSelect_vue_vue_type_template_id_1430b76a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _UnitSelect_vue_vue_type_template_id_1430b76a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TwoSelectsWithTextbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TwoSelectsWithTextbox_vue_vue_type_template_id_6068c9f2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TwoSelectsWithTextbox_vue_vue_type_template_id_6068c9f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -50065,38 +50067,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/UnitSelect.vue"
+component.options.__file = "resources/js/components/TwoSelectsWithTextbox.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/UnitSelect.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/UnitSelect.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UnitSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./UnitSelect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UnitSelect.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UnitSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoSelectsWithTextbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TwoSelectsWithTextbox.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoSelectsWithTextbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/UnitSelect.vue?vue&type=template&id=1430b76a&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/UnitSelect.vue?vue&type=template&id=1430b76a& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2& ***!
+  \******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnitSelect_vue_vue_type_template_id_1430b76a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./UnitSelect.vue?vue&type=template&id=1430b76a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UnitSelect.vue?vue&type=template&id=1430b76a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnitSelect_vue_vue_type_template_id_1430b76a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoSelectsWithTextbox_vue_vue_type_template_id_6068c9f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TwoSelectsWithTextbox.vue?vue&type=template&id=6068c9f2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoSelectsWithTextbox_vue_vue_type_template_id_6068c9f2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnitSelect_vue_vue_type_template_id_1430b76a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoSelectsWithTextbox_vue_vue_type_template_id_6068c9f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

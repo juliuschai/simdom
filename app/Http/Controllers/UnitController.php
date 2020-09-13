@@ -24,7 +24,7 @@ class UnitController extends Controller
 
     function formBaru()
     {
-        $tipeUnits = TipeUnit::getSorted();
+        $tipeUnits = TipeUnit::orderBy('nama')->get();
 
         return view('unit.baru', compact('tipeUnits'));
     }
@@ -40,7 +40,7 @@ class UnitController extends Controller
     
     function formEdit(Unit $unit)
     {
-        $tipeUnits = TipeUnit::getSorted();
+        $tipeUnits = TipeUnit::orderBy('nama')->get();
 
         return view('unit.edit', compact('unit', 'tipeUnits'));
     }

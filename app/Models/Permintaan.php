@@ -22,12 +22,7 @@ class Permintaan extends Model
 
     static function selectList()
     {
-        return Permintaan::join(
-            'users',
-            'users.id',
-            '=',
-            'permintaans.user_id'
-        )
+        return Permintaan::join('users', 'users.id', '=', 'permintaans.user_id')
             ->join('units', 'units.id', '=', 'permintaans.unit_id')
             ->select([
                 'permintaans.id',
@@ -46,17 +41,13 @@ class Permintaan extends Model
     static function selectListUser()
     {
         return Permintaan::selectList()
-            ->join(
-                'domains',
-                'domains.id',
-                '=',
-                'permintaans.domain_id'
-            )
+            ->join('domains', 'domains.id', '=', 'permintaans.domain_id')
             ->where('domains.user_id', auth()->id());
     }
 
-    static function permintaanBaru($req, $domain_id)
+    static function permintaanBaru($req, $domain_id = null)
     {
+        // Proses file
         if ($req->has('surat')) {
             $file = $req->file('surat');
             $filename = substr(
@@ -68,17 +59,25 @@ class Permintaan extends Model
             $file_path = null;
         }
 
+        // Get unit_id from unit
+        $tipe_unit_id = TipeUnit::where('nama', $req->tipeUnit)->firstOrFail()->id;
+        $unit = Unit::firstOrCreate([
+            'nama' => $req->unit,
+            'tipe_unit_id' => $tipe_unit_id,
+        ]);
+        $unit_id = $unit->id;
+
         $permintaan = Permintaan::create([
             'domain_id' => $domain_id,
             'user_id' => auth()->id(),
-            'unit_id' => $req->unit,
+            'unit_id' => $unit_id,
             'surat' => $file_path,
             'nama_domain' => $req->namaDomain,
             'deskripsi' => $req->deskripsi,
-            'server' => $req->server,
+            'server' => $req->serverDomain,
             'kapasitas' => $req->kapasitas,
             'keterangan' => $req->keterangan,
-            'ip' => $req->ipAddress,
+            'ip' => $req->ip,
         ]);
 
         return $permintaan;

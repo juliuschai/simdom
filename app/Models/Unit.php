@@ -26,9 +26,16 @@ class Unit extends Model
         )->select(['units.id', 'units.nama', 'tipe_units.nama as tipe_unit']);
     }
 
-    static function getSorted()
+    static function getDropdownOptions()
     {
-        return Unit::orderBy('nama')->get();
+        return Unit::join(
+            'tipe_units',
+            'tipe_units.id',
+            '=',
+            'units.tipe_unit_id'
+        )
+            ->orderBy('units.nama')
+            ->get(['units.nama as second_val', 'tipe_units.nama as first_val']);
     }
 
     function isiDariRequest($req)

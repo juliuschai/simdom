@@ -48,10 +48,13 @@ class PermintaanController extends Controller
 
     function terima(Permintaan $permintaan, Request $req)
     {
-        $permintaan->status = 'diterima';
-        $permintaan->ip = $req->ipAddress;
-        $permintaan->waktu_konfirmasi = now();
-        $permintaan->waktu_selesai = null;
+        $permintaan->fill([
+            'nama_domain' => $req->namaDomain,
+            'ip' => $req->ip,
+            'status' => 'diterima',
+            'waktu_konfirmasi' => now(),
+            'waktu_selesai' => null,
+        ]);
         $permintaan->save();
 
         return redirect()
@@ -62,7 +65,7 @@ class PermintaanController extends Controller
     function selesai(Permintaan $permintaan, Request $req)
     {
         $permintaan->status = 'selesai';
-        $permintaan->ip = $req->ipAddress;
+        $permintaan->ip = $req->ip;
         $permintaan->waktu_selesai = now();
 
         $domain = Domain::simpanDariSejarah($permintaan);

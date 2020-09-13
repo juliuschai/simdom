@@ -122,8 +122,8 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}</label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
-									<input id="namaDomain" type="text" name="namaDomain"
-										value="{{$permintaan->nama_domain}}" class="form-control" disabled>
+									<input id="namaDomain" name="namaDomain" type="text" name="namaDomain"
+										value="{{$permintaan->nama_domain}}" class="form-control">
 								</div>
 							</div>
 
@@ -226,11 +226,11 @@
 							<form method="POST" action="{{route('permintaan.terima', $permintaan->id)}}">
 								@csrf
 								<div class="form-group row">
-									<label for="ipAddress"
+									<label for="ip"
 										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
 									<i class="fa fa-inbox domain"></i>
 									<div class="col-md-6">
-										<input id="ipAddress" name="ipAddress" type="text"
+										<input id="ip" name="ip" type="text"
 											value="{{$permintaan->ip}}" class="form-control">
 									</div>
 								</div>
@@ -241,11 +241,11 @@
 							<form method="POST" action="{{route('permintaan.selesai', $permintaan->id)}}">
 								@csrf
 								<div class="form-group row">
-									<label for="ipAddress"
+									<label for="ip"
 										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
 									<i class="fa fa-inbox domain"></i>
 									<div class="col-md-6">
-										<input id="ipAddress" name="ipAddress" type="text"
+										<input id="ip" name="ip" type="text"
 											value="{{$permintaan->ip}}" class="form-control">
 									</div>
 								</div>

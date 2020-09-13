@@ -3,9 +3,9 @@ $(document).ready(function () {
 });
 
 function populate() {
-	// Set server to old input
-	$server = $('#server');
-	$server.val($server.data('value'));
+	// Set serverDomain to old input
+	$serverDomain = $('#serverDomain');
+	$serverDomain.val($serverDomain.data('value'));
 }
 
 function validate() {

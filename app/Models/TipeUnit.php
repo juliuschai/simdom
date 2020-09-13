@@ -12,9 +12,9 @@ class TipeUnit extends Model
      */
     public $timestamps = false;
 
-    static function getSorted()
+    static function getDropdownOptions()
     {
-        return TipeUnit::orderBy('nama')->get();
+        return TipeUnit::orderBy('nama')->pluck('nama');
     }
 
     function units()
