@@ -31,7 +31,6 @@ class Domain extends Model
                 'domains.kapasitas',
                 'domains.ip',
                 'domains.aktif',
-                'domains.created_at',
             ]);
     }
 
@@ -44,12 +43,12 @@ class Domain extends Model
     static function simpanDariSejarah(Permintaan $per)
     {
         if (!$per->domain_id) {
-        // Jika membuat domain baru
+            // Jika membuat domain baru
             $domain = new Domain();
             $domain->alias = $per->nama_domain;
             $domain->user_id = $per->user_id;
         } else {
-        // Jika memperbaharui sebuah domain
+            // Jika memperbaharui sebuah domain
             $domain = Domain::find($per->domain_id);
             $domain->alias = $domain->aliases();
         }
@@ -63,6 +62,7 @@ class Domain extends Model
             'kapasitas' => $per->kapasitas,
             'aktif' => 'aktif',
         ]);
+
         $domain->save();
 
         return $domain;
@@ -91,10 +91,6 @@ class Domain extends Model
 
     function permintaans()
     {
-        return $this->hasMany(
-            'App\Models\Permintaan',
-            'domain_id',
-            'id'
-        );
+        return $this->hasMany('App\Models\Permintaan', 'domain_id', 'id');
     }
 }

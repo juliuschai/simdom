@@ -31,7 +31,6 @@
 				<th scope="col">Kapasitas DB</th>
 				<th scope="col">IP</th>
 				<th scope="col">Status</th>
-				<th scope="col">Tanggal Rekap</th>
 				<th scope="col">Aksi</th>
 			</tr>
 		</thead>
