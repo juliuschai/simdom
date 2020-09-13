@@ -28,7 +28,7 @@ class PermintaanRequest extends FormRequest
             'surat' => 'nullable|mimes:pdf,jpeg,jpg,png|max:2000',
             'namaDomain' => 'required|string|max:60',
             'deskripsi' => 'required|string|max:254',
-            'tipeServer' => 'required|exists:tipe_servers,id',
+            'server' => 'required|exists:servers,id',
             'kapasitas' => 'required|integer',
             'keterangan' => 'required|string|max:254',
         ];

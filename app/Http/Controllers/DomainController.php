@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PermintaanRequest;
-use App\Models\DomainAktif;
-use App\Models\SejarahDomain;
-use App\Models\TipeServer;
+use App\Models\Domain;
+use App\Models\Permintaan;
+use App\Models\Server;
 use App\Models\TipeUnit;
 use App\Models\Unit;
 use App\User;
@@ -19,9 +19,9 @@ class DomainController extends Controller
     {
         $user = User::findOrLogout(auth()->id());
         if ($user->isAdmin()) {
-            $model = DomainAktif::selectList()->newQuery();
+            $model = Domain::selectList()->newQuery();
         } else {
-            $model = DomainAktif::selectListUser()->newQuery();
+            $model = Domain::selectListUser()->newQuery();
         }
         return DataTables::eloquent($model)->toJson();
     }
@@ -36,7 +36,7 @@ class DomainController extends Controller
         $user = User::findOrLogout(auth()->id());
         $units = Unit::getSorted();
         $tipeUnits = TipeUnit::getSorted();
-        $servers = TipeServer::get(['id', 'nama_server as nama']);
+        $servers = Server::get(['id', 'nama as nama']);
 
         return view(
             'domain.baru',
@@ -46,17 +46,17 @@ class DomainController extends Controller
 
     function simpanBaru(PermintaanRequest $req)
     {
-        $permintaan = SejarahDomain::permintaanBaru($req, null);
+        $permintaan = Permintaan::permintaanBaru($req, null);
 
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
-    function formEdit(DomainAktif $domain)
+    function formEdit(Domain $domain)
     {
         $user = User::findOrLogout(auth()->id());
         $units = Unit::getSorted();
         $tipeUnits = TipeUnit::getSorted();
-        $servers = TipeServer::get(['id', 'nama_server as nama']);
+        $servers = Server::get(['id', 'nama as nama']);
 
         return view(
             'domain.edit',
@@ -64,7 +64,7 @@ class DomainController extends Controller
         );
     }
 
-    function saveEdit(DomainAktif $domain, PermintaanRequest $req)
+    function saveEdit(Domain $domain, PermintaanRequest $req)
     {
         if ($domain->aktif == 'menunggu') {
             return redirect()
@@ -74,26 +74,26 @@ class DomainController extends Controller
                     'dilakukan atau hapus permintaan perubahan jika permintaan belum diverifikasi',
                 ]);
         }
-        $req->ipAddress = $domain->ip_domain;
+        $req->ipAddress = $domain->ip;
         $domain->aktif = 'menunggu';
         $domain->save();
 
-        $permintaan = SejarahDomain::permintaanBaru($req, $domain->id);
+        $permintaan = Permintaan::permintaanBaru($req, $domain->id);
         return redirect()->route('permintaan.lihat', $permintaan->id);
     }
 
-    function formTransfer(DomainAktif $domain)
+    function formTransfer(Domain $domain)
     {
         $pemilik = $domain->user;
 
         return view('domain.transfer', compact('pemilik'));
     }
 
-    function saveTransfer(DomainAktif $domain, Request $req)
+    function saveTransfer(Domain $domain, Request $req)
     {
         $user = User::findOrFail($req->id);
 
-        SejarahDomain::permintaanDariDomain(
+        Permintaan::permintaanDariDomain(
             $domain,
             "Transfer kepemilikan domain dari {$domain->user->email} - {$domain->user->integra}" +
                 " ke {$user->email} - {$user->integra}",
@@ -106,9 +106,9 @@ class DomainController extends Controller
         return redirect()->route('domain.list');
     }
 
-    function nonaktifasi(DomainAktif $domain)
+    function nonaktifasi(Domain $domain)
     {
-        SejarahDomain::permintaanDariDomain(
+        Permintaan::permintaanDariDomain(
             $domain,
             'Set domain menjadi nonaktif',
             true

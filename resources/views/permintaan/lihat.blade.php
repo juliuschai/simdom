@@ -127,8 +127,8 @@
 								</div>
 							</div>
 
-							@if($permintaan->domain_aktif_id)
-							<a target="_blank" href="{{route('domain.edit', ['domain' => $permintaan->domain_aktif_id])}}" >
+							@if($permintaan->domain_id)
+							<a target="_blank" href="{{route('domain.edit', ['domain' => $permintaan->domain_id])}}" >
 								Lihat record domain aktif dari {{$permintaan->nama_domain}}
 							</a>
 							@endif
@@ -181,12 +181,12 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="tipeServer"
-									class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}</label>
+								<label for="server"
+									class="col-md-4 col-form-label text-md-left">{{ __('Server') }}</label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<input id="tipeServer" type="text" class="form-control"
-										value="{{$permintaan->tipeServer->nama_server}}" disabled>
+									<input id="server" type="text" class="form-control"
+										value="{{$permintaan->server->nama}}" disabled>
 								</div>
 							</div>
 
@@ -231,7 +231,7 @@
 									<i class="fa fa-inbox domain"></i>
 									<div class="col-md-6">
 										<input id="ipAddress" name="ipAddress" type="text"
-											value="{{$permintaan->ip_domain}}" class="form-control">
+											value="{{$permintaan->ip}}" class="form-control">
 									</div>
 								</div>
 								<button type="submit" class="next action-button">Terima</button>
@@ -246,7 +246,7 @@
 									<i class="fa fa-inbox domain"></i>
 									<div class="col-md-6">
 										<input id="ipAddress" name="ipAddress" type="text"
-											value="{{$permintaan->ip_domain}}" class="form-control">
+											value="{{$permintaan->ip}}" class="form-control">
 									</div>
 								</div>
 								<button type="submit" class="next action-button">Selesai</button>

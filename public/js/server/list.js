@@ -15,8 +15,8 @@ tableElm.DataTable({
 		},
 		{
 			title: 'Nama Server',
-			data: 'nama_server',
-			name: 'nama_server',
+			data: 'nama',
+			name: 'nama',
 			searchable: true,
 			visible: true,
 		},

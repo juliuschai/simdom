@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SejarahDomain extends Model
+class Permintaan extends Model
 {
     protected $guarded = [];
 
     /**
-     * domain_aktif_id
+     * domain_id
      * nama_pj
      * nama_ins
      * no_telp
@@ -22,43 +22,43 @@ class SejarahDomain extends Model
 
     static function selectList()
     {
-        return SejarahDomain::join(
+        return Permintaan::join(
             'users',
             'users.id',
             '=',
-            'sejarah_domains.user_id'
+            'permintaans.user_id'
         )
             ->join(
-                'tipe_servers',
-                'tipe_servers.id',
+                'servers',
+                'servers.id',
                 '=',
-                'sejarah_domains.tipe_server_id'
+                'permintaans.server_id'
             )
-            ->join('units', 'units.id', '=', 'sejarah_domains.unit_id')
+            ->join('units', 'units.id', '=', 'permintaans.unit_id')
             ->select([
-                'sejarah_domains.id',
+                'permintaans.id',
                 'users.nama as user_nama',
                 'units.nama as unit_nama',
-                'sejarah_domains.nama_domain',
-                'tipe_servers.nama_server',
-                'sejarah_domains.kapasitas',
-                'sejarah_domains.ip_domain',
-                'sejarah_domains.status',
-                'sejarah_domains.keterangan',
+                'permintaans.nama_domain',
+                'servers.nama as nama_server',
+                'permintaans.kapasitas',
+                'permintaans.ip',
+                'permintaans.status',
+                'permintaans.keterangan',
             ])
-            ->orderBy('sejarah_domains.created_at', 'DESC');
+            ->orderBy('permintaans.created_at', 'DESC');
     }
 
     static function selectListUser()
     {
-        return SejarahDomain::selectList()
+        return Permintaan::selectList()
             ->join(
-                'domain_aktifs',
-                'domain_aktifs.id',
+                'domains',
+                'domains.id',
                 '=',
-                'sejarah_domains.domain_aktif_id'
+                'permintaans.domain_id'
             )
-            ->where('domain_aktifs.user_id', auth()->id());
+            ->where('domains.user_id', auth()->id());
     }
 
     static function permintaanBaru($req, $domain_id)
@@ -74,17 +74,17 @@ class SejarahDomain extends Model
             $file_path = null;
         }
 
-        $permintaan = SejarahDomain::create([
-            'domain_aktif_id' => $domain_id,
+        $permintaan = Permintaan::create([
+            'domain_id' => $domain_id,
             'user_id' => auth()->id(),
             'unit_id' => $req->unit,
             'surat' => $file_path,
             'nama_domain' => $req->namaDomain,
             'deskripsi' => $req->deskripsi,
-            'tipe_server_id' => $req->tipeServer,
+            'server_id' => $req->server,
             'kapasitas' => $req->kapasitas,
             'keterangan' => $req->keterangan,
-            'ip_domain' => $req->ipAddress,
+            'ip' => $req->ipAddress,
         ]);
 
         return $permintaan;
@@ -94,31 +94,31 @@ class SejarahDomain extends Model
      * Buat permintaan dari sebuah domain aktif dengan keterangan tertentu
      * Permintaan yang dibuat langsung di
      *
-     * @param DomainAktif domain domain_aktif dari record yang ingin dibuat
+     * @param Domain domain domain dari record yang ingin dibuat
      * @param integer user_id user yang membuat permintaan
      * @param string keterangan keterangan yang diinginkan
      * @param bool selesai anggap permintaan sudah selesai dilakukan dan langsung merubah domain aktif
      */
     static function permintaanDariDomain(
-        DomainAktif $domain,
+        Domain $domain,
         string $keterangan,
         bool $langsung
     ) {
-        $permintaan = new SejarahDomain();
+        $permintaan = new Permintaan();
         $permintaan->fill([
-            'domain_aktif_id' => $domain->id,
+            'domain_id' => $domain->id,
             'user_id' => auth()->id(),
             'unit_id' => $domain->unit_id,
             'surat' => null,
             'nama_domain' => $domain->nama_domain,
             'deskripsi' => $domain->deskripsi,
-            'tipe_server_id' => $domain->tipe_server_id,
+            'server_id' => $domain->server_id,
             'kapasitas' => $domain->kapasitas,
             'keterangan' => $keterangan,
-            'ip_domain' => $domain->ip_domain,
+            'ip' => $domain->ip,
         ]);
 
-        // Jika permintaan langsung diaplikasikan ke DomainAktif
+        // Jika permintaan langsung diaplikasikan ke Domain
         if ($langsung) {
             $permintaan->fill([
                 'status' => 'selesai',
@@ -142,13 +142,13 @@ class SejarahDomain extends Model
         return $this->belongsTo('App\Models\Unit');
     }
 
-    function tipeServer()
+    function server()
     {
-        return $this->belongsTo('App\Models\TipeServer');
+        return $this->belongsTo('App\Models\Server');
     }
 
-    function domainAktif()
+    function domain()
     {
-        return $this->belongsTo('App\Models\DomainAktif');
+        return $this->belongsTo('App\Models\Domain');
     }
 }

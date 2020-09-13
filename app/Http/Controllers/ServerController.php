@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ServerRequest;
-use App\Models\TipeServer;
+use App\Models\Server;
 
 use DataTables;
 
@@ -11,7 +11,7 @@ class ServerController extends Controller
 {
     function listData()
     {
-        $model = TipeServer::selectList()->newQuery();
+        $model = Server::selectList()->newQuery();
 
         return DataTables::eloquent($model)->toJson();
     }
@@ -23,31 +23,31 @@ class ServerController extends Controller
 
     function formBaru()
     {
-        $server = new TipeServer();
+        $server = new Server();
 
         return view('server.form', compact('server'));
     }
 
     function simpanBaru(ServerRequest $req)
     {
-        $server = TipeServer::serverBaru($req);
+        $server = Server::serverBaru($req);
 
         return redirect()->route('server.edit', ['server' => $server->id]);
     }
 
-    function formEdit(TipeServer $server)
+    function formEdit(Server $server)
     {
         return view('server.form', compact('server'));
     }
 
-    function saveEdit(TipeServer $server, ServerRequest $req)
+    function saveEdit(Server $server, ServerRequest $req)
     {
         $server->perbaharuiDariRequest($req);
 
         return redirect()->route('server.edit', ['server' => $server->id]);
     }
 
-    function hapus(TipeServer $server)
+    function hapus(Server $server)
     {
         $server->delete();
 

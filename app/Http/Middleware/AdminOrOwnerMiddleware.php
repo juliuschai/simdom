@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\DomainAktif;
-use App\Models\SejarahDomain;
+use App\Models\Domain;
+use App\Models\Permintaan;
 use App\User;
 use Closure;
 
@@ -28,10 +28,10 @@ class AdminOrOwnerMiddleware
         $owner_id = '';
         $params = $request->route()->parameters();
         if (array_key_exists('domain', $params)) {
-            $domain = DomainAktif::findOrFail($params['domain']);
+            $domain = Domain::findOrFail($params['domain']);
             $owner_id = $domain->user_id;
         } elseif (array_key_exists('permintaan', $params)) {
-            $permintaan = SejarahDomain::findOrFail($params['permintaan']);
+            $permintaan = Permintaan::findOrFail($params['permintaan']);
             $owner_id = $permintaan->user_id;
         }
 

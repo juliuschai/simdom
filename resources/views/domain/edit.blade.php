@@ -161,12 +161,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="tipeServer"
-                                    class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}</label>
+                                <label for="server"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Server') }}</label>
                                 <i class="fa fa-server domain"></i>
                                 <div class="col-md-6">
-                                    <select id="tipeServer" name="tipeServer" class="form-control"
-                                        data-value="{{$domain->tipe_server_id}}">
+                                    <select id="server" name="server" class="form-control"
+                                        data-value="{{$domain->server_id}}">
                                         @foreach ($servers as $server)
                                         <option value="{{$server->id}}">{{$server->nama}}</option>
                                         @endforeach
@@ -184,13 +184,13 @@
                                 </div>
                             </div>
 
-                            @if($domain->ip_domain)
+                            @if($domain->ip)
                             <div class="form-group row">
                                 <label for="ipAddress"
                                     class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
                                 <i class="fa fa-inbox domain"></i>
                                 <div class="col-md-6">
-                                    <input id="ipAddress" type="text" value="{{$domain->ip_domain}}"
+                                    <input id="ipAddress" type="text" value="{{$domain->ip}}"
                                         class="form-control" disabled>
                                 </div>
                             </div>

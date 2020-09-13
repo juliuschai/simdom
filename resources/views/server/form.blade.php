@@ -31,7 +31,7 @@
 								<i style="padding-left: 1px" class="fa fa-server domain"></i>
 								<div class="col-md-6">
 									<input id="namaServer" type="text" name="namaServer" class="form-control"
-										value="{{$server->nama_server}}">
+										value="{{$server->nama}}">
 								</div>
 							</div>
 

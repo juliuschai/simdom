@@ -11,7 +11,7 @@ class Domain extends Model
 
     static function viewDomainList() {
         return Domain::select(['id_data as id', 'name_pj', 'name_ins', 'no_tlp', 
-            'name_domain','jenis_domain', 'kp_sekarang', 'ip_domain', 'tgl_input']);
+            'name_domain','jenis_domain', 'kp_sekarang', 'ip', 'tgl_input']);
     }
 
     static function viewDomainList2() {

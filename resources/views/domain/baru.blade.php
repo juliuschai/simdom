@@ -142,13 +142,13 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="tipeServer"
-									class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}
+								<label for="server"
+									class="col-md-4 col-form-label text-md-left">{{ __('Server') }}
 									<p style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<select id="tipeServer" name="tipeServer" class="form-control"
-										data-value="{{old('tipeServer')}}??'1'">
+									<select id="server" name="server" class="form-control"
+										data-value="{{old('server')}}??'1'">
 										@foreach ($servers as $server)
 										<option value="{{$server->id}}">{{$server->nama}}</option>
 										@endforeach

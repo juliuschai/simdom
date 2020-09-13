@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DomainAktif extends Model
+class Domain extends Model
 {
     protected $guarded = [];
 
@@ -20,47 +20,47 @@ class DomainAktif extends Model
 
     static function selectList()
     {
-        return DomainAktif::join('users', 'users.id', '=', 'domain_aktifs.user_id')
-            ->join('tipe_servers', 'tipe_servers.id', '=', 'domain_aktifs.tipe_server_id')
-            ->join('units', 'units.id', '=', 'domain_aktifs.unit_id')
+        return Domain::join('users', 'users.id', '=', 'domains.user_id')
+            ->join('servers', 'servers.id', '=', 'domains.server_id')
+            ->join('units', 'units.id', '=', 'domains.unit_id')
             ->select([
-                'domain_aktifs.id',
+                'domains.id',
                 'users.nama as user_nama',
                 'units.nama as unit_nama',
-                'domain_aktifs.alias',
-                'tipe_servers.nama_server',
-                'domain_aktifs.kapasitas',
-                'domain_aktifs.ip_domain',
-                'domain_aktifs.aktif',
-                'domain_aktifs.created_at',
+                'domains.alias',
+                'servers.nama as nama_server',
+                'domains.kapasitas',
+                'domains.ip',
+                'domains.aktif',
+                'domains.created_at',
             ]);
     }
 
     static function selectListUser()
     {
-        return DomainAktif::selectList()->where('user_id', auth()->id());
+        return Domain::selectList()->where('user_id', auth()->id());
     }
 
     // Buat domain aktif dari sebuah sejarah
-    static function simpanDariSejarah(SejarahDomain $per)
+    static function simpanDariSejarah(Permintaan $per)
     {
-        if (!$per->domain_aktif_id) {
+        if (!$per->domain_id) {
         // Jika membuat domain baru
-            $domain = new DomainAktif();
+            $domain = new Domain();
             $domain->alias = $per->nama_domain;
             $domain->user_id = $per->user_id;
         } else {
         // Jika memperbaharui sebuah domain
-            $domain = DomainAktif::find($per->domain_aktif_id);
+            $domain = Domain::find($per->domain_id);
             $domain->alias = $domain->aliases();
         }
 
         $domain->fill([
             'unit_id' => $per->unit_id,
-            'ip_domain' => $per->ip_domain,
+            'ip' => $per->ip,
             'nama_domain' => $per->nama_domain,
             'deskripsi' => $per->deskripsi,
-            'tipe_server_id' => $per->tipe_server_id,
+            'server_id' => $per->server_id,
             'kapasitas' => $per->kapasitas,
             'aktif' => 'aktif',
         ]);
@@ -71,7 +71,7 @@ class DomainAktif extends Model
 
     function aliases()
     {
-        $arr = $this->sejarahDomains
+        $arr = $this->permintaans
             ->unique('nama_domain')
             ->map(function ($array) {
                 return $array['nama_domain'];
@@ -90,16 +90,16 @@ class DomainAktif extends Model
         return $this->belongsTo('App\Models\Unit');
     }
 
-    function tipeServer()
+    function server()
     {
-        return $this->belongsTo('App\Models\TipeServer');
+        return $this->belongsTo('App\Models\Server');
     }
 
-    function sejarahDomains()
+    function permintaans()
     {
         return $this->hasMany(
-            'App\Models\SejarahDomain',
-            'domain_aktif_id',
+            'App\Models\Permintaan',
+            'domain_id',
             'id'
         );
     }
