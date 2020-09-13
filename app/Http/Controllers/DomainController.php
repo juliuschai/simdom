@@ -36,12 +36,8 @@ class DomainController extends Controller
         $user = User::findOrLogout(auth()->id());
         $units = Unit::getSorted();
         $tipeUnits = TipeUnit::getSorted();
-        $servers = Server::get(['id', 'nama as nama']);
 
-        return view(
-            'domain.baru',
-            compact('user', 'units', 'tipeUnits', 'servers')
-        );
+        return view('domain.baru', compact('user', 'units', 'tipeUnits'));
     }
 
     function simpanBaru(PermintaanRequest $req)
@@ -64,7 +60,7 @@ class DomainController extends Controller
         );
     }
 
-    function saveEdit(Domain $domain, PermintaanRequest $req)
+    function simpanEdit(Domain $domain, PermintaanRequest $req)
     {
         if ($domain->aktif == 'menunggu') {
             return redirect()

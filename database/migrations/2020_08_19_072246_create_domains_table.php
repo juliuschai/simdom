@@ -21,9 +21,9 @@ class CreateDomainsTable extends Migration
             $table->string('nama_domain', 60);
             $table->string('deskripsi')->comment('nama panjang/penjelasan isi/tujuan domain');
             $table->string('alias');
-            $table->foreignId('server_id')->constrained()->onUpdate('CASCADE');
+            $table->enum('server', ['WHS', 'VPS', 'Colocation']);
             $table->integer('kapasitas');
-            $table->enum('aktif', ['aktif', 'menunggu', 'nonaktif'])->default('aktif');
+            $table->enum('aktif', ['aktif', 'menunggu', 'nonaktif', 'redirect'])->default('aktif');
             $table->timestamps();
         });
     }

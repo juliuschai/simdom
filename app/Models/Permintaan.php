@@ -28,19 +28,13 @@ class Permintaan extends Model
             '=',
             'permintaans.user_id'
         )
-            ->join(
-                'servers',
-                'servers.id',
-                '=',
-                'permintaans.server_id'
-            )
             ->join('units', 'units.id', '=', 'permintaans.unit_id')
             ->select([
                 'permintaans.id',
                 'users.nama as user_nama',
                 'units.nama as unit_nama',
                 'permintaans.nama_domain',
-                'servers.nama as nama_server',
+                'permintaans.server as nama_server',
                 'permintaans.kapasitas',
                 'permintaans.ip',
                 'permintaans.status',
@@ -81,7 +75,7 @@ class Permintaan extends Model
             'surat' => $file_path,
             'nama_domain' => $req->namaDomain,
             'deskripsi' => $req->deskripsi,
-            'server_id' => $req->server,
+            'server' => $req->server,
             'kapasitas' => $req->kapasitas,
             'keterangan' => $req->keterangan,
             'ip' => $req->ipAddress,
@@ -112,7 +106,7 @@ class Permintaan extends Model
             'surat' => null,
             'nama_domain' => $domain->nama_domain,
             'deskripsi' => $domain->deskripsi,
-            'server_id' => $domain->server_id,
+            'server' => $domain->server,
             'kapasitas' => $domain->kapasitas,
             'keterangan' => $keterangan,
             'ip' => $domain->ip,
@@ -140,11 +134,6 @@ class Permintaan extends Model
     function unit()
     {
         return $this->belongsTo('App\Models\Unit');
-    }
-
-    function server()
-    {
-        return $this->belongsTo('App\Models\Server');
     }
 
     function domain()

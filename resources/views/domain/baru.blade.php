@@ -147,11 +147,10 @@
 									<p style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<select id="server" name="server" class="form-control"
-										data-value="{{old('server')}}??'1'">
-										@foreach ($servers as $server)
-										<option value="{{$server->id}}">{{$server->nama}}</option>
-										@endforeach
+									<select id="server" name="server" class="form-control">
+										<option value="WHS">WHS/Zeus/CPanel</option>
+										<option value="VPS">VPS</option>
+										<option value="Colocation">Colocation</option>
 									</select>
 								</div>
 							</div>

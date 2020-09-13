@@ -186,7 +186,7 @@
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
 									<input id="server" type="text" class="form-control"
-										value="{{$permintaan->server->nama}}" disabled>
+										value="{{$permintaan->server}}" disabled>
 								</div>
 							</div>
 

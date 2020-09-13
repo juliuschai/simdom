@@ -40,7 +40,7 @@ class ServerController extends Controller
         return view('server.form', compact('server'));
     }
 
-    function saveEdit(Server $server, ServerRequest $req)
+    function simpanEdit(Server $server, ServerRequest $req)
     {
         $server->perbaharuiDariRequest($req);
 
