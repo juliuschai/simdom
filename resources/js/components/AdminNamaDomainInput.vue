@@ -12,7 +12,7 @@
 
 <template>
   <div>
-    <input type="text" v-model="namaDomain" class="col disabled" name="namaDomain" />
+    <input type="text" class="col disabled" name="namaDomain" :value="namaDomain" />
     <div class="row">
       <input type="text" v-model="prepend.val" class="col" :class="{hide: !prepend.active}" />
       <input type="text" v-model="selTemplate" class="col disabled" disabled />
@@ -30,14 +30,14 @@
 export default {
   props: {
     templates: {
-      type: Object,
+      type: Array,
       default: [],
     },
     selTemplateProp: {
       type: String,
       default: "",
     },
-    namaDomainLama: {
+    namaDomainProp: {
       type: String,
       default: null,
     },
@@ -53,7 +53,7 @@ export default {
 
   created() {
     this.selTemplate = this.selTemplateProp;
-    this.namaDomain = this.namaDomainLama;
+    this.namaDomainLama = this.namaDomainProp;
   },
 
   methods: {

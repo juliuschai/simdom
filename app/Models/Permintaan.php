@@ -29,7 +29,7 @@ class Permintaan extends Model
                 'users.nama as user_nama',
                 'units.nama as unit_nama',
                 'permintaans.nama_domain',
-                'permintaans.server as nama_server',
+                'permintaans.server',
                 'permintaans.kapasitas',
                 'permintaans.ip',
                 'permintaans.status',

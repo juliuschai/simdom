@@ -136,7 +136,7 @@
 									@admin
 									<admin-nama-domain-input :templates="{{$domain_templates}}"
 										sel-template-prop="{{$permintaan->unit->tipeUnit->domain_template}}"
-										nama-domain-lama="{{$permintaan->nama_domain}}">
+										nama-domain-prop="{{$permintaan->nama_domain}}">
 									</admin-nama-domain-input>
 									@else
 									<input id="namaDomain" type="text" value="{{$permintaan->nama_domain}}"
@@ -173,11 +173,6 @@
 										class="form-control" disabled>
 								</div>
 							</div>
-							@admin
-							<a href="{{route('domain.list', ['q' => $permintaan->unit->nama])}}">Lihat semua domain
-								dari
-								unit tersebut</a>
-							@endadmin
 
 							<div class="form-group row">
 								<label for="surat"
@@ -250,6 +245,28 @@
 										class="form-control">
 								</div>
 							</div>
+
+							{{-- Domain Table Unit Search Start --}}
+							<button type="button" id="showTableButton" class="btn btn-primary" 
+								onclick="initTable()">Lihat semua domain dari {{$permintaan->unit->nama}}</button>
+							<div id="ipTableSection" style="display: none;">
+								<div>Domain Aktif dengan VPS dari {{$permintaan->unit->nama}}</div>
+								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}" 
+									data-status="aktif" data-ajaxurl="{{route('permintaan.lihat.data')}}">
+									<thead>
+										<td>Id</td>
+										<td>Unit</td>
+										<td>Server</td>
+										<td>Status</td>
+										<td>Domain</td>
+										<td>Kapasitas DB</td>
+										<td>Ip</td>
+										<td>Aksi</td>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+
 							@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak')
 							<button type="submit" class="next action-button">Terima</button>
 							@endif
@@ -308,4 +325,7 @@
 <script src="{{ asset('js/form/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" defer />
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js" defer></script>
+<script src="{{ asset('js/permintaan/lihat.js') }}" defer></script>
 @endsection

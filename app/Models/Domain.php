@@ -27,7 +27,7 @@ class Domain extends Model
                 'users.nama as user_nama',
                 'units.nama as unit_nama',
                 'domains.alias',
-                'domains.server as nama_server',
+                'domains.server',
                 'domains.kapasitas',
                 'domains.ip',
                 'domains.aktif',
@@ -37,6 +37,21 @@ class Domain extends Model
     static function selectListUser()
     {
         return Domain::selectList()->where('user_id', auth()->id());
+    }
+
+    static function selectLihatData()
+    {
+        return Domain::join('users', 'users.id', '=', 'domains.user_id')
+            ->join('units', 'units.id', '=', 'domains.unit_id')
+            ->select([
+                'domains.id',
+                'units.id as unit_id',
+                'domains.server',
+                'domains.aktif',
+                'domains.alias',
+                'domains.kapasitas',
+                'domains.ip',
+            ]);
     }
 
     // Buat domain aktif dari sebuah sejarah

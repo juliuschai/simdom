@@ -39,6 +39,13 @@ class PermintaanController extends Controller
         );
     }
 
+    function lihatData()
+    {
+        $model = Domain::selectLihatData()->newQuery();
+
+        return DataTables::eloquent($model)->toJson();
+    }
+
     function hapus(Permintaan $permintaan)
     {
         if ($permintaan->status != 'menunggu') {
@@ -71,6 +78,7 @@ class PermintaanController extends Controller
     function selesai(Permintaan $permintaan, Request $req)
     {
         $permintaan->fill([
+            'nama_domain' => $req->namaDomain,
             'status' => 'selesai',
             'ip' => $req->ip,
             'waktu_selesai' => now(),

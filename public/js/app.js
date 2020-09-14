@@ -1939,14 +1939,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     templates: {
-      type: Object,
+      type: Array,
       "default": []
     },
     selTemplateProp: {
       type: String,
       "default": ""
     },
-    namaDomainLama: {
+    namaDomainProp: {
       type: String,
       "default": null
     }
@@ -1966,7 +1966,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.selTemplate = this.selTemplateProp;
-    this.namaDomain = this.namaDomainLama;
+    this.namaDomainLama = this.namaDomainProp;
   },
   methods: {
     isSelTemplateSubdir: function isSelTemplateSubdir() {
@@ -38329,25 +38329,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.namaDomain,
-          expression: "namaDomain"
-        }
-      ],
       staticClass: "col disabled",
       attrs: { type: "text", name: "namaDomain" },
-      domProps: { value: _vm.namaDomain },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.namaDomain = $event.target.value
-        }
-      }
+      domProps: { value: _vm.namaDomain }
     }),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [

@@ -41,8 +41,8 @@ tableElm.DataTable({
 		},
 		{
 			title: 'Jenis Domain',
-			data: 'nama_server',
-			name: 'servers.nama',
+			data: 'server',
+			name: 'domains.server',
 			searchable: true,
 			visible: true,
 		},

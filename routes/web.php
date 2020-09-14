@@ -43,6 +43,10 @@ Route::group(
                 Route::get('/permintaan/data', 'PermintaanController@listData')->name('permintaan.data');
 
                 Route::get('/user/cari', 'UserController@cari')->name('user.cari');
+
+                // Cari semua entri domain bedasarkan unit tertentu, dari permintaan
+                Route::get('/permintaan/lihat/data', 'PermintaanController@lihatData')->name('permintaan.lihat.data');
+
                 Route::group(
                     [
                         'middleware' => ['adminOrOwner'],
