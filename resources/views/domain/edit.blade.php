@@ -150,7 +150,8 @@
 
 										textbox-name-prop="unit"
 										first-name-prop="tipeUnit"
-										>
+                                        >
+									</two-select-with-textbox>
                                 </div>
                             </div>
                             @admin

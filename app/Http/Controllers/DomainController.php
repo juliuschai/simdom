@@ -43,7 +43,7 @@ class DomainController extends Controller
     {
         $permintaan = Permintaan::permintaanBaru($req);
 
-        return redirect()->route('permintaan.lihat', $permintaan->id);
+        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Domain berhasil dibuat!');
     }
 
     function formEdit(Domain $domain)
@@ -76,14 +76,14 @@ class DomainController extends Controller
 
         $permintaan = Permintaan::permintaanBaru($req, $domain->id);
 
-        return redirect()->route('permintaan.lihat', $permintaan->id);
+        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Domain berhasil diedit!');
     }
 
     function formTransfer(Domain $domain)
     {
         $pemilik = $domain->user;
 
-        return view('domain.transfer', compact('pemilik'));
+        return view('transfer', compact('pemilik'));
     }
 
     function saveTransfer(Domain $domain, Request $req)

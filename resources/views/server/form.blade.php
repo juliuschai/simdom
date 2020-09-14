@@ -11,9 +11,90 @@
 					@csrf
 					<!-- progressbar -->
 					<ul id="progressbar">
-						<li class="active" id="server"><strong>Data Server</strong></li>
+                        <li class="active" id="account"><strong>Data Diri</strong></li>
+						<li id="server"><strong>Data Server</strong></li>
 						<li id="confirm"><strong>Selesai</strong></li>
 					</ul>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{{ session()->get('message') }}</li>
+                        </ul>
+                    </div>
+                    @endif
+                    {{-- Tampilkan data diri --}}
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Data Diri :</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h6 class="steps">Tahap 1 - 3</h6>
+                                </div>
+                            </div>
+                            <small>Silahkan perbaharui data diri di myits</small>
+                            <div class="form-group row">
+                                <label for="namaPic"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
+                                <i style="padding-left: 1px" class="fa fa-user domain"></i>
+                                <div class="col-md-6">
+                                    <input id="namaPic" type="text" class="form-control" value="{{$user->nama}}"
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="integraPic"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('User Integra') }}</label>
+                                <i class="fa fa-address-card domain"></i>
+                                <div class="col-md-6">
+                                    <input id="integraPic" type="text" class="form-control" value="{{$user->integra}}"
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="emailPic"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}</label>
+                                <i class="fa fa-envelope domain"></i>
+                                <div class="col-md-6">
+                                    <input id="emailPic" type="text" class="form-control" value="{{$user->email}}"
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="sivitas"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Sivitas Akademika') }}</label>
+                                <i class="fa fa-users domain"></i>
+                                <div class="col-md-6">
+                                    <input id="sivitas" type="text" class="form-control" value="{{$user->group}}"
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="noWa"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('No. WA') }}</label>
+                                <i class="fa fa-mobile fa-2x domain"></i>
+                                <div class="col-md-6">
+                                    <input id="noWa" type="text" class="form-control" value="{{$user->no_wa}}" disabled>
+                                </div>
+                            </div>
+                            <a href="{{route('server.transfer', ['server' => $server->id])}}">Ganti PIC server</a>
+                        </div>
+                    <input type="button" name="next" class="next action-button" value="Next" />
+					</fieldset>
 					<fieldset>
 						<div class="form-card">
 							<div class="row">
@@ -25,37 +106,47 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="namaServer"
-									class="col-md-4 col-form-label text-md-left">{{ __('Nama Server') }}<p
+								<label for="deskripsi"
+									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi Server') }}<p
 										style="color: red" class="d-inline">*</p></label>
 								<i style="padding-left: 1px" class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<input id="namaServer" type="text" name="namaServer" class="form-control"
-										value="{{$server->nama}}">
+									<input id="deskripsi" type="text" name="deskripsi" class="form-control"
+										value="{{$server->deskripsi}}">
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<label for="lokasiServer"
-									class="col-md-4 col-form-label text-md-left">{{ __('Lokasi Server') }}</label>
-								<i class="fa fa-window-maximize domain"></i>
-								<div class="col-md-6">
-									<input id="lokasiServer" type="text" name="lokasiServer" class="form-control"
-										value="{{$server->lokasi_server}}">
-								</div>
-							</div>
+                            <div class="form-group row">
+                                <label for="unit"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}</label>
+                                <i class="fa fa-window-maximize domain"></i>
+                                <div class="col-md-6">
+									<two-select-with-textbox 
+										:seconds="{{$units}}" 
+										:firsts="{{$tipeUnits}}"
+										second-val="{{$server->unit?$server->unit->nama:''}}"
+										first-val="{{$server->unit?$server->unit->tipeUnit->nama:''}}"
+
+										textbox-name-prop="unit"
+										first-name-prop="tipeUnit"
+                                        >
+									</two-select-with-textbox>
+                                </div>
+                            </div>
+
 
 							<div class="form-group row">
-								<label for="keterangan"
-									class="col-md-4 col-form-label text-md-left">{{ __('Keterangan') }}</label>
+								<label for="noRack"
+									class="col-md-4 col-form-label text-md-left">{{ __('No. Rack') }}</label>
 								<i class="fa fa-window-maximize domain"></i>
 								<div class="col-md-6">
-									<textarea id="keterangan" name="keterangan"
-										class="form-control">{{$server->keterangan}}</textarea>
+									<input id="noRack" type="text" name="noRack" class="form-control"
+										value="{{$server->no_rack}}">
 								</div>
 							</div>
+							<small>kosongkan bila tidak diketahui</small>
 						</div>
-						<button type="submit" class="next action-button">Simpan</button>
+						<button type="submit" class="action-button">Simpan</button>
 					</fieldset>
 					<fieldset>
 						<div class="form-card">

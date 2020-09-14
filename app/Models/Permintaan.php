@@ -57,12 +57,7 @@ class Permintaan extends Model
         }
 
         // Get unit_id from unit
-        $tipe_unit_id = TipeUnit::where('nama', $req->tipeUnit)->firstOrFail()->id;
-        $unit = Unit::firstOrCreate([
-            'nama' => $req->unit,
-            'tipe_unit_id' => $tipe_unit_id,
-        ]);
-        $unit_id = $unit->id;
+        $unit_id = Unit::getIdFromUnitOrCreate($req->unit, $req->tipeUnit);
 
         $permintaan = Permintaan::create([
             'domain_id' => $domain_id,

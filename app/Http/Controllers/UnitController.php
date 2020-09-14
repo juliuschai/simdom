@@ -31,9 +31,7 @@ class UnitController extends Controller
     
     function simpanBaru(UnitRequest $req)
     {
-        $unit = new Unit();
-        $unit->isiDariRequest($req);
-        $unit->save();
+        Unit::simpanBaru($req);
 
         return redirect()->route('unit.list');
     }
