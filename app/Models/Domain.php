@@ -31,6 +31,7 @@ class Domain extends Model
                 'domains.kapasitas',
                 'domains.ip',
                 'domains.aktif',
+                'domains.created_at',
             ]);
     }
 

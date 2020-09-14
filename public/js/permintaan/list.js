@@ -2,7 +2,7 @@ var tableElm = $('#tableElm');
 
 var editBtn = $('#editBtnTemplate');
 
-tableElm.DataTable({
+var datatableRes = tableElm.DataTable({
 	processing: true,
 	serverSide: true,
 	ajax: tableElm.data('ajaxurl'),
@@ -75,6 +75,16 @@ tableElm.DataTable({
 			visible: true,
 		},
 		{
+			title: 'Dibuat',
+			data: 'created_at',
+			name: 'permintaans.created_at',
+			searchable: true,
+			visible: true,
+			render: function (data, type, full, meta) {
+				return new Date(data).toLocaleString();
+			},
+		},
+		{
 			title: 'Aksi',
 			data: null,
 			name: null,
@@ -86,3 +96,5 @@ tableElm.DataTable({
 		}
 	],
 });
+
+datatableRes.columns('permintaans.created_at:name').order('desc').draw();

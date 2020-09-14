@@ -34,8 +34,8 @@ class Permintaan extends Model
                 'permintaans.ip',
                 'permintaans.status',
                 'permintaans.keterangan',
-            ])
-            ->orderBy('permintaans.created_at', 'DESC');
+                'permintaans.created_at',
+            ]);
     }
 
     static function selectListUser()

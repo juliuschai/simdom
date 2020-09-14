@@ -69,6 +69,16 @@ var datatableRes = tableElm.DataTable({
 			visible: true,
 		},
 		{
+			title: 'Dibuat',
+			data: 'created_at',
+			name: 'domains.created_at',
+			searchable: true,
+			visible: true,
+			render: function (data, type, full, meta) {
+				return new Date(data).toLocaleString();
+			},
+		},
+		{
 			title: 'Aksi',
 			data: null,
 			name: null,
@@ -80,3 +90,5 @@ var datatableRes = tableElm.DataTable({
 		}
 	],
 });
+
+datatableRes.columns('domains.created_at:name').order('desc').draw();

@@ -32,6 +32,7 @@
 				<th scope="col">IP Domain</th>
 				<th scope="col">Status</th>
 				<th scope="col">Keterangan</th>
+				<th scope="col">Dibuat</th>
 				<th scope="col">Aksi</th>
 			</tr>
 		</thead>
