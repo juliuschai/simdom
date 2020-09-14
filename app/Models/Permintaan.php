@@ -50,10 +50,7 @@ class Permintaan extends Model
         // Proses file
         if ($req->has('surat')) {
             $file = $req->file('surat');
-            $filename = substr(
-                date("hms") . '_' . $file->getClientOriginalName(),
-                250
-            );
+            $filename = substr(date("hms") . '_' . $file->getClientOriginalName(), 0, 254);
             $file_path = $file->storeAs('surat', $filename, 'local');
         } else {
             $file_path = null;

@@ -26,7 +26,7 @@ class PermintaanRequest extends FormRequest
         return [
             'unit' => 'required|string|max:254',
             'tipeUnit' => 'required|string|exists:tipe_units,nama',
-            'surat' => 'nullable|mimxes:pdf,jpeg,jpg,png|max:2000',
+            'surat' => 'nullable|mimes:pdf,jpeg,jpg,png|max:2000',
             'deskripsi' => 'required|string|max:254',
             'serverDomain' => 'required|string|in:WHS,VPS,Colocation',
             'kapasitas' => 'required|integer',

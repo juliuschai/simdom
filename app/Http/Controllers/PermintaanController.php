@@ -33,7 +33,10 @@ class PermintaanController extends Controller
     {
         $domain_templates = TipeUnit::getDomainTemplateOptions();
 
-        return view('permintaan.lihat', compact('permintaan', 'domain_templates'));
+        return view(
+            'permintaan.lihat',
+            compact('permintaan', 'domain_templates')
+        );
     }
 
     function hapus(Permintaan $permintaan)
@@ -67,9 +70,11 @@ class PermintaanController extends Controller
 
     function selesai(Permintaan $permintaan, Request $req)
     {
-        $permintaan->status = 'selesai';
-        $permintaan->ip = $req->ip;
-        $permintaan->waktu_selesai = now();
+        $permintaan->fill([
+            'status' => 'selesai',
+            'ip' => $req->ip,
+            'waktu_selesai' => now(),
+        ]);
 
         $domain = Domain::simpanDariSejarah($permintaan);
 
@@ -83,9 +88,11 @@ class PermintaanController extends Controller
 
     function tolak(Permintaan $permintaan)
     {
-        $permintaan->status = 'ditolak';
-        $permintaan->waktu_konfirmasi = null;
-        $permintaan->waktu_selesai = null;
+        $permintaan->fill([
+            'status' => 'ditolak',
+            'waktu_konfirmasi' => null,
+            'waktu_selesai' => null,
+        ]);
         $permintaan->save();
 
         $domain = Domain::find($permintaan->domain_id);

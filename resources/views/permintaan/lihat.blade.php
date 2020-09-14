@@ -185,13 +185,12 @@
 								<i class="fa fa-file booking"></i>
 								@if(isset($permintaan->surat))
 								<div class="col-md-6">
-									<a href="{{route('surat.get', ['id' => $permintaan->id])}}" target="_blank"><button
-											style="background-color: #0067ac !important; color: white !important;"
-											class="btn">View</button></a>
-									<a href="{{route('surat.download', ['id' => $permintaan->id])}}"
-										target="_blank"><button
-											style="background-color: #0067ac !important; color: white !important;"
-											class="btn">Download</button></a>
+									<a href="{{route('surat.get', ['permintaan' => $permintaan->id])}}" target="_blank">
+										<button type="button" class="btn btn-primary">View</button>
+									</a>
+									<a href="{{route('surat.download', ['permintaan' => $permintaan->id])}}" target="_blank">
+										<button type="button" class="btn btn-primary">Download</button>
+									</a>
 								</div>
 								@else
 								<div class="col-md-6">

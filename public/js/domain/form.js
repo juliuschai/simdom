@@ -9,7 +9,7 @@ function populate() {
 }
 
 function validate() {
-	if (!$('#namaDomain').val()) { alert('Nama Domain tidak boleh kosong!'); return false; }
+	if (!$('#deskripsi').val()) { alert('Deskripsi Domain tidak boleh kosong!'); return false; }
 	if (!$('#surat').val()) {
 		if (!confirm('Field surat koson! Apakah Anda yakin tidak memakai surat?')) {
 			return false;

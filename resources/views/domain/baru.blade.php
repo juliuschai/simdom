@@ -139,7 +139,7 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="serverDomain" class="col-md-4 col-form-label text-md-left">{{ __('serverDomain') }}
+								<label for="serverDomain" class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}
 									<p style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
@@ -169,12 +169,12 @@
 								<i class="fa fa-inbox domain"></i>
 								<div class="col-md-6">
 									<textarea id="keterangan" type="text" name="keterangan" class="form-control"
-										placeholder="Permohonan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
+										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
 								</div>
 							</div>
 
 						</div>
-						<button type="button" class="next action-button" onclick="submitForm()">Buat</button>
+						<button type="button" class="action-button" onclick="submitForm()">Buat</button>
 						{{-- <input type="button" name="next" class="next action-button" value="Next" />  --}}
 						<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
 					</fieldset>

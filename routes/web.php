@@ -54,9 +54,12 @@ Route::group(
                         Route::get('/domain/{domain}/transfer', 'DomainController@formTransfer')->name('domain.transfer');
                         Route::post('/domain/{domain}/transfer', 'DomainController@saveTransfer')->name('domain.transfer');
 
-                        // hanya bisa dilakukan jika permintaan belum diproses (masih dalam status menunggu)
+                        // Permintaan management
                         Route::get('/permintaan/{permintaan}/lihat', 'PermintaanController@lihat')->name('permintaan.lihat');
                         Route::post('/permintaan/{permintaan}/hapus', 'PermintaanController@hapus')->name('permintaan.hapus');
+                        // Get surat file dari permintaan
+                        Route::get('/permintaan/{permintaan}/surat/get', 'FileController@getSurat')->name('surat.get');
+                        Route::get('/permintaan/{permintaan}/surat/download', 'FileController@downloadSurat')->name('surat.download');
                     }
                 );
 
