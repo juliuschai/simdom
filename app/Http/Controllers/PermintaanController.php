@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Domain;
 use App\Models\Permintaan;
+use App\Models\TipeUnit;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,9 @@ class PermintaanController extends Controller
 
     function lihat(Permintaan $permintaan)
     {
-        return view('permintaan.lihat', compact('permintaan'));
+        $domain_templates = TipeUnit::getDomainTemplateOptions();
+
+        return view('permintaan.lihat', compact('permintaan', 'domain_templates'));
     }
 
     function hapus(Permintaan $permintaan)

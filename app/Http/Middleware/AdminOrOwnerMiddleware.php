@@ -28,11 +28,9 @@ class AdminOrOwnerMiddleware
         $owner_id = '';
         $params = $request->route()->parameters();
         if (array_key_exists('domain', $params)) {
-            $domain = Domain::findOrFail($params['domain']);
-            $owner_id = $domain->user_id;
+            $owner_id = $params['domain']->user_id;
         } elseif (array_key_exists('permintaan', $params)) {
-            $permintaan = Permintaan::findOrFail($params['permintaan']);
-            $owner_id = $permintaan->user_id;
+            $owner_id = $params['permintaan']->user_id;
         }
 
         if ($owner_id == auth()->id()) {
