@@ -50,13 +50,18 @@ class Permintaan extends Model
         // Proses file
         if ($req->has('surat')) {
             $file = $req->file('surat');
-            $filename = substr(date("hms") . '_' . $file->getClientOriginalName(), 0, 254);
+            $original = $file->getClientOriginalName();
+            $original = substr(
+                $original,
+                strlen($original) - 230,
+                strlen($original)
+            );
+            $filename = date("hms") . '_' . $original;
             $file_path = $file->storeAs('surat', $filename, 'local');
         } else {
             $file_path = null;
         }
 
-        // Get unit_id from unit
         $unit_id = Unit::getIdFromUnitOrCreate($req->unit, $req->tipeUnit);
 
         $permintaan = Permintaan::create([
