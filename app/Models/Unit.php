@@ -26,20 +26,48 @@ class Unit extends Model
         )->select(['units.id', 'units.nama', 'tipe_units.nama as tipe_unit']);
     }
 
-    static function getSorted()
+    static function getDropdownOptions()
     {
-        return Unit::orderBy('nama')->get();
+        return Unit::join(
+            'tipe_units',
+            'tipe_units.id',
+            '=',
+            'units.tipe_unit_id'
+        )
+            ->orderBy('units.nama')
+            ->get(['units.nama as second_val', 'tipe_units.nama as first_val']);
+    }
+
+    static function simpanBaru($req)
+    {
+        $unit = new Unit();
+        $unit->isiDariRequest($req);
+        $unit->save();
+
+        return $unit;
     }
 
     function isiDariRequest($req)
     {
-        $unit = $this->fill([
+        $this->fill([
             'nama' => $req->nama,
             'tipe_unit_id' => $req->tipeUnit,
         ]);
 
-        return $unit;
+        return $this;
     }
+
+    static function getIdFromUnitOrCreate($unit, $tipe_unit)
+    {
+        $tipe_unit_id = TipeUnit::where('nama', $tipe_unit)->firstOrFail()->id;
+        $unit = Unit::firstOrCreate([
+            'nama' => $unit,
+            'tipe_unit_id' => $tipe_unit_id,
+        ]);
+
+        return $unit->id;
+    }
+
     static function viewUnitBuilder()
     {
         return Unit::join(

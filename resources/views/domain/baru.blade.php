@@ -57,7 +57,8 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="emailPic" class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}</label>
+								<label for="emailPic"
+									class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}</label>
 								<i class="fa fa-envelope domain"></i>
 								<div class="col-md-6">
 									<input id="emailPic" type="text" class="form-control" value="{{$user->email}}"
@@ -98,24 +99,13 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="namaDomain"
-									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}<p
-										style="color: red" class="d-inline">*</p></label>
-								<i class="fa fa-sticky-note-o domain"></i>
-								<div class="col-md-6">
-									<input id="namaDomain" type="text" name="namaDomain" value="{{old('namaDomain')}}"
-										class="form-control" placeholder="simdom.its.ac.id; webinar-book.its.ac.id; arek.its.ac.id/wasd">
-								</div>
-							</div>
-
-							<div class="form-group row">
 								<label for="deskripsi"
 									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}<p
 										style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
-									<input id="deskripsi" type="text" name="deskripsi"
-										value="{{old('deskripsi')}}" class="form-control">
+									<input id="deskripsi" type="text" name="deskripsi" value="{{old('deskripsi')}}"
+										class="form-control" placeholder="BEM ITS; Gemastik; Biro Administrasi Pembelajaran Mahasiswa">
 								</div>
 							</div>
 
@@ -125,9 +115,16 @@
 										style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-window-maximize domain"></i>
 								<div class="col-md-6">
-									<two-select id="unit" :seconds="{{$units}}" :firsts="{{$tipeUnits}}"
-										option-value="{{old('unit')??'1'}}" name-prop="unit">
-									</two-select>
+									<two-select-with-textbox 
+										:seconds="{{$units}}" 
+										:firsts="{{$tipeUnits}}"
+										second-val="{{old('unit')}}"
+										first-val="{{old('tipeUnit')}}"
+
+										textbox-name-prop="unit"
+										first-name-prop="tipeUnit"
+										>
+									</two-select-with-textbox>
 								</div>
 							</div>
 
@@ -142,12 +139,11 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="server"
-									class="col-md-4 col-form-label text-md-left">{{ __('Server') }}
+								<label for="serverDomain" class="col-md-4 col-form-label text-md-left">{{ __('Tipe Server') }}
 									<p style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<select id="server" name="server" class="form-control">
+									<select id="serverDomain" name="serverDomain" class="form-control" data-value="{{old('serverDomain')}}">
 										<option value="WHS">WHS/Zeus/CPanel</option>
 										<option value="VPS">VPS</option>
 										<option value="Colocation">Colocation</option>
@@ -173,12 +169,12 @@
 								<i class="fa fa-inbox domain"></i>
 								<div class="col-md-6">
 									<textarea id="keterangan" type="text" name="keterangan" class="form-control"
-										placeholder="Permohonan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
+										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
 								</div>
 							</div>
 
 						</div>
-						<button type="button" class="next action-button" onclick="submitForm()">Buat</button>
+						<button type="button" class="action-button" onclick="submitForm()">Buat</button>
 						{{-- <input type="button" name="next" class="next action-button" value="Next" />  --}}
 						<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
 					</fieldset>

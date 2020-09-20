@@ -22,63 +22,59 @@ class Permintaan extends Model
 
     static function selectList()
     {
-        return Permintaan::join(
-            'users',
-            'users.id',
-            '=',
-            'permintaans.user_id'
-        )
+        return Permintaan::join('users', 'users.id', '=', 'permintaans.user_id')
             ->join('units', 'units.id', '=', 'permintaans.unit_id')
             ->select([
                 'permintaans.id',
                 'users.nama as user_nama',
                 'units.nama as unit_nama',
                 'permintaans.nama_domain',
-                'permintaans.server as nama_server',
+                'permintaans.server',
                 'permintaans.kapasitas',
                 'permintaans.ip',
                 'permintaans.status',
                 'permintaans.keterangan',
-            ])
-            ->orderBy('permintaans.created_at', 'DESC');
+                'permintaans.created_at',
+            ]);
     }
 
     static function selectListUser()
     {
         return Permintaan::selectList()
-            ->join(
-                'domains',
-                'domains.id',
-                '=',
-                'permintaans.domain_id'
-            )
+            ->join('domains', 'domains.id', '=', 'permintaans.domain_id')
             ->where('domains.user_id', auth()->id());
     }
 
-    static function permintaanBaru($req, $domain_id)
+    static function permintaanBaru($req, $domain_id = null)
     {
+        // Proses file
         if ($req->has('surat')) {
             $file = $req->file('surat');
-            $filename = substr(
-                date("hms") . '_' . $file->getClientOriginalName(),
-                250
+            $original = $file->getClientOriginalName();
+            $original = substr(
+                $original,
+                strlen($original) - 230,
+                strlen($original)
             );
+            $filename = date("hms") . '_' . $original;
             $file_path = $file->storeAs('surat', $filename, 'local');
         } else {
             $file_path = null;
         }
 
+        $unit_id = Unit::getIdFromUnitOrCreate($req->unit, $req->tipeUnit);
+
         $permintaan = Permintaan::create([
             'domain_id' => $domain_id,
             'user_id' => auth()->id(),
-            'unit_id' => $req->unit,
+            'unit_id' => $unit_id,
             'surat' => $file_path,
             'nama_domain' => $req->namaDomain,
             'deskripsi' => $req->deskripsi,
-            'server' => $req->server,
+            'server' => $req->serverDomain,
             'kapasitas' => $req->kapasitas,
             'keterangan' => $req->keterangan,
-            'ip' => $req->ipAddress,
+            'ip' => $req->ip,
         ]);
 
         return $permintaan;

@@ -14,7 +14,7 @@ class CreatePermintaansTable extends Migration
             $table->foreignId('user_id')->constrained()->onUpdate('CASCADE');
             $table->foreignId('unit_id')->constrained()->onUpdate('CASCADE');
             $table->string('ip', 16)->nullable();
-            $table->string('nama_domain', 60);
+            $table->string('nama_domain', 60)->nullable();
             $table->string('deskripsi')->comment('nama panjang/penjelasan isi/tujuan domain');
             $table->string('surat')->nullable();
             $table->enum('server', ['WHS', 'VPS', 'Colocation']);

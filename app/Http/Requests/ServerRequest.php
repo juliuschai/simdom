@@ -24,9 +24,10 @@ class ServerRequest extends FormRequest
     public function rules()
     {
         return [
-            'namaServer' => 'required|string|max:254',
-            'lokasiServer' => 'nullable|string|max:254',
-            'keterangan' => 'nullable|string|max:254',
+            'deskripsi' => 'required|string|max:254',
+            'unit' => 'required|string|max:254',
+            'tipeUnit' => 'required|string|exists:tipe_units,nama',
+            'no_rack' => 'nullable|string|max:254',
         ];
     }
 }

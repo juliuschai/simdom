@@ -35,7 +35,6 @@ tableElm.DataTable({
 			searchable: false,
 			visible: true,
 			render: function (data, type, full, meta) {
-                console.log(full);
 				return editButton.createButton(full.id).html();
 			}
 		},

@@ -34,17 +34,26 @@ Route::group(
             ],
             function () {
                 // Domain management
+                Route::get('/domain/baru', 'DomainController@formBaru')->name('domain.baru');
+                Route::post('/domain/baru', 'DomainController@simpanBaru')->name('domain.baru');
                 Route::get('/domain/list', 'DomainController@list')->name('domain.list');
                 Route::get('/domain/data', 'DomainController@listData')->name('domain.data');
 
-                Route::get('/domain/baru', 'DomainController@formBaru')->name('domain.baru');
-                Route::post('/domain/baru', 'DomainController@simpanBaru')->name('domain.baru');
-
-                // Permintaan
+                // Permintaan list
                 Route::get('/permintaan/list', 'PermintaanController@list')->name('permintaan.list');
                 Route::get('/permintaan/data', 'PermintaanController@listData')->name('permintaan.data');
 
+                // Server baru
+                Route::get('/server/baru', 'ServerController@formBaru')->name('server.baru');
+                Route::post('/server/baru', 'ServerController@simpanBaru')->name('server.baru');
+                Route::get('/server/list', 'ServerController@list')->name('server.list');
+                Route::get('/server/data', 'ServerController@listData')->name('server.data');
+
                 Route::get('/user/cari', 'UserController@cari')->name('user.cari');
+
+                // Cari semua entri domain bedasarkan unit tertentu, dari permintaan
+                Route::get('/permintaan/lihat/data', 'PermintaanController@lihatData')->name('permintaan.lihat.data');
+
                 Route::group(
                     [
                         'middleware' => ['adminOrOwner'],
@@ -55,10 +64,19 @@ Route::group(
                         Route::post('/domain/{domain}/edit', 'DomainController@simpanEdit')->name('domain.edit');
                         Route::get('/domain/{domain}/transfer', 'DomainController@formTransfer')->name('domain.transfer');
                         Route::post('/domain/{domain}/transfer', 'DomainController@saveTransfer')->name('domain.transfer');
-
-                        // hanya bisa dilakukan jika permintaan belum diproses (masih dalam status menunggu)
+                        
+                        // Permintaan management
                         Route::get('/permintaan/{permintaan}/lihat', 'PermintaanController@lihat')->name('permintaan.lihat');
                         Route::post('/permintaan/{permintaan}/hapus', 'PermintaanController@hapus')->name('permintaan.hapus');
+                        Route::get('/permintaan/{permintaan}/surat/get', 'FileController@getSurat')->name('surat.get');
+                        Route::get('/permintaan/{permintaan}/surat/download', 'FileController@downloadSurat')->name('surat.download');
+
+                        // Server management
+                        Route::get('/server/{server}/edit', 'ServerController@formEdit')->name('server.edit');
+                        Route::post('/server/{server}/edit', 'ServerController@simpanEdit')->name('server.edit');
+                        Route::post('/server/{server}/hapus', 'ServerController@hapus')->name('server.hapus');
+                        Route::get('/server/{server}/transfer', 'ServerController@formTransfer')->name('server.transfer');
+                        Route::post('/server/{server}/transfer', 'ServerController@saveTransfer')->name('server.transfer');
                     }
                 );
 
@@ -67,16 +85,6 @@ Route::group(
                         'middleware' => ['admin'],
                     ],
                     function () {
-                        // Server
-                        Route::get('/server/list', 'ServerController@list')->name('server.list');
-                        Route::get('/server/data', 'ServerController@listData')->name('server.data');
-
-                        Route::get('/server/baru', 'ServerController@formBaru')->name('server.baru');
-                        Route::post('/server/baru', 'ServerController@simpanBaru')->name('server.baru');
-                        Route::get('/server/{server}/edit', 'ServerController@formEdit')->name('server.edit');
-                        Route::post('/server/{server}/edit', 'ServerController@simpanEdit')->name('server.edit');
-                        Route::post('/server/{server}/hapus', 'ServerController@hapus')->name('server.hapus');
-
                         // Ubah status Permintaan
                         Route::post('/permintaan/{permintaan}/terima', 'PermintaanController@terima')->name('permintaan.terima');
                         Route::post('/permintaan/{permintaan}/selesai', 'PermintaanController@selesai')->name('permintaan.selesai');

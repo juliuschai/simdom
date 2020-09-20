@@ -117,18 +117,36 @@
 								</div>
 							</div>
 
+						@admin
+						@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak')
+						<form method="POST" action="{{route('permintaan.terima', $permintaan->id)}}">
+							@csrf
+						@endif
+						@if($permintaan->status == 'diterima')
+						<form method="POST" action="{{route('permintaan.selesai', $permintaan->id)}}">
+							@csrf
+						@endif
+						@endadmin
+	
 							<div class="form-group row">
 								<label for="namaDomain"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}</label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
-									<input id="namaDomain" type="text" name="namaDomain"
-										value="{{$permintaan->nama_domain}}" class="form-control" disabled>
+									@admin
+									<admin-nama-domain-input :templates="{{$domain_templates}}"
+										sel-template-prop="{{$permintaan->unit->tipeUnit->domain_template}}"
+										nama-domain-prop="{{$permintaan->nama_domain}}">
+									</admin-nama-domain-input>
+									@else
+									<input id="namaDomain" type="text" value="{{$permintaan->nama_domain}}"
+										class="form-control" disabled>
+									@endif
 								</div>
 							</div>
 
 							@if($permintaan->domain_id)
-							<a target="_blank" href="{{route('domain.edit', ['domain' => $permintaan->domain_id])}}" >
+							<a target="_blank" href="{{route('domain.edit', ['domain' => $permintaan->domain_id])}}">
 								Lihat record domain aktif dari {{$permintaan->nama_domain}}
 							</a>
 							@endif
@@ -155,9 +173,6 @@
 										class="form-control" disabled>
 								</div>
 							</div>
-                            @admin
-                            <a href="{{route('domain.list', ['q' => $permintaan->unit->nama])}}">Lihat semua domain dari unit tersebut</a>
-                            @endadmin
 
 							<div class="form-group row">
 								<label for="surat"
@@ -165,13 +180,12 @@
 								<i class="fa fa-file booking"></i>
 								@if(isset($permintaan->surat))
 								<div class="col-md-6">
-									<a href="{{route('surat.get', ['id' => $permintaan->id])}}" target="_blank"><button
-											style="background-color: #0067ac !important; color: white !important;"
-											class="btn">View</button></a>
-									<a href="{{route('surat.download', ['id' => $permintaan->id])}}"
-										target="_blank"><button
-											style="background-color: #0067ac !important; color: white !important;"
-											class="btn">Download</button></a>
+									<a href="{{route('surat.get', ['permintaan' => $permintaan->id])}}" target="_blank">
+										<button type="button" class="btn btn-primary">View</button>
+									</a>
+									<a href="{{route('surat.download', ['permintaan' => $permintaan->id])}}" target="_blank">
+										<button type="button" class="btn btn-primary">Download</button>
+									</a>
 								</div>
 								@else
 								<div class="col-md-6">
@@ -185,8 +199,8 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('Server') }}</label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-6">
-									<input id="server" type="text" class="form-control"
-										value="{{$permintaan->server}}" disabled>
+									<input id="server" type="text" class="form-control" value="{{$permintaan->server}}"
+										disabled>
 								</div>
 							</div>
 
@@ -220,40 +234,51 @@
 								</div>
 							</div>
 
-                            @admin
-							@if($permintaan->status == 'menunggu'
-							|| $permintaan->status == 'ditolak')
-							<form method="POST" action="{{route('permintaan.terima', $permintaan->id)}}">
-								@csrf
-								<div class="form-group row">
-									<label for="ipAddress"
-										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
-									<i class="fa fa-inbox domain"></i>
-									<div class="col-md-6">
-										<input id="ipAddress" name="ipAddress" type="text"
-											value="{{$permintaan->ip}}" class="form-control">
-									</div>
+							@admin
+							@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak' || $permintaan->status == 'diterima')
+							<div class="form-group row">
+								<label for="ip"
+									class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
+								<i class="fa fa-inbox domain"></i>
+								<div class="col-md-6">
+									<input id="ip" name="ip" type="text" value="{{$permintaan->ip}}"
+										class="form-control">
 								</div>
-								<button type="submit" class="next action-button">Terima</button>
-							</form>
+							</div>
+
+							{{-- Domain Table Unit Search Start --}}
+							<button type="button" id="showTableButton" class="btn btn-primary" 
+								onclick="initTable()">Lihat semua domain dari {{$permintaan->unit->nama}}</button>
+							<div id="ipTableSection" style="display: none;">
+								<div>Domain Aktif dengan VPS dari {{$permintaan->unit->nama}}</div>
+								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}" 
+									data-status="aktif" data-ajaxurl="{{route('permintaan.lihat.data')}}">
+									<thead>
+										<td>Id</td>
+										<td>Unit</td>
+										<td>Server</td>
+										<td>Status</td>
+										<td>Domain</td>
+										<td>Kapasitas DB</td>
+										<td>Ip</td>
+										<td>Aksi</td>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+
+							@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak')
+							<button type="submit" class="next action-button">Terima</button>
 							@endif
 							@if($permintaan->status == 'diterima')
-							<form method="POST" action="{{route('permintaan.selesai', $permintaan->id)}}">
-								@csrf
-								<div class="form-group row">
-									<label for="ipAddress"
-										class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
-									<i class="fa fa-inbox domain"></i>
-									<div class="col-md-6">
-										<input id="ipAddress" name="ipAddress" type="text"
-											value="{{$permintaan->ip}}" class="form-control">
-									</div>
-								</div>
-								<button type="submit" class="next action-button">Selesai</button>
-							</form>
+							<button type="submit" class="next action-button">Selesai</button>
 							@endif
-							@if($permintaan->status == 'menunggu'
-							|| $permintaan->status == 'diterima')
+						</form>
+							@endif
+							@endadmin
+
+							@admin
+							@if($permintaan->status == 'menunggu' || $permintaan->status == 'diterima')
 							<form id="tolakForm" method="POST" action="{{route('permintaan.tolak', $permintaan->id)}}">
 								@csrf
 								<button type="button" class="previous action-button-previous" onclick="
@@ -269,7 +294,7 @@
 								">Hapus</button>
 							</form>
 							@endif
-                            @endadmin
+							@endadmin
 							<button type="button" class="previous action-button-previous">Prev</button>
 						</div>
 					</fieldset>
@@ -300,4 +325,7 @@
 <script src="{{ asset('js/form/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" defer />
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js" defer></script>
+<script src="{{ asset('js/permintaan/lihat.js') }}" defer></script>
 @endsection

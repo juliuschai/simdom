@@ -3,13 +3,13 @@ $(document).ready(function () {
 });
 
 function populate() {
-	// Set server to old input
-	$server = $('#server');
-	$server.val($server.data('value'));
+	// Set serverDomain to old input
+	$serverDomain = $('#serverDomain');
+	$serverDomain.val($serverDomain.data('value'));
 }
 
 function validate() {
-	if (!$('#namaDomain').val()) { alert('Nama Domain tidak boleh kosong!'); return false; }
+	if (!$('#deskripsi').val()) { alert('Deskripsi Domain tidak boleh kosong!'); return false; }
 	if (!$('#surat').val()) {
 		if (!confirm('Field surat koson! Apakah Anda yakin tidak memakai surat?')) {
 			return false;

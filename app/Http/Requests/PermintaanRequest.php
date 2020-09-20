@@ -24,11 +24,11 @@ class PermintaanRequest extends FormRequest
     public function rules()
     {
         return [
-            'unit' => 'required|exists:units,id',
+            'unit' => 'required|string|max:254',
+            'tipeUnit' => 'required|string|exists:tipe_units,nama',
             'surat' => 'nullable|mimes:pdf,jpeg,jpg,png|max:2000',
-            'namaDomain' => 'required|string|max:60',
             'deskripsi' => 'required|string|max:254',
-            'server' => 'required|string|in:WHS,VPS,Colocation',
+            'serverDomain' => 'required|string|in:WHS,VPS,Colocation',
             'kapasitas' => 'required|integer',
             'keterangan' => 'required|string|max:254',
         ];

@@ -42,8 +42,8 @@ var datatableRes = tableElm.DataTable({
 		},
 		{
 			title: 'Jenis Domain',
-			data: 'nama_server',
-			name: 'servers.nama',
+			data: 'server',
+			name: 'domains.server',
 			searchable: true,
 			visible: true,
 		},
@@ -69,6 +69,16 @@ var datatableRes = tableElm.DataTable({
 			visible: true,
 		},
 		{
+			title: 'Dibuat',
+			data: 'created_at',
+			name: 'domains.created_at',
+			searchable: true,
+			visible: true,
+			render: function (data, type, full, meta) {
+				return new Date(data).toLocaleString();
+			},
+		},
+		{
 			title: 'Aksi',
 			data: null,
 			name: null,
@@ -81,8 +91,4 @@ var datatableRes = tableElm.DataTable({
 	],
 });
 
-// Domain List search via get params
-let queryString = window.location.search;
-let urlParams = new URLSearchParams(queryString);
-let urlSearch = urlParams.get('q');
-if (urlSearch) datatableRes.search(urlSearch).draw();
+datatableRes.columns('domains.created_at:name').order('desc').draw();

@@ -24,23 +24,21 @@ class UnitController extends Controller
 
     function formBaru()
     {
-        $tipeUnits = TipeUnit::getSorted();
+        $tipeUnits = TipeUnit::orderBy('nama')->get();
 
         return view('unit.baru', compact('tipeUnits'));
     }
     
     function simpanBaru(UnitRequest $req)
     {
-        $unit = new Unit();
-        $unit->isiDariRequest($req);
-        $unit->save();
+        Unit::simpanBaru($req);
 
         return redirect()->route('unit.list');
     }
     
     function formEdit(Unit $unit)
     {
-        $tipeUnits = TipeUnit::getSorted();
+        $tipeUnits = TipeUnit::orderBy('nama')->get();
 
         return view('unit.edit', compact('unit', 'tipeUnits'));
     }

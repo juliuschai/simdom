@@ -15,9 +15,10 @@ class CreateServersTable extends Migration
     {
         Schema::create('servers', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('lokasi_server')->nullable();
-            $table->string('keterangan')->nullable();
+            $table->foreignId('user_id')->constrained()->onUpdate('CASCADE');
+            $table->foreignId('unit_id')->constrained()->onUpdate('CASCADE');
+            $table->string('deskripsi');
+            $table->string('no_rack')->nullable();
             $table->timestamps();
         });
     }

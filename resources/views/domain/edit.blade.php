@@ -113,7 +113,7 @@
                                 <i class="fa fa-sticky-note-o domain"></i>
                                 <div class="col-md-6">
                                     <input id="namaDomain" type="text" name="namaDomain"
-                                        value="{{$domain->nama_domain}}" class="form-control">
+                                        value="{{$domain->nama_domain}}" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -142,9 +142,16 @@
                                     class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}</label>
                                 <i class="fa fa-window-maximize domain"></i>
                                 <div class="col-md-6">
-                                    <two-select id="unit" :seconds="{{$units}}" :firsts="{{$tipeUnits}}"
-                                        option-value="{{$domain->unit_id}}" name-prop="unit">
-                                    </two-select>
+									<two-select-with-textbox 
+										:seconds="{{$units}}" 
+										:firsts="{{$tipeUnits}}"
+										second-val="{{$domain->unit->nama}}"
+										first-val="{{$domain->unit->tipeUnit->nama}}"
+
+										textbox-name-prop="unit"
+										first-name-prop="tipeUnit"
+                                        >
+									</two-select-with-textbox>
                                 </div>
                             </div>
                             @admin
@@ -161,11 +168,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="server"
+                                <label for="serverDomain"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Server') }}</label>
                                 <i class="fa fa-server domain"></i>
                                 <div class="col-md-6">
-                                    <select id="server" name="server" class="form-control">
+                                    <select id="serverDomain" name="serverDomain" class="form-control" data-value="{{$domain->server}}">
 										<option value="WHS">WHS/Zeus/CPanel</option>
 										<option value="VPS">VPS</option>
 										<option value="Colocation">Colocation</option>
@@ -185,11 +192,11 @@
 
                             @if($domain->ip)
                             <div class="form-group row">
-                                <label for="ipAddress"
+                                <label for="ip"
                                     class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
                                 <i class="fa fa-inbox domain"></i>
                                 <div class="col-md-6">
-                                    <input id="ipAddress" type="text" value="{{$domain->ip}}"
+                                    <input id="ip" type="text" value="{{$domain->ip}}"
                                         class="form-control" disabled>
                                 </div>
                             </div>

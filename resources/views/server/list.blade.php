@@ -23,9 +23,13 @@
 		<thead class="thead-custom-blue">
 			<tr>
 				<th scope="col">Id</th>
-				<th scope="col">Nama Server</th>
+				<th scope="col">Nama PIC</th>
+				<th scope="col">Email PIC</th>
+				<th scope="col">No. HP PIC</th>
+				<th scope="col">Unit</th>
+				<th scope="col">Deskripsi</th>
+				<th scope="col">No. Rack</th>
 				<th scope="col">Tanggal Aktif</th>
-				<th scope="col">Lokasi Server</th>
 				<th scope="col">Aksi</th>
 			</tr>
 		</thead>

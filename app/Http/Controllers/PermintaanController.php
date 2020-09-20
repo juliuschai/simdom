@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Domain;
 use App\Models\Permintaan;
+use App\Models\TipeUnit;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,19 @@ class PermintaanController extends Controller
 
     function lihat(Permintaan $permintaan)
     {
-        return view('permintaan.lihat', compact('permintaan'));
+        $domain_templates = TipeUnit::getDomainTemplateOptions();
+
+        return view(
+            'permintaan.lihat',
+            compact('permintaan', 'domain_templates')
+        );
+    }
+
+    function lihatData()
+    {
+        $model = Domain::selectLihatData()->newQuery();
+
+        return DataTables::eloquent($model)->toJson();
     }
 
     function hapus(Permintaan $permintaan)
@@ -48,10 +61,13 @@ class PermintaanController extends Controller
 
     function terima(Permintaan $permintaan, Request $req)
     {
-        $permintaan->status = 'diterima';
-        $permintaan->ip = $req->ipAddress;
-        $permintaan->waktu_konfirmasi = now();
-        $permintaan->waktu_selesai = null;
+        $permintaan->fill([
+            'nama_domain' => $req->namaDomain,
+            'ip' => $req->ip,
+            'status' => 'diterima',
+            'waktu_konfirmasi' => now(),
+            'waktu_selesai' => null,
+        ]);
         $permintaan->save();
 
         return redirect()
@@ -61,9 +77,12 @@ class PermintaanController extends Controller
 
     function selesai(Permintaan $permintaan, Request $req)
     {
-        $permintaan->status = 'selesai';
-        $permintaan->ip = $req->ipAddress;
-        $permintaan->waktu_selesai = now();
+        $permintaan->fill([
+            'nama_domain' => $req->namaDomain,
+            'status' => 'selesai',
+            'ip' => $req->ip,
+            'waktu_selesai' => now(),
+        ]);
 
         $domain = Domain::simpanDariSejarah($permintaan);
 
@@ -77,9 +96,11 @@ class PermintaanController extends Controller
 
     function tolak(Permintaan $permintaan)
     {
-        $permintaan->status = 'ditolak';
-        $permintaan->waktu_konfirmasi = null;
-        $permintaan->waktu_selesai = null;
+        $permintaan->fill([
+            'status' => 'ditolak',
+            'waktu_konfirmasi' => null,
+            'waktu_selesai' => null,
+        ]);
         $permintaan->save();
 
         $domain = Domain::find($permintaan->domain_id);
