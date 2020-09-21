@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\EmailHelper;
 use App\Models\Domain;
 use App\Models\Permintaan;
 use App\Models\TipeUnit;
@@ -54,6 +55,8 @@ class PermintaanController extends Controller
 
         $this->tolak($permintaan);
 
+        EmailHelper::notifyStatus($permintaan, 'Permintaan telah dihapus');
+
         $permintaan->delete();
 
         return redirect()->route('permintaan.list'); // PART: change route to permintaan list
@@ -69,6 +72,8 @@ class PermintaanController extends Controller
             'waktu_selesai' => null,
         ]);
         $permintaan->save();
+
+        EmailHelper::notifyStatus($permintaan, 'Permintaan sedang diproses');
 
         return redirect()
             ->back()
@@ -89,6 +94,8 @@ class PermintaanController extends Controller
         $permintaan->domain_id = $domain->id;
         $permintaan->save();
 
+        EmailHelper::notifyStatus($permintaan, 'Permintaan sudah selesai');
+
         return redirect()
             ->back()
             ->with('message', 'Permintan selesai');
@@ -106,6 +113,8 @@ class PermintaanController extends Controller
         $domain = Domain::find($permintaan->domain_id);
         $domain->aktif = 'aktif';
         $domain->save();
+
+        EmailHelper::notifyStatus($permintaan, 'Permintaan telah ditolak!');
 
         return redirect()
             ->back()

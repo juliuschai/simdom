@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\EmailHelper;
 use App\Http\Requests\PermintaanRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
@@ -100,12 +101,14 @@ class DomainController extends Controller
         $domain->user_id = $user->id;
         $domain->save();
 
+        EmailHelper::notifyTransfer($domain->user->email, $user->email, $domain);
+
         return redirect()->route('domain.list');
     }
 
     function nonaktifasi(Domain $domain)
     {
-        Permintaan::permintaanDariDomain(
+        $permintaan = Permintaan::permintaanDariDomain(
             $domain,
             'Set domain menjadi nonaktif',
             true
@@ -113,6 +116,8 @@ class DomainController extends Controller
 
         $domain->aktif = 'nonaktif';
         $domain->save();
+
+        EmailHelper::notifyStatus($permintaan, 'Domain berhasil dinonaktifkan');
 
         return redirect()
             ->back()

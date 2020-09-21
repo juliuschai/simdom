@@ -77,6 +77,9 @@ class Permintaan extends Model
             'ip' => $req->ip,
         ]);
 
+        EmailHelper::permintaanBaruAdmin($permintaan);
+        EmailHelper::permintaanBaruUser($permintaan);
+
         return $permintaan;
     }
 
@@ -118,6 +121,9 @@ class Permintaan extends Model
         }
 
         $permintaan->save();
+
+        EmailHelper::permintaanBaruAdmin($permintaan);
+        EmailHelper::permintaanBaruUser($permintaan);
 
         return $permintaan;
     }
