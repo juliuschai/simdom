@@ -45,7 +45,7 @@ class EmailHelper
             'link' => route('permintaan.lihat', [
                 'permintaan' => $permintaan->id,
             ]),
-            'domain' => $permintaan->domain,
+            'domain' => $permintaan->domain->nama,
             'user' => "{$permintaan->user->nama} - {$permintaan->user->group} - {$permintaan->unit->nama}",
             'keterangan' => $permintaan->keterangan,
         ];
@@ -78,7 +78,7 @@ class EmailHelper
                 'permintaan' => $permintaan->id,
             ]),
             'user' => $user,
-            'domain' => $permintaan->domain,
+            'domain' => $permintaan->domain->nama,
             'keterangan' => $permintaan->keterangan,
         ];
 
@@ -103,7 +103,7 @@ class EmailHelper
             'link' => route('permintaan.lihat', [
                 'permintaan' => $permintaan->id,
             ]),
-            'domain' => $permintaan->domain,
+            'domain' => $permintaan->domain->nama,
             'keterangan' => $permintaan->keterangan,
         ];
 
@@ -132,7 +132,7 @@ class EmailHelper
                 $message->subject('Simdom - Perubahan PIC');
             });
         } catch (\Throwable $th) {
-            \Log::warning('Gagal mengemail user perubahan status permintaan');
+            \Log::warning('Gagal mengemail user perubahan PIC ke email '.$from.' '.$from.' ke PIC '.$to);
             \Log::warning($th);
         }
 
@@ -143,8 +143,12 @@ class EmailHelper
                 $message->subject('Simdom - Perubahan PIC');
             });
         } catch (\Throwable $th) {
-            \Log::warning('Gagal mengemail user perubahan status permintaan');
+            \Log::warning('Gagal mengemail user perubahan ke email '.$from.' '.$to.' dari PIC '.$from.' ke PIC '.$to);
             \Log::warning($th);
         }
+    }
+
+    static function notifyReminder() {
+
     }
 }
