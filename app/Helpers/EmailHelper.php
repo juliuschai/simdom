@@ -148,7 +148,21 @@ class EmailHelper
         }
     }
 
-    static function notifyReminder() {
+    static function notifyReminder(Domain $domain) {
+        $email = $domain->user->email;
+        $data = [
+            'nama' => $domain->nama,
+            'link' => route('domain.transfer', ['domain' => $domain->id])
+        ];
 
+        try {
+            Mail::send('email.domain_reminder', $data, function ($message) use ($email) {
+                $message->to($email);
+                $message->subject('Simdom - Perubahan PIC');
+            });
+        } catch (\Throwable $th) {
+            \Log::warning('Gagal mengemail user reminder PIC');
+            \Log::warning($th);
+        }
     }
 }

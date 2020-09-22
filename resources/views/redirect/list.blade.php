@@ -11,7 +11,7 @@
 	@endif
 
 	<div id="editBtnTemplate" style="display: none;">
-		<a href="{{route('server.edit', ['server' => 0])}}">
+		<a href="{{route('redirect.edit', ['redirect' => 0])}}">
 			<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Domain">
 				<i class="fa fa-pencil"></i>
 			</button>
@@ -19,16 +19,13 @@
 	</div>
 
 	<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
-		data-ajaxurl="{{ route('server.data') }}">
+		data-ajaxurl="{{ route('redirect.data') }}">
 		<thead class="thead-custom-blue">
 			<tr>
 				<th scope="col">Id</th>
-				<th scope="col">Nama PIC</th>
-				<th scope="col">Email PIC</th>
-				<th scope="col">No. HP PIC</th>
-				<th scope="col">Unit</th>
-				<th scope="col">Deskripsi</th>
-				<th scope="col">No. Rack</th>
+				<th scope="col">Link Lama</th>
+				<th scope="col">Link Baru</th>
+				<th scope="col">Keterangan</th>
 				<th scope="col">Dibuat</th>
 				<th scope="col">Aksi</th>
 			</tr>
@@ -42,5 +39,5 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" defer />
 <script src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js" defer></script>
 <script src="{{asset('js/util/datatablesPlugin.js') }}" defer></script>
-<script src="{{asset('js/server/list.js') }}" defer></script>
+<script src="{{asset('js/redirect/list.js') }}" defer></script>
 @endsection

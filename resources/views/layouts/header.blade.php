@@ -59,8 +59,9 @@
                     <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Baru</a>
                         <ul>
                             <li><a href="{{ route('domain.baru') }}">Form Domain Baru</a></li>
-                            @admin
                             <li><a href="{{ route('server.baru') }}">Form Server Baru</a></li>
+                            @admin
+                            <li><a href="{{ route('redirect.baru') }}">Form Redirect Baru</a></li>
                             @endadmin
                         </ul>
                     </li>
@@ -68,15 +69,18 @@
                         <ul>
                             <li><a href="{{route('domain.list')}}">Lihat List Domain</a></li>
                             <li><a href="{{route('permintaan.list')}}">Lihat List Permintaan</a></li>
-                            @admin
                             <li><a href="{{route('server.list')}}">Lihat List Server</a></li>
+                            @admin
+                            <li><a href="{{route('redirect.list')}}">Lihat List Redirect</a></li>
                             @endadmin
                         </ul>
                     </li>
                     @admin
                     <li class="dropdown"><a href="#"><span class="icon-inbox"></span>Report</a>
                         <ul>
-                            <li><a href="?cat=administrator&page=report">Data Report</a></li>
+                            <li><a href="?cat=administrator&page=report">Domain Data Report</a></li>
+                            <li><a href="?cat=administrator&page=report">Domain Server Report</a></li>
+                            <li><a href="?cat=administrator&page=report">Domain Redirect Report</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a href="#"><span class="icon-signal"></span>Grafik</a>

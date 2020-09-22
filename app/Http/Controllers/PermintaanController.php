@@ -59,7 +59,7 @@ class PermintaanController extends Controller
 
         $permintaan->delete();
 
-        return redirect()->route('permintaan.list'); // PART: change route to permintaan list
+        return redirect()->route('permintaan.list');
     }
 
     function terima(Permintaan $permintaan, Request $req)

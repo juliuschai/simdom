@@ -48,7 +48,7 @@ class ServerController extends Controller
 
         return redirect()
             ->route('server.edit', ['server' => $server->id])
-            ->with('message', 'Server colocation berhasil diedit!');
+            ->with('message', 'Server colocation berhasil dibuat!');
     }
 
     function formEdit(Server $server)
