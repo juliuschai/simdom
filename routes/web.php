@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/test', 'HomeController@test');
 Route::group(
     [
         'prefix' => 'v2',
@@ -94,6 +96,15 @@ Route::group(
 
                         // Set domain nonaktif
                         Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasi')->name('domain.nonaktifasi');
+
+                        // Redirect Management
+                        Route::get('/redirect/baru', 'RedirectController@formBaru')->name('redirect.baru');
+                        Route::post('/redirect/baru', 'RedirectController@simpanBaru')->name('redirect.baru');
+                        Route::get('/redirect/list', 'RedirectController@list')->name('redirect.list');
+                        Route::get('/redirect/data', 'RedirectController@listData')->name('redirect.data');
+                        Route::get('/redirect/{redirect}/edit', 'RedirectController@formEdit')->name('redirect.edit');
+                        Route::post('/redirect/{redirect}/edit', 'RedirectController@simpanEdit')->name('redirect.edit');
+                        Route::post('/redirect/{redirect}/hapus', 'RedirectController@hapus')->name('redirect.hapus');
 
                         // User management
                         Route::get('/user/list', 'UserController@list')->name('user.list');

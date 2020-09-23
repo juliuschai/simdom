@@ -19,24 +19,23 @@
 			</a>
 		</div>
 
-		<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
-			data-ajaxurl="{{ route('server.data') }}">
-			<thead class="thead-custom-blue">
-				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Nama PIC</th>
-					<th scope="col">Email PIC</th>
-					<th scope="col">No. HP PIC</th>
-					<th scope="col">Unit</th>
-					<th scope="col">Deskripsi</th>
-					<th scope="col">No. Rack</th>
-					<th scope="col">Tanggal Aktif</th>
-					<th scope="col">Aksi</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-	</div>
+	<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
+		data-ajaxurl="{{ route('server.data') }}">
+		<thead class="thead-custom-blue">
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Nama PIC</th>
+				<th scope="col">Email PIC</th>
+				<th scope="col">No. HP PIC</th>
+				<th scope="col">Unit</th>
+				<th scope="col">Deskripsi</th>
+				<th scope="col">No. Rack</th>
+				<th scope="col">Dibuat</th>
+				<th scope="col">Aksi</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
 </div>
 @endsection
 

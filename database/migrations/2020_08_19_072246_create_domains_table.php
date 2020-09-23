@@ -25,6 +25,8 @@ class CreateDomainsTable extends Migration
             $table->integer('kapasitas');
             $table->enum('aktif', ['aktif', 'menunggu', 'nonaktif', 'redirect'])->default('aktif');
             $table->timestamps();
+            $table->date('reminder')->default(DB::raw('DATE_ADD(CURDATE(), INTERVAL 6 MONTH)'))
+                ->comment('digunakan untuk mengirimkan reminder kepada PIC untuk memperbaharui data PIC');
         });
     }
 
