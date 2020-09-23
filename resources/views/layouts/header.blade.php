@@ -67,25 +67,25 @@
                     <ul class="nav child_menu">
                       <li><a href="{{ route('domain.baru') }}">Domain</a></li>
                       @admin
-                      <li><a href="#">Server</a></li>
+                      <li><a href="{{ route('server.baru') }}">Server</a></li>
                       @endadmin
                     </ul>
                   </li>
                   @if(auth()->user()->isAdmin())
                   <li><a><i class="fa fa-list"></i> List <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Domain</a></li>
-                      <li><a href="#">Permintaan</a></li>
+                      <li><a href="{{ route('domain.list') }}">Domain</a></li>
+                      <li><a href="{{ route('permintaan.list') }}">Permintaan</a></li>
                       @admin
-                      <li><a href="#">Server</a></li>
+                      <li><a href="{{ route('server.list') }}">Server</a></li>
                       @endadmin
                     </ul>
                   </li>
                   @admin
                   <li><a><i class="fa fa-table"></i> Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">User</a></li>
-                      <li><a href="#">Fakultas/Departemen/Unit</a></li>
+                      <li><a href="{{ route('user.list') }}">User</a></li>
+                      <li><a href="{{ route('unit.list') }}">Fakultas/Departemen/Unit</a></li>
                     </ul>
                   </li>
                   @endadmin

@@ -1,7 +1,10 @@
 @extends('layouts.header')
 
 @section('content')
-<div class="container-fluid">
+<div class="right_col booking" role="main">
+    <div class="col-md-12 col-sm-12 text-center p-0 mt-3 mb-2">
+	    <div class="card px-5 pt-4 pb-3">
+        <div class="header-custom">{{ __('Edit User') }}</div>
     <div class="form-group row">
         <label for="namaPic" class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
         <i style="padding-left: 1px" class="fa fa-user domain"></i>
@@ -68,7 +71,7 @@
     @if($user->role != 'user')
     <form method="POST" action="{{ route('user.role', ['user' => $user->id, 'role' => 'user']) }}">
         @csrf
-        <button type="submit" class="btn btn-success">Jadikan User</button>
+        <button type="submit" class="btn btn-success" style="margin-bottom: 5px; padding: 4px 8px;font-size: 11pt;">Jadikan User</button>
     </form>
     @endif
 
@@ -76,14 +79,16 @@
     @if($user->email_notification)
     <form method="POST" action="{{ route('user.notif', ['user' => $user->id, 'notif' => 'false']) }}">
         @csrf
-        <button type="submit" class="btn btn-warning">Hentikan email notifikasi user</button>
+        <button type="submit" class="btn btn-custom-warning" style="margin-bottom: 5px; padding: 4px 8px;font-size: 11pt;">Hentikan email notifikasi user</button>
     </form>
     @else
     <form method="POST" action="{{ route('user.notif', ['user' => $user->id, 'notif' => 'true']) }}">
         @csrf
-        <button type="submit" class="btn btn-danger">Email notifikasi user untuk permintaan baru</button>
+        <button type="submit" class="btn btn-danger" style="padding: 4px 8px;font-size: 11pt;">Email notifikasi user untuk permintaan baru</button>
     </form>
     @endif
+        </div>
+    </div>
 </div>
 @endsection
 

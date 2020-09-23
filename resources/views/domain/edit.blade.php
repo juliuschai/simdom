@@ -14,7 +14,6 @@
                     <ul id="progressbar">
                         <li class="active" id="account"><strong>Data Diri</strong></li>
                         <li id="domain"><strong>Data Domain</strong></li>
-                        <li id="confirm"><strong>Selesai</strong></li>
                     </ul>
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -40,7 +39,7 @@
                                     <h2 class="fs-title">Data Diri :</h2>
                                 </div>
                                 <div class="col-5">
-                                    <h6 class="steps">Tahap 1 - 3</h6>
+                                    <h6 class="steps">Tahap 1 - 2</h6>
                                 </div>
                             </div>
                             <small>Silahkan perbaharui data diri di myits</small>
@@ -104,7 +103,7 @@
                                     <h2 class="fs-title">Data Domain :</h2>
                                 </div>
                                 <div class="col-5">
-                                    <h2 class="steps">Tahap 2 - 3</h2>
+                                    <h2 class="steps">Tahap 2 - 2</h2>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -160,7 +159,7 @@
                             <div class="form-group row">
                                 <label for="surat"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}</label>
-                                <i class="fa fa-file booking"></i>
+                                <i class="fa fa-file booking" style="margin-left: -10px; margin-top: 10px"></i>
                                 <div class="col-md-6">
                                     <input style="border: none;" id="surat" type="file" name="surat"
                                         class="form-control">
@@ -186,7 +185,7 @@
                                 <i class="fa fa-database domain"></i>
                                 <div class="col-md-6">
                                     <input id="kapasitas" type="text" name="kapasitas" value="{{$domain->kapasitas}}"
-                                        class="form-control">(GB)
+                                        class="form-control d-inline" style="width: 15%; margin-right:10px;">(GB)
                                 </div>
                             </div>
 
@@ -226,22 +225,6 @@
                         <button type="button" class="next action-button" onclick="submitForm()">Buat</button>
                         {{-- <input type="button" name="next" class="next action-button" value="Next" />  --}}
                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    </fieldset>
-                    {{-- Tampilkan selesai view --}}
-                    <fieldset>
-                        <div class="form-card">
-                            <br><br>
-                            <h2 class="purple-text text-center"><strong>SELAMAT !</strong></h2> <br>
-                            <div class="row justify-content-center">
-                                <div class="col-3"> <img src="{{ asset('img/icon/check-mark.png') }}" class="fit-image">
-                                </div>
-                            </div> <br><br>
-                            <div class="row justify-content-center">
-                                <div class="col-7 text-center">
-                                    <h5 class="purple-text text-center">Permintaan Domain Telah Terdafdar</h5>
-                                </div>
-                            </div>
-                        </div>
                     </fieldset>
                 </form>
                 @if($domain->aktif != 'nonaktif')
