@@ -1,8 +1,10 @@
 @extends('layouts.header')
 
 @section('content')
-<div class="container-fluid">
-	<div class="row justify-content-center">
+<!-- <div class="container-fluid"> -->
+	<!-- <div class="row justify-content-center"> -->
+<div class="right_col booking" role="main">
+	<div class="col-md-12 col-sm-12">
 		<div class="col-md-12 col-sm-12 text-center p-0 mt-3 mb-2">
 			<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
 				<h2 id="heading">Registrasi Domain</h2>
@@ -205,5 +207,6 @@
 <script src="{{ asset('js/form/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
+<script src="{{ asset('js/domain/form.js') }}" defer></script>
 <script src="{{ asset('js/domain/form.js') }}" defer></script>
 @endsection

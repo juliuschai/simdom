@@ -1,7 +1,6 @@
 @auth
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,157 +8,146 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Aplikasi Sistem Domain') }}</title>
+    <title>{{ config('app.name', 'Aplikasi Booking Webinar') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap" rel="stylesheet" >
+    <link href="{{ asset('css/form/font-awesome.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.default.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/new-custom.css') }}" rel="stylesheet">
 
     <!-- Icon -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="{{ asset('css/icons/font-awesome.css') }}" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="{{ asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}"
-        rel="stylesheet">
-    <link href="{{ asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{ asset('css/form/bootstrap.min.css') }}" rel="stylesheet">
 
 </head>
-
 <body>
-    <div id="app" class="mainwrapper fullwrapper">
-        <!--NAVIGASI MENU UTAMA-->
-        <div class="leftpanel">
-
-            <div class="logopanel">
-                <h4><a href="{{route('home')}}"><?php echo "Sistem Informasi Domain ITS"; ?></a></h4>
+    <div id="app">
+        
+    <body class="nav-md admin">
+    <div class="container body admin">
+      <div class="main_container">
+        <div id="dashboard" class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title">
+                  <span>Dashboard</span></a>
             </div>
 
-            <div class="datewidget">Hari ini: <?php echo date("d M Y"); ?></div>
+            <div class="clearfix"></div>
 
-            <div class="leftmenu">
-                <ul class="nav nav-tabs nav-stacked">
-                    <li class="active"><a href="{{route('home')}}"><span class="icon-align-justify"></span> Dashboard</a>
-                    </li>
-                    <!--MENU ADMIN-->
-                    <li class="dropdown"><a href="#"><span class="icon-file"></span>Form Baru</a>
-                        <ul>
-                            <li><a href="{{ route('domain.baru') }}">Form Domain Baru</a></li>
-                            @admin
-                            <li><a href="{{ route('server.baru') }}">Form Server Baru</a></li>
-                            @endadmin
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#"><span class="icon-pencil"></span>List</a>
-                        <ul>
-                            <li><a href="{{route('domain.list')}}">Lihat List Domain</a></li>
-                            <li><a href="{{route('permintaan.list')}}">Lihat List Permintaan</a></li>
-                            @admin
-                            <li><a href="{{route('server.list')}}">Lihat List Server</a></li>
-                            @endadmin
-                        </ul>
-                    </li>
-                    @admin
-                    <li class="dropdown"><a href="#"><span class="icon-inbox"></span>Report</a>
-                        <ul>
-                            <li><a href="?cat=administrator&page=report">Data Report</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#"><span class="icon-signal"></span>Grafik</a>
-                        <ul>
-                            <li><a href="?cat=administrator&page=grafik">Lihat Grafik Domain</a></li>
-                            <li><a href="?cat=administrator&page=grafik">Lihat Grafik Server</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#"><span class="icon-user"></span>Admin List</a>
-                        <ul>
-                            <li><a href="{{route('user.list')}}">List User</a></li>
-                            <li><a href="{{route('unit.list')}}">List Fakultas/Departemen/Unit</a></li>
-                        </ul>
-                    </li>
-                    @endadmin
+            <br />
+
+            @auth
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <!-- Home, List, Calendar, Report -->
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">Dashboard</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> Form <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ route('domain.baru') }}">Domain</a></li>
+                      @admin
+                      <li><a href="#">Server</a></li>
+                      @endadmin
+                    </ul>
+                  </li>
+                  @if(auth()->user()->isAdmin())
+                  <li><a><i class="fa fa-list"></i> List <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">Domain</a></li>
+                      <li><a href="#">Permintaan</a></li>
+                      @admin
+                      <li><a href="#">Server</a></li>
+                      @endadmin
+                    </ul>
+                  </li>
+                  @admin
+                  <li><a><i class="fa fa-table"></i> Data <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">User</a></li>
+                      <li><a href="#">Fakultas/Departemen/Unit</a></li>
+                    </ul>
+                  </li>
+                  @endadmin
+                  <li><a><i class="fa fa-table"></i> Report <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">Data Report</a></li>
+                    </ul>
+                  </li>
+                  @endif
                 </ul>
+              </div>
+
             </div>
+            @endauth
+            <!-- /sidebar menu -->
+
+          </div>
         </div>
 
-        <div class="rightpanel">
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+            <nav class="nav navbar-nav">
+              <ul class=" navbar-right">
+                <li class="nav-item dropdown open" style="padding-left: 15px;">
+                  <a style="color: white; text-decoration: none;" href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                    @auth
+                    @if(auth()->user()->isAdmin())
+                    <i class="fa fa-user admin"></i>Admin
+                    @else
+                    <i class="fa fa-user admin"></i>User
+                    @endif
+                    @endauth
+                  </a>
+                  <div style="margin: auto" class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item"  href="#"><i class="fa fa-sign-out pull-right"></i>Log Out</a>
+                  </div>
+                </li>
 
-            <div class="headerpanel">
-                <a href="" class="showmenu"></a>
-                <div class="headerright">
-                    <span style="color:#FFF">
-                        {{ __('Selamat Datang Kembali') }} {{ auth()->user()->nama }}
-                    </span>
-                    <div class="dropdown userinfo"> <a class="dropdown-toggle" data-toggle="dropdown" data-target="#"
-                            href="/page.html">Profil Info</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="dashboard.php?cat=web&page=chgpwd"><span class="icon-wrench"></span> Ubah
-                                    Password</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{route('logout')}}" onclick="
-                                event.preventDefault(); 
-                                document.getElementById('logout-form').submit();
-                                "><span class="icon-off"></span>Keluar</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="breadcrumbwidget">
-                <ul class="breadcrumb">
-                    <li></li>
-                </ul>
-            </div>
-
-            <div class="pagetitle">
-                <h1><?php echo "Aplikasi Domain Berbasis Web"; ?></h1>
-            </div>
-
-            <div class="maincontent">
-                <div class="contentinner content-dashboard">
-                    <div class="row-fluid">
-                        <main>
-                            @yield('content')
-                        </main>
-                    </div>
-                </div>
-            </div>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        
+        <main>
+            @yield('content')
+        </main>
 
         </div>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-
     </div>
 
-    @yield('scripts')
-    <script src="{{ asset('js/assets/prettify.js') }}" defer></script>
-    <script src="{{ asset('js/assets/jquery-1.10.1.min.js') }}" defer></script>
-    <script src="{{ asset('js/assets/jquery.alerts.js') }}" defer></script>
-    <script src="{{ asset('js/assets/bootstrap.min.js') }}" defer></script>
-    <script src="{{ asset('js/assets/custom.js') }}" defer></script>
-    <script src="{{ asset('js/assets/jquery.flot.min.js') }}" defer></script>
-    <script src="{{ asset('js/assets/jquery.flot.resize.min.js') }}" defer></script>
-    <script src="{{ asset('js/assets/jquery.js') }}" defer></script>
+    </div>
+  @yield('scripts')
 </body>
-
 </html>
 @else
 <script type="text/javascript">
     window.location = "{{ route('login') }}";
 </script>
 @endauth
+
