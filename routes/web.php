@@ -85,13 +85,17 @@ Route::group(
                         'middleware' => ['admin'],
                     ],
                     function () {
+                        // Set domain nonaktif
+                        Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasi')->name('domain.nonaktifasi');
+                        Route::get('/domain/export', 'DomainController@formExport')->name('domain.export');
+                        Route::post('/domain/export', 'DomainController@downloadExport')->name('domain.export');            
+            
                         // Ubah status Permintaan
                         Route::post('/permintaan/{permintaan}/terima', 'PermintaanController@terima')->name('permintaan.terima');
                         Route::post('/permintaan/{permintaan}/selesai', 'PermintaanController@selesai')->name('permintaan.selesai');
                         Route::post('/permintaan/{permintaan}/tolak', 'PermintaanController@tolak')->name('permintaan.tolak');
-
-                        // Set domain nonaktif
-                        Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasi')->name('domain.nonaktifasi');
+                        Route::get('/permintaan/export', 'PermintaanController@formExport')->name('permintaan.export');
+                        Route::post('/permintaan/export', 'PermintaanController@downloadExport')->name('permintaan.export');            
 
                         // Redirect Management
                         Route::get('/redirect/baru', 'RedirectController@formBaru')->name('redirect.baru');
@@ -101,6 +105,8 @@ Route::group(
                         Route::get('/redirect/{redirect}/edit', 'RedirectController@formEdit')->name('redirect.edit');
                         Route::post('/redirect/{redirect}/edit', 'RedirectController@simpanEdit')->name('redirect.edit');
                         Route::post('/redirect/{redirect}/hapus', 'RedirectController@hapus')->name('redirect.hapus');
+                        Route::get('/redirect/export', 'RedirectController@formExport')->name('redirect.export');
+                        Route::post('/redirect/export', 'RedirectController@downloadExport')->name('redirect.export');            
 
                         // User management
                         Route::get('/user/list', 'UserController@list')->name('user.list');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\EmailHelper;
+use App\Http\Requests\ExportRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
 use App\Models\TipeUnit;
@@ -119,5 +120,13 @@ class PermintaanController extends Controller
         return redirect()
             ->back()
             ->with('message', 'Permintan berhasil ditolak');
+    }
+
+    function formExport() {
+        return view('permintaan.export');
+    }
+
+    function  downloadExport(ExportRequest $req) {
+        return Permintaan::export($req);
     }
 }

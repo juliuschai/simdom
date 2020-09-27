@@ -77,3 +77,5 @@ tableElm.DataTable({
 		}
 	],
 });
+
+datatableRes.columns('domains.created_at:name').order('desc').draw();

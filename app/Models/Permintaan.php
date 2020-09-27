@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use App\Helpers\EmailHelper;
+use App\Helpers\FileHelper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Permintaan extends Model
 {
@@ -126,6 +130,61 @@ class Permintaan extends Model
         EmailHelper::permintaanBaruUser($permintaan);
 
         return $permintaan;
+    }
+
+    static function export($req) {
+        $query = DB::table('permintaans as p')
+            ->join('domains as d', 'd.id', '=', 'p.user_id')
+            ->join('users as u', 'u.id', '=', 'p.user_id')
+            ->join('units', 'units.id', '=', 'p.unit_id')
+            ->orderBy('p.created_at');
+
+        if (!$req->has('semuaWaktu')) {
+            $query = $query->where('p.created_at', '>', Carbon::parse($req->waktuMulai))
+                ->where('p.created_at', '<', Carbon::parse($req->waktuAkhir));
+        }
+
+        $datas = $query->get([
+            'u.nama as u_nama',
+            'u.email as u_email',
+            'u.integra as u_integra',
+            'u.group as u_group',
+            'u.no_wa as u_no_wa',
+            'units.nama as unit_nama',
+            'd.nama_domain as domain_aktif',
+            'p.nama_domain as nama_domain',
+            'p.deskripsi as deskripsi',
+            'p.ip as ip',
+            'p.server as server',
+            'p.kapasitas as kapasitas',
+            'p.status as status',
+            'p.keterangan as keterangan',
+            DB::raw('DATE_ADD(p.waktu_konfirmasi, INTERVAL 7 HOUR) as waktu_konfirmasi'),
+            DB::raw('DATE_ADD(p.waktu_selesai, INTERVAL 7 HOUR) as waktu_selesai'),
+            DB::raw('DATE_ADD(p.created_at, INTERVAL 7 HOUR) as waktu_dibuat'),
+        ]);
+
+        foreach ($datas as $data) {
+            // Calculate lama_proses
+            $dateSelesai = Carbon::parse($data->waktu_selesai);
+            $dateKonfirmasi = Carbon::parse($data->waktu_konfirmasi);
+            $data->lama_proses = $dateSelesai->diffInDays($dateKonfirmasi);
+        }
+
+        $htmlString = view('permintaan.export_table', compact('datas'));
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
+        $spreadsheet = $reader->loadFromString($htmlString);
+        
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+        $currentTime = Carbon::now('Asia/Jakarta')->format("Y-m-d_Hi");
+        if (!file_exists(storage_path("app/export"))) {
+            mkdir(storage_path("app/export"), 0777, true);
+        }
+        $filename = "permintaan_export_$currentTime.xls";
+        $writer->save(storage_path("app/export/$filename"));
+        // FileHelper::scheduleDelete("export/$filename");
+        return FileHelper::downloadSuratOrFail("export/$filename", $filename);
+        // FileHelper::deleteDokumenOrFail($filename);
     }
 
     function user()

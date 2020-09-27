@@ -40,17 +40,17 @@ class PICReminder extends Command
      */
     public function handle()
     {
-        $domains = Domain::where('reminder', DB::raw('CURDATE()'))->get();
-        // dd(count($domains));
-        // TODO:
+        $domains = Domain::where('aktif', '!=', 'nonaktif')
+            ->where('reminder', DB::raw('CURDATE()'))
+            ->get();
 
         foreach ($domains as $domain) {
             EmailHelper::notifyReminder($domain);
         }
         // Set the next domain for the next six months
         DB::statement('UPDATE domains 
-        SET reminder = DATE_ADD(reminder, INTERVAL 6 MONTH)
-        WHERE reminder = CURDATE();');
+            SET reminder = DATE_ADD(reminder, INTERVAL 6 MONTH)
+            WHERE reminder = CURDATE();');
 
         return 0;
     }

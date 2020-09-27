@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\EmailHelper;
+use App\Http\Requests\ExportRequest;
 use App\Http\Requests\PermintaanRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
@@ -122,5 +123,13 @@ class DomainController extends Controller
         return redirect()
             ->back()
             ->with('message', 'Status Domain: nonaktif');
+    }
+
+    function formExport() {
+        return view('domain.export');
+    }
+
+    function  downloadExport(ExportRequest $req) {
+        return Domain::export($req);
     }
 }
