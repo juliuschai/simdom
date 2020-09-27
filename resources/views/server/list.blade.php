@@ -2,21 +2,22 @@
 
 @section('content')
 
-<div class="col-md-12 col-sm-12">
-	<h2 class="table-title">Data Server</h2>
-	@if(session()->has('message'))
-	<div class="alert alert-success">
-		{{ session()->get('message') }}
-	</div>
-	@endif
+<div class="right_col booking" role="main">
+	<div class="col-md-12 col-sm-12">
+		<h2 class="table-title">Data Server</h2>
+		@if(session()->has('message'))
+		<div class="alert alert-success">
+			{{ session()->get('message') }}
+		</div>
+		@endif
 
-	<div id="editBtnTemplate" style="display: none;">
-		<a href="{{route('server.edit', ['server' => 0])}}">
-			<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Domain">
-				<i class="fa fa-pencil"></i>
-			</button>
-		</a>
-	</div>
+		<div id="editBtnTemplate" style="display: none;">
+			<a href="{{route('server.edit', ['server' => 0])}}">
+				<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Domain">
+					<i class="fa fa-pencil"></i>
+				</button>
+			</a>
+		</div>
 
 	<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
 		data-ajaxurl="{{ route('server.data') }}">

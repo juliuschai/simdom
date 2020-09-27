@@ -1,18 +1,15 @@
 @extends('layouts.header')
 
 @section('content')
-<div class="container-fluid">
-	<div class="row justify-content-center">
+<div class="right_col booking" role="main">
 		<div class="col-md-12 col-sm-12 text-center p-0 mt-3 mb-2">
 			<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
 				<h2 id="heading">Permintaan Domain</h2>
-				<p>Silahkan mengengkapi formulir berikut</p>
 				<div id="msform">
 					<!-- progressbar -->
 					<ul id="progressbar">
 						<li class="active" id="account"><strong>Data Diri</strong></li>
 						<li id="domain"><strong>Data Domain</strong></li>
-						<li id="confirm"><strong>Selesai</strong></li>
 					</ul>
 					@if ($errors->any())
 					<div class="alert alert-danger">
@@ -38,7 +35,7 @@
 									<h2 class="fs-title">Data Diri :</h2>
 								</div>
 								<div class="col-5">
-									<h6 class="steps">Tahap 1 - 3</h6>
+									<h6 class="steps">Tahap 1 - 2</h6>
 								</div>
 							</div>
 							@if($permintaan->user->isAdmin())
@@ -113,7 +110,7 @@
 									<h2 class="fs-title">Data Domain :</h2>
 								</div>
 								<div class="col-5">
-									<h2 class="steps">Tahap 2 - 3</h2>
+									<h2 class="steps">Tahap 2 - 2</h2>
 								</div>
 							</div>
 
@@ -132,7 +129,7 @@
 								<label for="namaDomain"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}</label>
 								<i class="fa fa-sticky-note-o domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-6" style="margin-right:10px;">
 									@admin
 									<admin-nama-domain-input :templates="{{$domain_templates}}"
 										sel-template-prop="{{$permintaan->unit->tipeUnit->domain_template}}"
@@ -177,14 +174,14 @@
 							<div class="form-group row">
 								<label for="surat"
 									class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}</label>
-								<i class="fa fa-file booking"></i>
+								<i class="fa fa-file domain"></i>
 								@if(isset($permintaan->surat))
 								<div class="col-md-6">
 									<a href="{{route('surat.get', ['permintaan' => $permintaan->id])}}" target="_blank">
-										<button type="button" class="btn btn-primary">View</button>
+										<button type="button" class="btn btn-custom" style="padding: 4px 8px; font-size: 11pt;">View</button>
 									</a>
 									<a href="{{route('surat.download', ['permintaan' => $permintaan->id])}}" target="_blank">
-										<button type="button" class="btn btn-primary">Download</button>
+										<button type="button" class="btn btn-custom" style="padding: 4px 8px; font-size: 11pt;">Download</button>
 									</a>
 								</div>
 								@else
@@ -246,11 +243,43 @@
 								</div>
 							</div>
 
+							<button type="button" class="previous action-previous">Prev</button>
+							@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak')
+							<button type="submit" class="next action-terima">Terima</button>
+							@endif
+							@if($permintaan->status == 'diterima')
+							<button type="submit" class="next action-button">Selesai</button>
+							@endif
+						</form>
+							@endif
+							@endadmin
+
+							@admin
+							@if($permintaan->status == 'menunggu' || $permintaan->status == 'diterima')
+							<form id="tolakForm" method="POST" action="{{route('permintaan.tolak', $permintaan->id)}}">
+								@csrf
+								<button type="button" class="previous action-tolak" onclick="
+								if (confirm('Anda yakin menolak permintaan?')) {document.getElementById('tolakForm').submit();}
+								">Tolak</button>
+							</form>
+							@endif
+							@if($permintaan->status == 'menunggu')
+							<form id="hapusForm" method="POST" action="{{route('permintaan.hapus', $permintaan->id)}}">
+								@csrf
+								<button type="button" class="previous action-hapus" onclick="
+								if (confirm('Anda akan menghapus permintaan! Lanjutkan?')) {document.getElementById('hapusForm').submit();}
+								">Hapus</button>
+							</form>
+							@endif
+							@endadmin
+
+							@admin
 							{{-- Domain Table Unit Search Start --}}
-							<button type="button" id="showTableButton" class="btn btn-primary" 
+							<button type="button" id="showTableButton" class="action-lihat" 
 								onclick="initTable()">Lihat semua domain dari {{$permintaan->unit->nama}}</button>
 							<div id="ipTableSection" style="display: none;">
-								<div>Domain Aktif dengan VPS dari {{$permintaan->unit->nama}}</div>
+								<hr />
+								<div style="margin-left: 400px;">Domain Aktif dengan VPS dari {{$permintaan->unit->nama}}</div>
 								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}" 
 									data-status="aktif" data-ajaxurl="{{route('permintaan.lihat.data')}}">
 									<thead>
@@ -266,58 +295,12 @@
 									<tbody></tbody>
 								</table>
 							</div>
-
-							@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak')
-							<button type="submit" class="next action-button">Terima</button>
-							@endif
-							@if($permintaan->status == 'diterima')
-							<button type="submit" class="next action-button">Selesai</button>
-							@endif
-						</form>
-							@endif
 							@endadmin
-
-							@admin
-							@if($permintaan->status == 'menunggu' || $permintaan->status == 'diterima')
-							<form id="tolakForm" method="POST" action="{{route('permintaan.tolak', $permintaan->id)}}">
-								@csrf
-								<button type="button" class="previous action-button-previous" onclick="
-								if (confirm('Anda yakin menolak permintaan?')) {document.getElementById('tolakForm').submit();}
-								">Tolak</button>
-							</form>
-							@endif
-							@if($permintaan->status == 'menunggu')
-							<form id="hapusForm" method="POST" action="{{route('permintaan.hapus', $permintaan->id)}}">
-								@csrf
-								<button type="button" class="previous action-button-previous" onclick="
-								if (confirm('Anda akan menghapus permintaan! Lanjutkan?')) {document.getElementById('hapusForm').submit();}
-								">Hapus</button>
-							</form>
-							@endif
-							@endadmin
-							<button type="button" class="previous action-button-previous">Prev</button>
-						</div>
-					</fieldset>
-					{{-- Tampilkan selesai view --}}
-					<fieldset>
-						<div class="form-card">
-							<br><br>
-							<h2 class="purple-text text-center"><strong>SELAMAT !</strong></h2> <br>
-							<div class="row justify-content-center">
-								<div class="col-3"> <img src="{{ asset('img/icon/check-mark.png') }}" class="fit-image">
-								</div>
-							</div> <br><br>
-							<div class="row justify-content-center">
-								<div class="col-7 text-center">
-									<h5 class="purple-text text-center">Permintaan Domain Telah Terdafdar</h5>
-								</div>
-							</div>
 						</div>
 					</fieldset>
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 @endsection
 

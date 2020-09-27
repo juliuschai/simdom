@@ -94,6 +94,7 @@ class CreateUnitsTable extends Migration
             ['nama' => "Direktorat Kerjasama dan Pengelola Usaha", 'tipe_unit_id' => 3],
             ['nama' => "Unit Pengembangan Smart Eco Campus", 'tipe_unit_id' => 3],
             ['nama' => "UKPBJ", 'tipe_unit_id' => 3],
+            ['nama' => "ITS", 'tipe_unit_id' => 3],
         ]);
     }
 

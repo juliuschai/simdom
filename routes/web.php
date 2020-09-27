@@ -33,6 +33,10 @@ Route::group(
                 'middleware' => ['auth'],
             ],
             function () {
+                //Grafik
+                // Route::view('/chart', 'chart.chart');
+                Route::get('/chart', 'ChartController@index')->name('dashboard.chart');
+
                 // Domain management
                 Route::get('/domain/baru', 'DomainController@formBaru')->name('domain.baru');
                 Route::post('/domain/baru', 'DomainController@simpanBaru')->name('domain.baru');
