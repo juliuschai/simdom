@@ -44,8 +44,7 @@
         <div id="dashboard" class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title">
-                  <span>Dashboard</span></a>
+                <img src="{{ asset('img/logo/logo.png') }}" style="margin: -20px 0 0 -5px; width: 200px">
             </div>
 
             <div class="clearfix"></div>
@@ -78,11 +77,12 @@
                       <li><a href="{{ route('permintaan.list') }}">Permintaan</a></li>
                       @admin
                       <li><a href="{{ route('server.list') }}">Server</a></li>
+                      <li><a href="{{ route('redirect.list') }}">Alias</a></li>
                       @endadmin
                     </ul>
                   </li>
                   @admin
-                  <li><a><i class="fa fa-table"></i> Data <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-database"></i> Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('user.list') }}">User</a></li>
                       <li><a href="{{ route('unit.list') }}">Fakultas/Departemen/Unit</a></li>
@@ -91,7 +91,7 @@
                   @endadmin
                   <li><a><i class="fa fa-table"></i> Report <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Data Report</a></li>
+                      <li><a href="{{ route('user.list') }}">Export</a></li>
                     </ul>
                   </li>
                   @endif
