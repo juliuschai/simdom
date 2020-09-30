@@ -93,11 +93,6 @@ class Domain extends Model
             ->join('units', 'units.id', '=', 'd.unit_id')
             ->orderBy('d.created_at');
 
-        if (!$req->has('semuaWaktu')) {
-            $query = $query->where('d.created_at', '>', Carbon::parse($req->waktuMulai))
-                ->where('d.created_at', '<', Carbon::parse($req->waktuAkhir));
-        }
-
         $datas = $query->get([
             'u.nama as u_nama',
             'u.email as u_email',

@@ -16,13 +16,24 @@ class EmailHelper
     static function getEmailUser(Permintaan $permintaan)
     {
         if ($permintaan->domain) {
-            // Kalau permintaan untuk edit domain,
-            // email pic dari domain
+            // Kalau permintaan untuk edit domain, email pic dari domain
             $email = $permintaan->domain->user->email;
         } else {
-            // Kalau permintaan untuk buat domain (belum ada domain),
-            // email pic dari permintaan
+            // Kalau permintaan untuk buat domain (belum ada domain), email pic dari permintaan
             $email = $permintaan->user->email;
+        }
+
+        return $email;
+    }
+
+    static function getNamaDomain(Permintaan $permintaan)
+    {
+        if ($permintaan->domain) {
+            // Kalau permintaan untuk edit domain, nama domain dari domain
+            $email = $permintaan->domain->nama;
+        } else {
+            // Kalau permintaan untuk buat domain (belum ada domain), nama domain dari permintaan
+            $email = $permintaan->nama;
         }
 
         return $email;
@@ -45,7 +56,7 @@ class EmailHelper
             'link' => route('permintaan.lihat', [
                 'permintaan' => $permintaan->id,
             ]),
-            'domain' => $permintaan->domain->nama,
+            'domain' => EmailHelper::getNamaDomain($permintaan),
             'user' => "{$permintaan->user->nama} - {$permintaan->user->group} - {$permintaan->unit->nama}",
             'keterangan' => $permintaan->keterangan,
         ];
@@ -78,7 +89,7 @@ class EmailHelper
                 'permintaan' => $permintaan->id,
             ]),
             'user' => $user,
-            'domain' => $permintaan->domain->nama,
+            'domain' => EmailHelper::getNamaDomain($permintaan),
             'keterangan' => $permintaan->keterangan,
         ];
 
@@ -103,7 +114,7 @@ class EmailHelper
             'link' => route('permintaan.lihat', [
                 'permintaan' => $permintaan->id,
             ]),
-            'domain' => $permintaan->domain->nama,
+            'domain' => EmailHelper::getNamaDomain($permintaan),
             'keterangan' => $permintaan->keterangan,
         ];
 

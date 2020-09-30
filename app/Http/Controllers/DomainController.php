@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\EmailHelper;
-use App\Http\Requests\ExportRequest;
+use App\Http\Requests\ExportNoOptRequest;
 use App\Http\Requests\PermintaanRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
@@ -129,7 +129,7 @@ class DomainController extends Controller
         return view('domain.export');
     }
 
-    function  downloadExport(ExportRequest $req) {
+    function  downloadExport(Request $req) {
         return Domain::export($req);
     }
 }

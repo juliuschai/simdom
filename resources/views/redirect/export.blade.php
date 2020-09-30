@@ -15,7 +15,7 @@
 			</div>
 			@endif
 
-			<form id="formSubmit" action="{{route('domain.export')}}" method="POST">
+			<form id="formSubmit" action="{{route('redirect.export')}}" method="POST">
 				@csrf
 				<div class="form-group row">
 					<label for="semuaWaktu" class="col-md-4">{{ __('Semua waktu') }}</label>

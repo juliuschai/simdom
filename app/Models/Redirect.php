@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Helpers\FileHelper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Redirect extends Model
 {
@@ -35,5 +38,32 @@ class Redirect extends Model
         $redirect->save();
 
         return $redirect;
+    }
+
+    static function export($req) {
+        $query = DB::table('redirects as r')
+            ->orderBy('r.created_at');
+
+        $datas = $query->get([
+            'r.link_lama',
+            'r.link_baru',
+            'r.keterangan',
+            DB::raw('DATE_ADD(r.created_at, INTERVAL 7 HOUR) as waktu_dibuat'),
+        ]);
+
+        $htmlString = view('redirect.export_table', compact('datas'));
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
+        $spreadsheet = $reader->loadFromString($htmlString);
+        
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+        $currentTime = Carbon::now('Asia/Jakarta')->format("Y-m-d_Hi");
+        if (!file_exists(storage_path("app/export"))) {
+            mkdir(storage_path("app/export"), 0777, true);
+        }
+        $filename = "redirect_export_$currentTime.xls";
+        $writer->save(storage_path("app/export/$filename"));
+        // FileHelper::scheduleDelete("export/$filename");
+        return FileHelper::downloadSuratOrFail("export/$filename", $filename);
+        // FileHelper::deleteDokumenOrFail($filename);
     }
 }

@@ -90,7 +90,9 @@
                                     <input id="noWa" type="text" class="form-control" value="{{$user->no_wa}}" disabled>
                                 </div>
                             </div>
+                            @if($server->id)
                             <a href="{{route('server.transfer', ['server' => $server->id])}}">Ganti PIC server</a>
+                            @endif
                         </div>
                     <input type="button" name="next" class="next action-button" value="Next" />
 					</fieldset>
