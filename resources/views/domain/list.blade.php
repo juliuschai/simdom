@@ -19,6 +19,32 @@
 			</a>
 		</div>
 
+		@admin
+		<div id="nonaktifasiBtnTemplate" style="display: none;">
+			<form action="{{route('domain.nonaktifasi', ['domain' => 0])}}" method="POST" class="d-inline">
+				@csrf
+				<button type="submit" class="btn btn-danger" style="padding: 3px 8px" onclick="
+				return confirm('Domain akan dinonaktifkan! Lanjutkan?')" title="Nonaktif Server"><i class="fa fa-power-off"></i></button>
+			</form>
+		</div>
+
+		<div id="aktifasiBtnTemplate" style="display: none;">
+			<form action="{{route('domain.aktifasi', ['domain' => 0])}}" method="POST" class="d-inline">
+				@csrf
+				<button type="submit" class="btn btn-success" style="padding: 3px 8px" onclick="
+				return confirm('Aktifasi domain?')" title="Aktifasi Domain"><i class="fa fa-power-off"></i></button>
+			</form>
+		</div>
+		@else
+		<div id="nonaktifasiBtnTemplate" style="display: none;">
+			<a href=""></a>
+		</div>
+		
+		<div id="aktifasiBtnTemplate" style="display: none;">
+			<a href=""></a>
+		</div>
+		@endadmin
+
 		<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"
 			data-ajaxurl="{{ route('domain.data') }}">
 			<thead class="thead-custom-blue">
@@ -31,6 +57,7 @@
 					<th scope="col">Kapasitas DB</th>
 					<th scope="col">IP</th>
 					<th scope="col">Status</th>
+					<th scope="col">Aktif</th>
 					<th scope="col">Dibuat</th>
 					<th scope="col">Aksi</th>
 				</tr>

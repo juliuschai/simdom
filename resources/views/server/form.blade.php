@@ -151,14 +151,6 @@
 						<button type="submit" class="action-button">Simpan</button>
 					</fieldset>
 				</form>
-				@if($server->id)
-				<form id="hapusForm" action="{{route('server.hapus', ['server' => $server->id])}}" method="POST">
-					@csrf
-					<button type="button" class="btn btn-danger" onclick="
-					if (confirm('Anda yakin menghapus server?')) {document.getElementById('hapusForm').submit();}
-					">Hapus</button>
-				</form>
-				@endif
 			</div>
 		</div>
 	</div>

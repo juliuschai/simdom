@@ -13,6 +13,7 @@
             <td>IP</td>
             <td>Tipe Server</td>
             <td>Kapasitas</td>
+            <td>Status</td>
             <td>Aktif</td>
             <td>Waktu Dibuat</td>
         </tr>
@@ -32,6 +33,7 @@
 			<td>{{$data->ip}}</td>
 			<td>{{$data->server}}</td>
 			<td>{{$data->kapasitas}}</td>
+			<td>{{$data->status}}</td>
 			<td>{{$data->aktif}}</td>
 			<td>{{$data->waktu_dibuat}}</td>
         </tr>

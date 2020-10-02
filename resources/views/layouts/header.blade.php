@@ -71,7 +71,6 @@
                       @endadmin
                     </ul>
                   </li>
-                  @if(auth()->user()->isAdmin())
                   <li><a><i class="fa fa-list"></i> List <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('domain.list') }}">Domain</a></li>
@@ -97,7 +96,6 @@
                     </ul>
                   </li>
                   @endadmin
-                  @endif
                 </ul>
               </div>
 

@@ -2,6 +2,8 @@
 var tableElm = $('#tableElm');
 
 var editBtn = $('#editBtnTemplate');
+var nonaktifasiBtn = $('#nonaktifasiBtnTemplate');
+var aktifasiBtn = $('#aktifasiBtnTemplate');
 
 var datatableRes = tableElm.DataTable({
 	processing: true,
@@ -63,6 +65,13 @@ var datatableRes = tableElm.DataTable({
 		},
 		{
 			title: 'Status',
+			data: 'status',
+			name: 'domains.status',
+			searchable: true,
+			visible: true,
+		},
+		{
+			title: 'Aktif',
 			data: 'aktif',
 			name: 'domains.aktif',
 			searchable: true,
@@ -85,7 +94,15 @@ var datatableRes = tableElm.DataTable({
 			searchable: false,
 			visible: true,
 			render: function (data, type, full, meta) {
-				return editBtn.createButton(full.id).html();
+				let res = '<div style="white-space: nowrap;">';
+				res += editBtn.createButton(full.id).html();
+				if (full.aktif === 'aktif') {
+					res += nonaktifasiBtn.createButton(full.id).html();
+				} else {
+					res += aktifasiBtn.createButton(full.id).html();
+				}
+				res += '</div>';
+				return res;
 			}
 		}
 	],

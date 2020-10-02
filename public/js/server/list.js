@@ -1,6 +1,7 @@
 var tableElm = $('#tableElm');
 
 var editBtn = $('#editBtnTemplate');
+var delBtn = $('#delBtnTemplate');
 
 tableElm.DataTable({
 	processing: true,
@@ -72,7 +73,11 @@ tableElm.DataTable({
 			searchable: false,
 			visible: true,
 			render: function (data, type, full, meta) {
-				return editBtn.createButton(full.id).html();
+				let res = '<div style="white-space: nowrap;">';
+				res += editBtn.createButton(full.id).html();
+				res += delBtn.createButton(full.id).html();
+				res += '</div>';
+				return res;
 			}
 		}
 	],

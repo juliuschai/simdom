@@ -13,7 +13,7 @@
 		<!-- Action button templates -->
 		<div id="editBtnTemplate" style="display: none;">
 			<a href="{{route('permintaan.lihat', ['permintaan' => 0])}}">
-				<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Domain">
+				<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Permintaan">
 					<i class="fa fa-pencil"></i>
 				</button>
 			</a>

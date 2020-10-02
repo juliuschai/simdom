@@ -12,10 +12,18 @@
 
 	<div id="editBtnTemplate" style="display: none;">
 		<a href="{{route('redirect.edit', ['redirect' => 0])}}">
-			<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Domain">
+			<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Redirect Record">
 				<i class="fa fa-pencil"></i>
 			</button>
 		</a>
+	</div>
+
+	<div id="delBtnTemplate" style="display: none;">
+		<form action="{{route('redirect.hapus', ['redirect' => 0])}}" method="POST" class="d-inline">
+			@csrf
+			<button type="submit" class="btn btn-danger" style="padding: 3px 8px" onclick="
+			return confirm('Anda yakin menghapus redirect record?')" title="Hapus Redirect Record"><i class="fa fa-trash-o"></i></button>
+		</form>
 	</div>
 
 	<table id="tableElm" class="table table-bordered table-striped table-bordered table-hover dataTable"

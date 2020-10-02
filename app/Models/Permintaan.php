@@ -88,13 +88,13 @@ class Permintaan extends Model
     }
 
     /**
-     * Buat permintaan dari sebuah domain aktif dengan keterangan tertentu
+     * Buat permintaan dari sebuah domain dengan keterangan tertentu
      * Permintaan yang dibuat langsung di
      *
      * @param Domain domain domain dari record yang ingin dibuat
      * @param integer user_id user yang membuat permintaan
      * @param string keterangan keterangan yang diinginkan
-     * @param bool selesai anggap permintaan sudah selesai dilakukan dan langsung merubah domain aktif
+     * @param bool selesai anggap permintaan sudah selesai
      */
     static function permintaanDariDomain(
         Domain $domain,

@@ -33,6 +33,7 @@ class Domain extends Model
                 'domains.server',
                 'domains.kapasitas',
                 'domains.ip',
+                'domains.status',
                 'domains.aktif',
                 'domains.created_at',
             ]);
@@ -58,8 +59,8 @@ class Domain extends Model
             ]);
     }
 
-    // Buat domain aktif dari sebuah sejarah
-    static function simpanDariSejarah(Permintaan $per)
+    // Buat domain dari sebuah permintaan
+    static function simpanDariPermintaan(Permintaan $per)
     {
         if (!$per->domain_id) {
             // Jika membuat domain baru
@@ -79,7 +80,7 @@ class Domain extends Model
             'deskripsi' => $per->deskripsi,
             'server' => $per->server,
             'kapasitas' => $per->kapasitas,
-            'aktif' => 'aktif',
+            'status' => 'siap',
         ]);
 
         $domain->save();
@@ -106,6 +107,7 @@ class Domain extends Model
             'd.ip as ip',
             'd.server as server',
             'd.kapasitas as kapasitas',
+            'd.status as status',
             'd.aktif as aktif',
             DB::raw('DATE_ADD(d.created_at, INTERVAL 7 HOUR) as waktu_dibuat'),
         ]);

@@ -147,5 +147,3 @@
     init_autosize();
   
   });	
-
-console.log("bisa");

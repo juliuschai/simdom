@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Domain;
 use App\Models\Permintaan;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 
 class EmailHelper
 {

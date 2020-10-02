@@ -89,8 +89,9 @@ Route::group(
                         'middleware' => ['admin'],
                     ],
                     function () {
-                        // Set domain nonaktif
+                        // Set domain keaktifan domain
                         Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasi')->name('domain.nonaktifasi');
+                        Route::post('/domain/{domain}/aktif', 'DomainController@aktifasi')->name('domain.aktifasi');
                         Route::get('/domain/export', 'DomainController@formExport')->name('domain.export');
                         Route::post('/domain/export', 'DomainController@downloadExport')->name('domain.export');            
             

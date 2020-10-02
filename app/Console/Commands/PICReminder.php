@@ -40,7 +40,7 @@ class PICReminder extends Command
      */
     public function handle()
     {
-        $domains = Domain::where('aktif', '!=', 'nonaktif')
+        $domains = Domain::where('aktif', 'aktif')
             ->where('reminder', DB::raw('CURDATE()'))
             ->get();
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\EmailHelper;
 use App\Http\Requests\ExportRequest;
+use App\Http\Requests\PermintaanSelesaiRequest;
+use App\Http\Requests\PermintaanTerimaRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
 use App\Models\TipeUnit;
@@ -63,7 +65,7 @@ class PermintaanController extends Controller
         return redirect()->route('permintaan.list');
     }
 
-    function terima(Permintaan $permintaan, Request $req)
+    function terima(Permintaan $permintaan, PermintaanTerimaRequest $req)
     {
         $permintaan->fill([
             'nama_domain' => $req->namaDomain,
@@ -81,7 +83,7 @@ class PermintaanController extends Controller
             ->with('message', 'Permintan berhasil diterima');
     }
 
-    function selesai(Permintaan $permintaan, Request $req)
+    function selesai(Permintaan $permintaan, PermintaanSelesaiRequest $req)
     {
         $permintaan->fill([
             'nama_domain' => $req->namaDomain,
@@ -90,7 +92,7 @@ class PermintaanController extends Controller
             'waktu_selesai' => now(),
         ]);
 
-        $domain = Domain::simpanDariSejarah($permintaan);
+        $domain = Domain::simpanDariPermintaan($permintaan);
 
         $permintaan->domain_id = $domain->id;
         $permintaan->save();
@@ -112,10 +114,11 @@ class PermintaanController extends Controller
         $permintaan->save();
 
         $domain = Domain::find($permintaan->domain_id);
-        $domain->aktif = 'aktif';
-        $domain->save();
-
-        EmailHelper::notifyStatus($permintaan, 'Permintaan telah ditolak!');
+        if ($domain) {
+            $domain->status = 'siap';
+            $domain->save();
+            EmailHelper::notifyStatus($permintaan, 'Permintaan telah ditolak!');
+        }
 
         return redirect()
             ->back()

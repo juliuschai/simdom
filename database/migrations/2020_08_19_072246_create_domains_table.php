@@ -23,7 +23,9 @@ class CreateDomainsTable extends Migration
             $table->string('alias');
             $table->enum('server', ['WHS', 'VPS', 'Colocation']);
             $table->integer('kapasitas');
-            $table->enum('aktif', ['aktif', 'menunggu', 'nonaktif'])->default('aktif');
+            $table->enum('status', ['siap', 'menunggu'])->default('siap')
+                ->comment('Status menunggu menunjukkan domain sedang dalam prosesdiubah');
+            $table->enum('aktif', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
             $table->date('reminder')->default(DB::raw('DATE_ADD(CURDATE(), INTERVAL 6 MONTH)'))
                 ->comment('digunakan untuk mengirimkan reminder kepada PIC untuk memperbaharui data PIC');
