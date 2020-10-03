@@ -212,11 +212,21 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="statusAktif"
-                                    class="col-md-4 col-form-label text-md-left">{{ __('Status Aktif') }}</label>
+                                <label for="status"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Status') }}</label>
                                 <i class="fa fa-inbox domain"></i>
                                 <div class="col-md-6">
-                                    <input id="statusAktif" type="text" value="{{$domain->aktif}}" class="form-control"
+                                    <input id="status" type="text" value="{{$domain->status}}" class="form-control"
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="aktif"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Aktif') }}</label>
+                                <i class="fa fa-inbox domain"></i>
+                                <div class="col-md-6">
+                                    <input id="aktif" type="text" value="{{$domain->aktif}}" class="form-control"
                                         disabled>
                                 </div>
                             </div>
@@ -227,15 +237,6 @@
                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
                 </form>
-                @if($domain->aktif != 'nonaktif')
-                <form id="nonaktifasiForm" action="{{route('domain.nonaktifasi', ['domain' => $domain->id])}}"
-                    method="POST">
-                    @csrf
-                    <button type="button" class="btn btn-danger" onclick="
-                    if (confirm('Domain akan dinonaktifkan! Lanjutkan?')) {document.getElementById('nonaktifasiForm').submit();}
-                    ">Non-Aktifasi</button>
-                </form>
-                @endif
             </div>
         </div>
     </div>

@@ -35,6 +35,7 @@ var datatableRes = tableElm.DataTable({
 			searchable: true,
 			visible: true,
 			render: function (data, type, full, meta) {
+				if (!data) return '-';
 				const res = data.replace(',', ',<br>');
 				return res;
 			}

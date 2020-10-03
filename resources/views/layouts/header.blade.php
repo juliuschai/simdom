@@ -65,19 +65,19 @@
                   <li><a><i class="fa fa-edit"></i> Form <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('domain.baru') }}">Domain</a></li>
-                      @admin
                       <li><a href="{{ route('server.baru') }}">Server</a></li>
+                      @admin
+                      <li><a href="{{ route('redirect.baru') }}">Redirect</a></li>
                       @endadmin
                     </ul>
                   </li>
-                  @if(auth()->user()->isAdmin())
                   <li><a><i class="fa fa-list"></i> List <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('domain.list') }}">Domain</a></li>
                       <li><a href="{{ route('permintaan.list') }}">Permintaan</a></li>
-                      @admin
                       <li><a href="{{ route('server.list') }}">Server</a></li>
-                      <li><a href="{{ route('redirect.list') }}">Alias</a></li>
+                      @admin
+                      <li><a href="{{ route('redirect.list') }}">Redirect</a></li>
                       @endadmin
                     </ul>
                   </li>
@@ -88,13 +88,14 @@
                       <li><a href="{{ route('unit.list') }}">Fakultas/Departemen/Unit</a></li>
                     </ul>
                   </li>
-                  @endadmin
                   <li><a><i class="fa fa-table"></i> Report <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ route('user.list') }}">Export</a></li>
+                      <li><a href="{{ route('domain.export') }}">Domain Aktif Export</a></li>
+                      <li><a href="{{ route('permintaan.export') }}">Permintaan Export</a></li>
+                      <li><a href="{{ route('redirect.export') }}">Redirect Export</a></li>
                     </ul>
                   </li>
-                  @endif
+                  @endadmin
                 </ul>
               </div>
 

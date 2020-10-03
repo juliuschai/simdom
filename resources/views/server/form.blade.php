@@ -90,7 +90,9 @@
                                     <input id="noWa" type="text" class="form-control" value="{{$user->no_wa}}" disabled>
                                 </div>
                             </div>
+                            @if($server->id)
                             <a href="{{route('server.transfer', ['server' => $server->id])}}">Ganti PIC server</a>
+                            @endif
                         </div>
                     <input type="button" name="next" class="next action-button" value="Next" />
 					</fieldset>
@@ -149,14 +151,6 @@
 						<button type="submit" class="action-button">Simpan</button>
 					</fieldset>
 				</form>
-				@if($server->id)
-				<form id="hapusForm" action="{{route('server.hapus', ['server' => $server->id])}}" method="POST">
-					@csrf
-					<button type="button" class="btn btn-danger" onclick="
-					if (confirm('Anda yakin menghapus server?')) {document.getElementById('hapusForm').submit();}
-					">Hapus</button>
-				</form>
-				@endif
 			</div>
 		</div>
 	</div>

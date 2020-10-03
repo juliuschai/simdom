@@ -62,14 +62,6 @@
                     </div>
                     <button type="submit" class="action-button">Simpan</button>
 				</form>
-				@if($redirect->id)
-				<form id="hapusForm" action="{{route('redirect.hapus', ['redirect' => $redirect->id])}}" method="POST">
-					@csrf
-					<button type="button" class="btn btn-danger" onclick="
-					if (confirm('Anda yakin menghapus redirect record?')) {document.getElementById('hapusForm').submit();}
-					">Hapus</button>
-				</form>
-				@endif
 			</div>
 		</div>
 	</div>

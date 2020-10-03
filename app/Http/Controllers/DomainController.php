@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\EmailHelper;
+use App\Http\Requests\ExportNoOptRequest;
 use App\Http\Requests\PermintaanRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
@@ -44,7 +45,7 @@ class DomainController extends Controller
     {
         $permintaan = Permintaan::permintaanBaru($req);
 
-        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Domain berhasil dibuat!');
+        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Permintaan buat domain berhasil!');
     }
 
     function formEdit(Domain $domain)
@@ -61,7 +62,7 @@ class DomainController extends Controller
 
     function simpanEdit(Domain $domain, PermintaanRequest $req)
     {
-        if ($domain->aktif == 'menunggu') {
+        if ($domain->status == 'menunggu') {
             return redirect()
                 ->back()
                 ->withErrors([
@@ -72,12 +73,12 @@ class DomainController extends Controller
 
         $req->ip = $domain->ip;
         $req->namaDomain = $domain->nama_domain;
-        $domain->aktif = 'menunggu';
+        $domain->status = 'menunggu';
         $domain->save();
 
         $permintaan = Permintaan::permintaanBaru($req, $domain->id);
 
-        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Domain berhasil diedit!');
+        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Permintaan edit domain berhasil!');
     }
 
     function formTransfer(Domain $domain)
@@ -122,5 +123,31 @@ class DomainController extends Controller
         return redirect()
             ->back()
             ->with('message', 'Status Domain: nonaktif');
+    }
+
+    function aktifasi(Domain $domain)
+    {
+        $permintaan = Permintaan::permintaanDariDomain(
+            $domain,
+            'Set domain menjadi aktif',
+            true
+        );
+
+        $domain->aktif = 'aktif';
+        $domain->save();
+
+        EmailHelper::notifyStatus($permintaan, 'Domain berhasil diaktifkan');
+
+        return redirect()
+            ->back()
+            ->with('message', 'Status Domain: aktif');
+    }
+
+    function formExport() {
+        return view('domain.export');
+    }
+
+    function  downloadExport(Request $req) {
+        return Domain::export($req);
     }
 }

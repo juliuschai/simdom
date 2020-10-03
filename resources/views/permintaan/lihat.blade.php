@@ -127,7 +127,8 @@
 	
 							<div class="form-group row">
 								<label for="namaDomain"
-									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}</label>
+									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}<p
+									style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6" style="margin-right:10px;">
 									@admin
@@ -150,8 +151,7 @@
 
 							<div class="form-group row">
 								<label for="deskripsi"
-									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}<p
-										style="color: red" class="d-inline">*</p></label>
+									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}</label>
 								<i class="fa fa-sticky-note-o domain"></i>
 								<div class="col-md-6">
 									<input id="deskripsi" type="text" name="deskripsi"

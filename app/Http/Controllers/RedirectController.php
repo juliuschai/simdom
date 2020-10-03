@@ -58,4 +58,12 @@ class RedirectController extends Controller
 
         return redirect()->route('redirect.list');
     }
+
+    function formExport() {
+        return view('redirect.export');
+    }
+
+    function  downloadExport(Request $req) {
+        return Redirect::export($req);
+    }
 }
