@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @section('content')
-<div class="container-fluid">
+]<div class="right_col booking" role="main">
 	<div class="row justify-content-center">
 		<div class="col-md-12 col-sm-12 text-center p-0 mt-3 mb-2">
 			<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
