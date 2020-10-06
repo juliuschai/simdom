@@ -1,8 +1,8 @@
 @extends('layouts.header')
 
 @section('content')
-]<div class="right_col booking" role="main">
-	<div class="row justify-content-center">
+<div class="right_col booking" role="main">
+	<!-- <div class="row justify-content-center"> -->
 		<div class="col-md-12 col-sm-12 text-center p-0 mt-3 mb-2">
 			<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
 				<h2 id="heading">Redirect Record</h2>
@@ -32,7 +32,7 @@
                                 class="col-md-4 col-form-label text-md-left">{{ __('Link Lama') }}<p
                                 style="color: red" class="d-inline">*</p></label>
                             <i class="fa fa-window-maximize domain"></i>
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="linkLama" type="text" name="linkLama" class="form-control"
                                     value="{{$redirect->link_lama}}">
                             </div>
@@ -43,7 +43,7 @@
                                 class="col-md-4 col-form-label text-md-left">{{ __('Link Baru') }}<p
                                 style="color: red" class="d-inline">*</p></label>
                             <i class="fa fa-window-maximize domain"></i>
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="linkBaru" type="text" name="linkBaru" class="form-control"
                                     value="{{$redirect->link_baru}}">
                             </div>
@@ -53,7 +53,7 @@
                             <label for="keterangan"
                                 class="col-md-4 col-form-label text-md-left">{{ __('Keterangan') }}</label>
                             <i style="padding-left: 1px" class="fa fa-server domain"></i>
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="keterangan" type="text" name="keterangan" class="form-control"
                                     value="{{$redirect->keterangan}}">
                             </div>
@@ -64,7 +64,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 </div>
 @endsection
 

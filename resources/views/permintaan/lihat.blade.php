@@ -29,7 +29,7 @@
 					@endif
 					{{-- Tampilkan data diri --}}
 					<fieldset>
-						<div class="form-card">
+						<div class="form-header">
 							<div class="row">
 								<div class="col-7">
 									<h2 class="fs-title">Data Diri :</h2>
@@ -38,13 +38,15 @@
 									<h6 class="steps">Tahap 1 - 2</h6>
 								</div>
 							</div>
+						</div>
+						<div class="form-card">
 							@if($permintaan->user->isAdmin())
 							<h6>Perubahan ini dibuat oleh admin</h6>
 							<div class="form-group row">
 								<label for="namaPic"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
 								<i style="padding-left: 1px" class="fa fa-user domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="namaPic" type="text" class="form-control"
 										value="{{$permintaan->user->nama}}" disabled>
 								</div>
@@ -54,7 +56,7 @@
 								<label for="namaPic"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
 								<i style="padding-left: 1px" class="fa fa-user domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="namaPic" type="text" class="form-control"
 										value="{{$permintaan->user->nama}}" disabled>
 								</div>
@@ -64,7 +66,7 @@
 								<label for="integraPic"
 									class="col-md-4 col-form-label text-md-left">{{ __('User Integra') }}</label>
 								<i class="fa fa-address-card domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="integraPic" type="text" class="form-control"
 										value="{{$permintaan->user->integra}}" disabled>
 								</div>
@@ -74,7 +76,7 @@
 								<label for="emailPic"
 									class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}</label>
 								<i class="fa fa-envelope domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="emailPic" type="text" class="form-control"
 										value="{{$permintaan->user->email}}" disabled>
 								</div>
@@ -84,7 +86,7 @@
 								<label for="sivitas"
 									class="col-md-4 col-form-label text-md-left">{{ __('Sivitas Akademika') }}</label>
 								<i class="fa fa-users domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="sivitas" type="text" class="form-control"
 										value="{{$permintaan->user->group}}" disabled>
 								</div>
@@ -94,17 +96,18 @@
 								<label for="noWa"
 									class="col-md-4 col-form-label text-md-left">{{ __('No. WA') }}</label>
 								<i class="fa fa-mobile fa-2x domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="noWa" type="text" class="form-control"
 										value="{{$permintaan->user->no_wa}}" disabled>
 								</div>
 							</div>
 							@endif
-						</div> <input type="button" name="next" class="next action-button" value="Next" />
+						</div> 
+						<input type="button" name="next" class="next action-button" value="Next" />
 					</fieldset>
 					{{-- Tampilkan data domain --}}
 					<fieldset>
-						<div class="form-card">
+						<div class="form-header">
 							<div class="row">
 								<div class="col-7">
 									<h2 class="fs-title">Data Domain :</h2>
@@ -113,6 +116,8 @@
 									<h2 class="steps">Tahap 2 - 2</h2>
 								</div>
 							</div>
+						</div>
+						<div class="form-card">
 
 						@admin
 						@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak')
@@ -130,7 +135,7 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}<p
 									style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-sticky-note-o domain"></i>
-								<div class="col-md-6" style="margin-right:10px;">
+								<div class="col-md-7" style="margin-right:10px;">
 									@admin
 									<admin-nama-domain-input :templates="{{$domain_templates}}"
 										sel-template-prop="{{$permintaan->unit->tipeUnit->domain_template}}"
@@ -153,7 +158,7 @@
 								<label for="deskripsi"
 									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi') }}</label>
 								<i class="fa fa-sticky-note-o domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="deskripsi" type="text" name="deskripsi"
 										value="{{$permintaan->deskripsi}}" class="form-control" disabled>
 								</div>
@@ -163,7 +168,7 @@
 								<label for="unit"
 									class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}</label>
 								<i class="fa fa-window-maximize domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="tipeUnit" type="text" value="{{$permintaan->unit->tipeUnit->nama}}"
 										class="form-control" disabled>
 									<input id="unit" type="text" value="{{$permintaan->unit->nama}}"
@@ -176,7 +181,7 @@
 									class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}</label>
 								<i class="fa fa-file domain"></i>
 								@if(isset($permintaan->surat))
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<a href="{{route('surat.get', ['permintaan' => $permintaan->id])}}" target="_blank">
 										<button type="button" class="btn btn-custom" style="padding: 4px 8px; font-size: 11pt;">View</button>
 									</a>
@@ -185,7 +190,7 @@
 									</a>
 								</div>
 								@else
-								<div class="col-md-6">
+								<div class="col-md-7">
 									Tidak ada surat
 								</div>
 								@endif
@@ -195,7 +200,7 @@
 								<label for="server"
 									class="col-md-4 col-form-label text-md-left">{{ __('Server') }}</label>
 								<i class="fa fa-server domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="server" type="text" class="form-control" value="{{$permintaan->server}}"
 										disabled>
 								</div>
@@ -205,7 +210,7 @@
 								<label for="kapasitas"
 									class="col-md-4 col-form-label text-md-left">{{ __('Kapasitas (Kuota DB)') }}</label>
 								<i class="fa fa-database domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="kapasitas" type="text" value="{{$permintaan->kapasitas}}"
 										class="form-control" disabled>(GB)
 								</div>
@@ -215,7 +220,7 @@
 								<label for="keterangan"
 									class="col-md-4 col-form-label text-md-left">{{ __('Keterangan') }}</label>
 								<i class="fa fa-inbox domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<textarea id="keterangan" type="text" class="form-control"
 										disabled>{{$permintaan->keterangan}}</textarea>
 								</div>
@@ -225,7 +230,7 @@
 								<label for="status"
 									class="col-md-4 col-form-label text-md-left">{{ __('Status') }}</label>
 								<i class="fa fa-database domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="status" type="text" value="{{$permintaan->status}}" class="form-control"
 										disabled>
 								</div>
@@ -237,18 +242,17 @@
 								<label for="ip"
 									class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
 								<i class="fa fa-inbox domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="ip" name="ip" type="text" value="{{$permintaan->ip}}"
 										class="form-control">
 								</div>
 							</div>
 
-							<button type="button" class="previous action-previous">Prev</button>
 							@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak')
 							<button type="submit" class="next action-terima">Terima</button>
 							@endif
 							@if($permintaan->status == 'diterima')
-							<button type="submit" class="next action-button">Selesai</button>
+							<button type="submit" class="next action-selesai">Selesai</button>
 							@endif
 						</form>
 							@endif
@@ -273,7 +277,32 @@
 							@endif
 							@endadmin
 
-							@admin
+							<!-- @admin
+							{{-- Domain Table Unit Search Start --}}
+							<button type="button" id="showTableButton" class="action-lihat" 
+								onclick="initTable()">Lihat semua domain dari {{$permintaan->unit->nama}}</button>
+							<div id="ipTableSection" style="display: none;">
+								<hr />
+								<div style="margin-left: 400px;">Domain Aktif dengan VPS dari {{$permintaan->unit->nama}}</div>
+								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}" 
+									data-status="aktif" data-ajaxurl="{{route('permintaan.lihat.data')}}">
+									<thead>
+										<td>Id</td>
+										<td>Unit</td>
+										<td>Server</td>
+										<td>Status</td>
+										<td>Domain</td>
+										<td>Kapasitas DB</td>
+										<td>Ip</td>
+										<td>Aksi</td>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+							@endadmin -->
+						</div>
+						<button type="button" class="previous action-previous">Previous</button>
+						@admin
 							{{-- Domain Table Unit Search Start --}}
 							<button type="button" id="showTableButton" class="action-lihat" 
 								onclick="initTable()">Lihat semua domain dari {{$permintaan->unit->nama}}</button>
@@ -296,7 +325,6 @@
 								</table>
 							</div>
 							@endadmin
-						</div>
 					</fieldset>
 				</div>
 			</div>

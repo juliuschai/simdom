@@ -709,6 +709,13 @@ p {
 
 .form-card {
   text-align: left;
+  /* padding: 0 20px; */
+  padding: 0 150px;
+}
+
+.form-header {
+  text-align: left;
+  /* padding: 0 20px; */
   padding: 0 20px;
 }
 
@@ -725,7 +732,7 @@ p {
   margin-top: 2px;
   width: 100%;
   box-sizing: border-box;
-  font-family: montserrat;
+  /* font-family: montserrat; */
   color: #2c3e50;
   /* background-color: #ECEFF1; */
   font-size: 14px;
@@ -733,7 +740,7 @@ p {
 }
 
 #msform select{
-  width: 49.63%;
+  width: 49.55%;
   margin-top: 5px;
 }
 
@@ -914,6 +921,10 @@ p {
   object-fit: cover;
 }
 
+/* #msform .field {
+  margin-right: -10rem;
+} */
+
 /* Override bootstrap col*/
 .col-md-7 {
   -ms-flex: 0 0 58.333333%;
@@ -937,7 +948,7 @@ p {
 }
 
 #msform .action-terima {
-  margin-left: 400px !important; 
+  margin-left: 40% !important; 
   float: none; 
   width:300px;
   background: #77dd77;
@@ -957,7 +968,7 @@ p {
 }
 
 #msform .action-tolak {
-  margin-left: 400px !important; 
+  margin-left: 40% !important; 
   float: none; 
   width:300px;
   background: #d43f3a;
@@ -976,7 +987,7 @@ p {
 }
 
 #msform .action-hapus {
-  margin-left: 400px !important; 
+  margin-left: 40% !important; 
   float: none; 
   width:300px;
   background: #ff9a00;
@@ -995,7 +1006,8 @@ p {
 }
 
 #msform .action-previous {
-  width: 100px;
+  margin-left: 18.5% !important; 
+  width: 300px;
   background: #616161;
   font-weight: bold;
   color: white;
@@ -1003,9 +1015,8 @@ p {
   border-radius: 0px;
   cursor: pointer;
   padding: 10px 5px;
-  /* margin: 10px 5px 10px 0px; */
-  margin: 10px 5px 10px 700px;
-  float: right
+  /* margin: 10px 5px 10px 700px; */
+  margin: 5px 20px 5px 5px;
 }
 
 #msform .action-previous:hover,
@@ -1014,7 +1025,7 @@ p {
 }
 
 #msform .action-lihat {
-  margin-left: 400px !important; 
+  margin-left: 18.5% !important; 
   float: none; 
   width:300px;
   background: #013880;
@@ -1030,4 +1041,23 @@ p {
 #msform .action-lihat:hover,
 #msform .action-lihat:focus {
   background-color: #286090;
+}
+
+#msform .action-selesai {
+  margin-left: 40% !important; 
+  float: none; 
+  width:300px;
+  background: #f9a608;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 0px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 5px 20px 5px 5px;
+}
+
+#msform .action-selesai:hover,
+#msform .action-selesai:focus {
+  background-color: #ffc75c;
 }

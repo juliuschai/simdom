@@ -32,7 +32,7 @@
                     @endif
                     {{-- Tampilkan data diri --}}
                     <fieldset>
-                        <div class="form-card">
+                        <div class="form-header">
                             <div class="row">
                                 <div class="col-7">
                                     <h2 class="fs-title">Data Diri :</h2>
@@ -41,12 +41,14 @@
                                     <h6 class="steps">Tahap 1 - 2</h6>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-card">
                             <small>Silahkan perbaharui data diri di myits</small>
                             <div class="form-group row">
                                 <label for="namaPic"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Nama') }}</label>
                                 <i style="padding-left: 1px" class="fa fa-user domain"></i>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="namaPic" type="text" class="form-control" value="{{$user->nama}}"
                                         disabled>
                                 </div>
@@ -56,7 +58,7 @@
                                 <label for="integraPic"
                                     class="col-md-4 col-form-label text-md-left">{{ __('User Integra') }}</label>
                                 <i class="fa fa-address-card domain"></i>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="integraPic" type="text" class="form-control" value="{{$user->integra}}"
                                         disabled>
                                 </div>
@@ -66,7 +68,7 @@
                                 <label for="emailPic"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Email ITS') }}</label>
                                 <i class="fa fa-envelope domain"></i>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="emailPic" type="text" class="form-control" value="{{$user->email}}"
                                         disabled>
                                 </div>
@@ -76,7 +78,7 @@
                                 <label for="sivitas"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Sivitas Akademika') }}</label>
                                 <i class="fa fa-users domain"></i>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="sivitas" type="text" class="form-control" value="{{$user->group}}"
                                         disabled>
                                 </div>
@@ -86,7 +88,7 @@
                                 <label for="noWa"
                                     class="col-md-4 col-form-label text-md-left">{{ __('No. WA') }}</label>
                                 <i class="fa fa-mobile fa-2x domain"></i>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="noWa" type="text" class="form-control" value="{{$user->no_wa}}" disabled>
                                 </div>
                             </div>
@@ -97,8 +99,8 @@
                     <input type="button" name="next" class="next action-button" value="Next" />
 					</fieldset>
 					<fieldset>
-						<div class="form-card">
-							<div class="row">
+                        <div class="form-header">
+                            <div class="row">
 								<div class="col-7">
 									<h2 class="fs-title">Data Server :</h2>
 								</div>
@@ -106,12 +108,14 @@
 									<h6 class="steps">Tahap 2 - 2</h6>
 								</div>
 							</div>
+                        </div>
+						<div class="form-card">
 							<div class="form-group row">
 								<label for="deskripsi"
 									class="col-md-4 col-form-label text-md-left">{{ __('Deskripsi Server') }}<p
 										style="color: red" class="d-inline">*</p></label>
 								<i style="padding-left: 1px" class="fa fa-server domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="deskripsi" type="text" name="deskripsi" class="form-control"
 										value="{{$server->deskripsi}}">
 								</div>
@@ -121,7 +125,7 @@
                                 <label for="unit"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}</label>
                                 <i class="fa fa-window-maximize domain"></i>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
 									<two-select-with-textbox 
 										:seconds="{{$units}}" 
 										:firsts="{{$tipeUnits}}"
@@ -141,7 +145,7 @@
 								<label for="noRack"
 									class="col-md-4 col-form-label text-md-left">{{ __('No. Rack') }}</label>
 								<i class="fa fa-window-maximize domain"></i>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<input id="noRack" type="text" name="noRack" class="form-control"
 										value="{{$server->no_rack}}">
 								</div>
