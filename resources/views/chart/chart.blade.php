@@ -5,17 +5,29 @@
 <div class="right_col booking" role="main">
   <div class="col-md-12 col-sm-12">
     <div class="row">
-        <canvas id="perbulan" class="card" width="761" height="280" style="margin: 3px; padding: 20px;" class="chart"></canvas>
-        <canvas id="pertahun" class="card" width="761" height="280" style="margin: 3px; padding: 20px;" class="chart"></canvas>
+      <div class="d-inline-flex" style="position: relative; height:19vh; width:38vw">
+          <canvas id="perbulan" class="card" style="margin: 3px; padding: 20px;" class="chart">Jumlah Permintaan (perbulan)</canvas>
+      </div>
+      <div class="d-inline-flex" style="position: relative; height:19vh; width:38vw">
+          <canvas id="pertahun" class="card" style="margin: 3px; padding: 20px;" class="chart">Jumlah Permintaan (pertahun)</canvas>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="d-inline-flex" style="position: relative; height:19vh; width:38vw">
+          <canvas id="departemen" class="card" style="margin: 3px; padding: 20px;" class="chart"></canvas>
+      </div>
+      <div class="d-inline-flex" style="position: relative; height:19vh; width:38vw">
+          <canvas id="fakultas" class="card" style="margin: 3px; padding: 20px;" class="chart"></canvas>
+      </div>
     </div>
     <div class="row">
-        <canvas id="departemen" class="card" width="761" height="280" style="margin: 3px; padding: 20px;" class="chart"></canvas>
-        <canvas id="fakultas" class="card" width="761" height="280" style="margin: 3px; padding: 20px;" class="chart"></canvas>
-    </div>
-    <div class="row">
-        <canvas id="unit" class="card" width="761" height="280" style="margin: 3px; padding: 20px;" class="chart"></canvas>
-        <canvas id="server" class="card" width="761" height="280" style="margin: 3px; padding: 20px;" class="chart"></canvas>
-    </div>
+      <div class="d-inline-flex" style="position: relative; height:19vh; width:38vw">
+          <canvas id="unit" class="card" style="margin: 3px; padding: 20px;" class="chart"></canvas>
+      </div>
+      <div class="d-inline-flex" style="position: relative; height:19vh; width:38vw">
+          <canvas id="server" class="card" style="margin: 3px; padding: 20px;" class="chart"></canvas>
+      </div>
+    </div> -->
   </div>
 </div>
 
@@ -38,8 +50,9 @@
   data-departements="{{json_encode($departements)}}"
   data-nama_departemen="{{json_encode($nama_departemen)}}"
 
-  data-server="{{json_encode($servers)}}"
-  data-nama_server="{{json_encode($nama_server)}}"
+  data-server-WHS="{{json_encode($servers_WHS)}}"
+  data-server-VPS="{{json_encode($servers_VPS)}}"
+  data-server-Colocation="{{json_encode($servers_Colocation)}}"
 >
 
 @endsection

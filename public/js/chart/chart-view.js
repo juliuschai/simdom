@@ -1,3 +1,5 @@
+let $data = $('#serverData');
+
 var perbulan = $data.data('perbulan');
 var nama_bulan = $data.data('nama_bulan');
 
@@ -13,8 +15,9 @@ var nama_fakultas = $data.data('nama_fakultas');
 var units = $data.data('units');
 var nama_unit = $data.data('nama_unit');
 
-var servers = $data.data('servers');
-var nama_server = $data.data('nama_server');
+var servers_WHS = $data.data('servers_WHS');
+var servers_VPS = $data.data('servers_VPS');
+var servers_Colocation = $data.data('servers_Colocation');
 
 var all = document.getElementById('perbulan').getContext('2d');
 var chart = new Chart(all, {
@@ -56,7 +59,7 @@ options: {
             display: false
         },
         colorschemes: {
-            scheme: 'brewer.GnBu9'
+            scheme: 'brewer.BrBG7'
         }
     }
 }
@@ -102,7 +105,7 @@ options: {
             display: false
         },
         colorschemes: {
-            scheme: 'brewer.OrRd9'
+            scheme: 'brewer.RdBu9'
         }
     }
 }
@@ -250,10 +253,14 @@ var all = document.getElementById('server').getContext('2d');
 var chart = new Chart(all, {
 type: 'doughnut',
 data: {
-    labels: nama_server,
+    labels: ['WHS', 'VPS', 'Colocation'],
     datasets: [{
-            label: '',
-            data: servers
+        label: '',
+        data: servers_WHS
+    }, {
+        data: servers_VPS
+    },{
+        data: servers_Colocation
     }]
 },
 options: {
@@ -291,3 +298,5 @@ options: {
     }
 }
 });
+
+console.log("bisa");

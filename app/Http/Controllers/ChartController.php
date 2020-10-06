@@ -22,38 +22,30 @@ class ChartController extends Controller
     public function index()
     {
         // Jumlah Permintaan
-        $perbulan = Permintaan::select(\DB::raw("SUM(MONTH(waktu_konfirmasi)) as bulan"))
-            ->join('units', 'units.id', '=', 'permintaans.unit_id')
-            ->groupBy(\DB::raw('units.nama'))
-            ->orderByRaw('bulan DESC')
-            ->limit(5)
+        $perbulan = Permintaan::select(\DB::raw("CONVERT(SUM(MONTH(waktu_konfirmasi)), SIGNED) as bulan, MONTH(waktu_konfirmasi) as nama_bulan"))
+            ->groupBy(\DB::raw("MONTH(waktu_konfirmasi)"))
+            ->orderByRaw('nama_bulan ASC')
             ->pluck('bulan');
 
-        $nama_bulan = Permintaan::select(\DB::raw("SUM(MONTH(waktu_konfirmasi)) as bulan, MONTH(waktu_konfirmasi) as nama_bulan"))
-            ->join('units', 'units.id', '=', 'permintaans.unit_id')
-            ->groupBy(\DB::raw('units.nama'))
-            ->orderByRaw('bulan DESC')
-            ->limit(5)
+        $nama_bulan = Permintaan::select(\DB::raw("CONVERT(SUM(MONTH(waktu_konfirmasi)), SIGNED) as bulan, MONTH(waktu_konfirmasi) as nama_bulan"))
+            ->groupBy(\DB::raw("MONTH(waktu_konfirmasi)"))
+            ->orderByRaw('nama_bulan ASC')
             ->pluck('nama_bulan');
 
-        $pertahun = Permintaan::select(\DB::raw("SUM(YEAR(waktu_konfirmasi)) as tahun"))
-            ->join('units', 'units.id', '=', 'permintaans.unit_id')
-            ->groupBy(\DB::raw('units.nama'))
-            ->orderByRaw('tahun DESC')
-            ->limit(5)
+        $pertahun = Permintaan::select(\DB::raw("CONVERT(SUM(YEAR(waktu_konfirmasi)), SIGNED) as tahun, YEAR(waktu_konfirmasi) as nama_tahun"))
+            ->groupBy(\DB::raw("YEAR(waktu_konfirmasi)"))
+            ->orderByRaw('nama_tahun ASC')
             ->pluck('tahun');
 
-        $nama_tahun = Permintaan::select(\DB::raw("SUM(YEAR(waktu_konfirmasi)) as tahun, YEAR(waktu_konfirmasi) as nama_tahun"))
-            ->join('units', 'units.id', '=', 'permintaans.unit_id')
-            ->groupBy(\DB::raw('units.nama'))
-            ->orderByRaw('tahun DESC')
-            ->limit(5)
+        $nama_tahun = Permintaan::select(\DB::raw("CONVERT(SUM(YEAR(waktu_konfirmasi)), SIGNED) as tahun, YEAR(waktu_konfirmasi) as nama_tahun"))
+            ->groupBy(\DB::raw("YEAR(waktu_konfirmasi)"))
+            ->orderByRaw('nama_tahun ASC')
             ->pluck('nama_tahun');
 
         // unit
         $departements = Domain::select(\DB::raw("COUNT(*) as count"))
                     ->join('units', 'units.id', '=', 'domains.unit_id')
-                    ->where('units.unit_type_id', '=', '1')
+                    ->where('units.tipe_unit_id', '=', '1')
                     ->groupBy(\DB::raw('units.nama'))
                     ->orderByRaw('count DESC')
                     ->limit(5)
@@ -61,7 +53,7 @@ class ChartController extends Controller
 
         $nama_departemen = Domain::select(\DB::raw("COUNT(*) as count, units.nama"))
                     ->join('units', 'units.id', '=', 'domains.unit_id')
-                    ->where('units.unit_type_id', '=', '1')
+                    ->where('units.tipe_unit_id', '=', '1')
                     ->groupBy(\DB::raw('units.nama'))
                     ->orderByRaw('count DESC')
                     ->limit(5)
@@ -69,19 +61,19 @@ class ChartController extends Controller
         
         $faculties = Domain::select(\DB::raw("COUNT(*) as count"))
                     ->join('units', 'units.id', '=', 'domains.unit_id')
-                    ->where('units.unit_type_id', '=', '2')
+                    ->where('units.tipe_unit_id', '=', '2')
                     ->groupBy(\DB::raw('units.nama'))
                     ->orderByRaw('units.nama DESC')
                     ->pluck('count');
 
         $nama_fakultas = Unit::select(\DB::raw("units.nama"))
-                    ->where('units.unit_type_id', '=', '2')
+                    ->where('units.tipe_unit_id', '=', '2')
                     ->orderByRaw('units.nama DESC')
                     ->pluck('units.nama');
 
         $units = Domain::select(\DB::raw("COUNT(*) as count"))
                     ->join('units', 'units.id', '=', 'domains.unit_id')
-                    ->where('units.unit_type_id', '=', '3')
+                    ->where('units.tipe_unit_id', '=', '3')
                     ->groupBy(\DB::raw('units.nama'))
                     ->orderByRaw('count DESC')
                     ->limit(5)
@@ -89,28 +81,31 @@ class ChartController extends Controller
 
         $nama_unit = Domain::select(\DB::raw("COUNT(*) as count, units.nama"))
                     ->join('units', 'units.id', '=', 'domains.unit_id')
-                    ->where('units.unit_type_id', '=', '3')
+                    ->where('units.tipe_unit_id', '=', '3')
                     ->groupBy(\DB::raw('units.nama'))
                     ->orderByRaw('count DESC')
                     ->limit(5)
                     ->pluck('units.nama');
 
         // server
-        $servers = Domain::select(\DB::raw("COUNT(*) as count"))
-            ->join('servers', 'servers.id', '=', 'domains.server_id')
-            ->groupBy(\DB::raw('servers.nama'))
+        $servers_WHS = Domain::select(\DB::raw("COUNT(*) as count"))
+            ->where('domains.server', '=', 'WHS')
             ->orderByRaw('count DESC')
             ->pluck('count');
 
-        $nama_server = Domain::select(\DB::raw("COUNT(*) as count, servers.nama"))
-            ->join('servers', 'servers.id', '=', 'domains.server_id')
-            ->groupBy(\DB::raw('servers.nama'))
+        $servers_VPS = Domain::select(\DB::raw("COUNT(*) as count"))
+            ->where('domains.server', '=', 'VPS')
             ->orderByRaw('count DESC')
-            ->pluck('servers.nama');
+            ->pluck('count');
+
+        $servers_Colocation = Domain::select(\DB::raw("COUNT(*) as count"))
+            ->where('domains.server', '=', 'Colocation')
+            ->orderByRaw('count DESC')
+            ->pluck('count');
 
         return view('chart.chart', compact('perbulan', 'nama_bulan', 'pertahun', 'nama_tahun',
                 'departements', 'faculties', 'units', 'nama_departemen', 'nama_fakultas', 'nama_unit', 
-                'servers', 'nama_server'));
+                'servers_WHS', 'servers_VPS', 'servers_Colocation'));
 
     }
     

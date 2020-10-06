@@ -34,7 +34,6 @@ Route::group(
             ],
             function () {
                 //Grafik
-                // Route::view('/chart', 'chart.chart');
                 Route::get('/chart', 'ChartController@index')->name('dashboard.chart');
 
                 // Domain management
