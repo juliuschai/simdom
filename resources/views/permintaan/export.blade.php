@@ -36,7 +36,7 @@
 					<input id="waktuMulai" name="waktuMulai" type="hidden">
 					<input id="waktuAkhir" name="waktuAkhir" type="hidden">
 
-					<button type="button" class="btn btn-custom" onclick="submitForm()">Download</button>
+					<button type="button" class="btn btn-custom" onclick="submitForm()" style="margin-left:47.5%">Download</button>
 				</form>
 			</div>
 		</div>

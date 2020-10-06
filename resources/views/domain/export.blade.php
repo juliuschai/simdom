@@ -26,7 +26,7 @@
 							</div>
 					</div>
 
-					<button type="submit" class="btn btn-custom">Download</button>
+					<button type="submit" class="btn btn-custom" style="margin-left:47.5%">Download</button>
 				</form>
 			</div>
 		</div>
