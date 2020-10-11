@@ -26,17 +26,6 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        DB::table('users')->insert([
-            'sub' => '51D15B2E-FE38-41A8-A8A6-43A2745C4B31',
-            'email' => 'lorem',
-            'nama' => 'lorem',
-            'integra' => 'lorem',
-            'no_wa' => 'lorem',
-            'group' => 'lorem',
-            'role' => 'admin',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 
     /**
