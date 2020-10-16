@@ -67,6 +67,7 @@ class Domain extends Model
             $domain = new Domain();
             $domain->alias = $per->nama_domain;
             $domain->user_id = $per->user_id;
+            $domain->reminder = date('Y-m-d', strtotime("+6 months", strtotime(date("Y-m-d"))));
         } else {
             // Jika memperbaharui sebuah domain
             $domain = Domain::find($per->domain_id);

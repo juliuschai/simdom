@@ -27,8 +27,7 @@ class CreateDomainsTable extends Migration
                 ->comment('Status menunggu menunjukkan domain sedang dalam prosesdiubah');
             $table->enum('aktif', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
-            $table->date('reminder')->default(DB::raw('DATE_ADD(CURDATE(), INTERVAL 6 MONTH)'))
-                ->comment('digunakan untuk mengirimkan reminder kepada PIC untuk memperbaharui data PIC');
+            $table->date('reminder')->comment('digunakan untuk mengirimkan reminder kepada PIC untuk memperbaharui data PIC');
         });
     }
 
