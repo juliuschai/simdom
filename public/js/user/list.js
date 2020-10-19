@@ -63,7 +63,7 @@ tableElm.DataTable({
 			searchable: true,
             visible: true,
             render: function (data, type, full, meta) {
-                if (data === 'true') return 'Iya';
+                if (data == true) return 'Iya';
                 else return 'Tidak';
             },
 		},
