@@ -17,7 +17,7 @@ class CreatePermintaansTable extends Migration
             $table->string('nama_domain', 60)->nullable();
             $table->string('deskripsi')->comment('nama panjang/penjelasan isi/tujuan domain');
             $table->string('surat')->nullable();
-            $table->enum('server', ['WHS', 'VPS', 'Colocation']);
+            $table->enum('server', ['WHS', 'VPS', 'Colocation', 'Server Web ITS', 'WHS v2', 'Hosting Luar ITS', 'Lain - lain']);
             $table->integer('kapasitas');
             $table->enum('status', ['menunggu', 'diterima', 'selesai', 'ditolak'])->default('menunggu');
             $table->string('keterangan');

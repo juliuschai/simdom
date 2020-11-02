@@ -21,7 +21,7 @@ class CreateDomainsTable extends Migration
             $table->string('nama_domain', 60)->nullable();
             $table->string('deskripsi')->comment('nama panjang/penjelasan isi/tujuan domain');
             $table->string('alias');
-            $table->enum('server', ['WHS', 'VPS', 'Colocation']);
+            $table->enum('server', ['WHS', 'VPS', 'Colocation', 'Server Web ITS', 'WHS v2', 'Hosting Luar ITS', 'Lain - lain']);
             $table->integer('kapasitas');
             $table->enum('status', ['siap', 'menunggu'])->default('siap')
                 ->comment('Status menunggu menunjukkan domain sedang dalam prosesdiubah');
