@@ -1,15 +1,15 @@
 {{-- Email template permintaan berubah status untuk user --}}
 <ul>
     <li>
-        {{$status}}
+        Status: {{$status}}
     </li>
     <li>
         <a href="{{$link}}">link ke permintaan</a>
     </li>
     <li>
-        {{$domain}}
+        Domain: {{$domain}}
     </li>
     <li>
-        {{$keterangan}}
+        Keterangan: {{$keterangan}}
     </li>
 </ul>

@@ -1,9 +1,9 @@
 {{-- Email template permintaan transfer domain --}}
 <ul>
     <li>
-        {{$status}}
+        Status: {{$status}}
     </li>
     <li>
-        {{$domain}}
+        Domain: {{$domain}}
     </li>
 </ul>

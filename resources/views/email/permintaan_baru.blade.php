@@ -4,12 +4,12 @@
         <a href="{{$link}}">link ke permintaan</a>
     </li>
     <li>
-        {{$domain}}
+        Domain: {{$domain}}
     </li>
     <li>
-        {{$user}}
+        User: {{$user}}
     </li>
     <li>
-        {{$keterangan}}
+        Keterangan: {{$keterangan}}
     </li>
 </ul>
