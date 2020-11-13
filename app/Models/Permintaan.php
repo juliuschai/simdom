@@ -45,8 +45,11 @@ class Permintaan extends Model
     static function selectListUser()
     {
         return Permintaan::selectList()
-            ->join('domains', 'domains.id', '=', 'permintaans.domain_id')
-            ->where('domains.user_id', auth()->id());
+            ->leftJoin('domains', 'domains.id', '=', 'permintaans.domain_id')
+            ->where(function($q) {
+                return $q->where('permintaans.user_id', auth()->id())
+                    ->orWhere('domains.user_id', auth()->id());
+            });
     }
 
     static function permintaanBaru($req, $domain_id = null)
@@ -174,7 +177,7 @@ class Permintaan extends Model
         $htmlString = view('permintaan.export_table', compact('datas'));
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
         $spreadsheet = $reader->loadFromString($htmlString);
-        
+
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
         $currentTime = Carbon::now('Asia/Jakarta')->format("Y-m-d_Hi");
         if (!file_exists(storage_path("app/export"))) {
