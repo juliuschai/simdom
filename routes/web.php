@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', 'HomeController@test');
+
+Route::get('/pantauweb', 'PantauWebController@index');
+
 Route::group(
     [
         'domain' => Config::get('app.base_subdomain').'.'.Config::get('app.base_domain'),
@@ -66,7 +69,7 @@ Route::group(
                         Route::post('/domain/{domain}/edit', 'DomainController@simpanEdit')->name('domain.edit');
                         Route::get('/domain/{domain}/transfer', 'DomainController@formTransfer')->name('domain.transfer');
                         Route::post('/domain/{domain}/transfer', 'DomainController@saveTransfer')->name('domain.transfer');
-                        
+
                         // Permintaan management
                         Route::get('/permintaan/{permintaan}/lihat', 'PermintaanController@lihat')->name('permintaan.lihat');
                         Route::post('/permintaan/{permintaan}/hapus', 'PermintaanController@hapus')->name('permintaan.hapus');
@@ -91,14 +94,14 @@ Route::group(
                         Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasi')->name('domain.nonaktifasi');
                         Route::post('/domain/{domain}/aktif', 'DomainController@aktifasi')->name('domain.aktifasi');
                         Route::get('/domain/export', 'DomainController@formExport')->name('domain.export');
-                        Route::post('/domain/export', 'DomainController@downloadExport')->name('domain.export');            
-            
+                        Route::post('/domain/export', 'DomainController@downloadExport')->name('domain.export');
+
                         // Ubah status Permintaan
                         Route::post('/permintaan/{permintaan}/terima', 'PermintaanController@terima')->name('permintaan.terima');
                         Route::post('/permintaan/{permintaan}/selesai', 'PermintaanController@selesai')->name('permintaan.selesai');
                         Route::post('/permintaan/{permintaan}/tolak', 'PermintaanController@tolak')->name('permintaan.tolak');
                         Route::get('/permintaan/export', 'PermintaanController@formExport')->name('permintaan.export');
-                        Route::post('/permintaan/export', 'PermintaanController@downloadExport')->name('permintaan.export');            
+                        Route::post('/permintaan/export', 'PermintaanController@downloadExport')->name('permintaan.export');
 
                         // Redirect Management
                         Route::get('/redirect/baru', 'RedirectController@formBaru')->name('redirect.baru');
@@ -109,7 +112,7 @@ Route::group(
                         Route::post('/redirect/{redirect}/edit', 'RedirectController@simpanEdit')->name('redirect.edit');
                         Route::post('/redirect/{redirect}/hapus', 'RedirectController@hapus')->name('redirect.hapus');
                         Route::get('/redirect/export', 'RedirectController@formExport')->name('redirect.export');
-                        Route::post('/redirect/export', 'RedirectController@downloadExport')->name('redirect.export');            
+                        Route::post('/redirect/export', 'RedirectController@downloadExport')->name('redirect.export');
 
                         // User management
                         Route::get('/user/list', 'UserController@list')->name('user.list');
