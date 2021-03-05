@@ -202,7 +202,14 @@
 										style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-inbox domain"></i>
 								<div class="col-md-7">
-									<textarea id="keterangan" type="text" name="keterangan" class="form-control"
+                                    <select id="keteranganSelect" onchange="keteranganUpdate()">
+                                        <option>Reset Password</option>
+                                        <option>Ganti Domain</option>
+                                        <option>Buat Domain Baru</option>
+                                        <option>Penambahakn Kuota</option>
+                                        <option>Lainnya</option>
+                                    </select>
+									<textarea id="keterangan" type="text" name="keterangan" class="form-control" hidden="true"
 										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
 								</div>
 							</div>
@@ -224,4 +231,16 @@
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
 <script src="{{ asset('js/domain/form.js') }}" defer></script>
+<script>
+    function keteranganUpdate() {
+        const keteranganSelect = document.getElementById('keteranganSelect');
+        const keteranganTxt = document.getElementById('keterangan');
+        keteranganTxt.value = keteranganSelect.value;
+        if (keteranganSelect.value == 'Lainnya') {
+            keteranganTxt.hidden = false;
+        } else {
+            keteranganTxt.hidden = true;
+        }
+    }
+</script>
 @endsection
