@@ -26,7 +26,11 @@ class Unit extends Model
         )->select(['units.id', 'units.nama', 'tipe_units.nama as tipe_unit']);
     }
 
-    static function getDropdownOptions()
+    /**
+     * Get data for dropdown options
+     * @param bool $keperuntukan true: get keperuntukan options; false: get non-keperuntukan options
+     */
+    static function getDropdownOptions($keperuntukan)
     {
         return Unit::join(
             'tipe_units',
@@ -35,6 +39,7 @@ class Unit extends Model
             'units.tipe_unit_id'
         )
             ->orderBy('units.nama')
+            ->where('keperuntukan', $keperuntukan)
             ->get(['units.nama as second_val', 'tipe_units.nama as first_val']);
     }
 

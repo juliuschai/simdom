@@ -33,12 +33,17 @@ class ServerController extends Controller
     {
         $user = User::findOrLogout(auth()->id());
         $server = new Server();
-        $units = Unit::getDropdownOptions();
-        $tipeUnits = TipeUnit::getDropdownOptions();
+
+        $units = Unit::getDropdownOptions(false);
+        $tipeUnits = TipeUnit::getDropdownOptions(false);
+
+        $keperuntukans = Unit::getDropdownOptions(true);
+        $tipeKeperuntukans = TipeUnit::getDropdownOptions(true);
+
 
         return view(
             'server.form',
-            compact('user', 'server', 'units', 'tipeUnits')
+            compact('user', 'server', 'units', 'tipeUnits', 'keperuntukans', 'tipeKeperuntukans')
         );
     }
 

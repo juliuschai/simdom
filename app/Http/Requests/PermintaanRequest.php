@@ -26,8 +26,11 @@ class PermintaanRequest extends FormRequest
         return [
             'unit' => 'required|string|max:254',
             'tipeUnit' => 'required|string|exists:tipe_units,nama',
-            'surat' => 'nullable|mimes:pdf,jpeg,jpg,png|max:2000',
+            'keperuntukan' => 'required|string|max:254',
+            'tipeKeperuntukan' => 'required|string|exists:tipe_units,nama',
+            'surat' => 'required|mimes:pdf,jpeg,jpg,png|max:2000',
             'deskripsi' => 'required|string|max:254',
+            'domainDiajukan' => 'nullable|string|max:254',
             'serverDomain' => 'required|string|in:WHS,VPS,Colocation',
             'kapasitas' => 'required|integer',
             'keterangan' => 'required|string|max:254',

@@ -121,24 +121,43 @@
 								</div>
 							</div>
 
-                            <div class="form-group row">
-                                <label for="unit"
-                                    class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}</label>
-                                <i class="fa fa-window-maximize domain"></i>
-                                <div class="col-md-7">
-									<two-select-with-textbox 
-										:seconds="{{$units}}" 
+							<div class="form-group row">
+								<label for="unit"
+									class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}<p
+										style="color: red" class="d-inline">*</p></label>
+								<i class="fa fa-window-maximize domain"></i>
+								<div class="col-md-7">
+									<two-select
+										:seconds="{{$units}}"
 										:firsts="{{$tipeUnits}}"
-										second-val="{{$server->unit?$server->unit->nama:''}}"
-										first-val="{{$server->unit?$server->unit->tipeUnit->nama:''}}"
+										second-val="{{old('unit')}}"
+										first-val="{{old('tipeUnit')}}"
 
 										textbox-name-prop="unit"
 										first-name-prop="tipeUnit"
+										>
+									</two-select>
+								</div>
+							</div>
 
-                                        >
+							<div class="form-group row">
+								<label for="keperuntukan"
+									class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
+										style="color: red" class="d-inline">*</p></label>
+								<i class="fa fa-window-maximize domain"></i>
+								<div class="col-md-7">
+									<two-select-with-textbox
+										:seconds="{{$keperuntukans}}"
+										:firsts="{{$tipeKeperuntukans}}"
+										second-val="{{old('keperuntukan')}}"
+										first-val="{{old('tipeKeperuntukan')}}"
+
+										textbox-name-prop="keperuntukan"
+										first-name-prop="tipeKeperuntukan"
+										>
 									</two-select-with-textbox>
-                                </div>
-                            </div>
+								</div>
+							</div>
 
 
 							<div class="form-group row">

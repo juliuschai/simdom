@@ -102,7 +102,7 @@
 								</div>
 							</div>
 							@endif
-						</div> 
+						</div>
 						<input type="button" name="next" class="next action-button" value="Next" />
 					</fieldset>
 					{{-- Tampilkan data domain --}}
@@ -129,7 +129,7 @@
 							@csrf
 						@endif
 						@endadmin
-	
+
 							<div class="form-group row">
 								<label for="namaDomain"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}<p
@@ -279,12 +279,12 @@
 
 							<!-- @admin
 							{{-- Domain Table Unit Search Start --}}
-							<button type="button" id="showTableButton" class="action-lihat" 
+							<button type="button" id="showTableButton" class="action-lihat"
 								onclick="initTable()">Lihat semua domain dari {{$permintaan->unit->nama}}</button>
 							<div id="ipTableSection" style="display: none;">
 								<hr />
 								<div style="margin-left: 400px;">Domain Aktif dengan VPS dari {{$permintaan->unit->nama}}</div>
-								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}" 
+								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}"
 									data-status="aktif" data-ajaxurl="{{route('permintaan.lihat.data')}}">
 									<thead>
 										<td>Id</td>
@@ -304,12 +304,12 @@
 						<button type="button" class="previous action-previous">Previous</button>
 						@admin
 							{{-- Domain Table Unit Search Start --}}
-							<button type="button" id="showTableButton" class="action-lihat" 
+							<button type="button" id="showTableButton" class="action-lihat"
 								onclick="initTable()">Lihat semua domain dari {{$permintaan->unit->nama}}</button>
 							<div id="ipTableSection" style="display: none;">
 								<hr />
 								<div style="margin-left: 400px;">Domain Aktif dengan VPS dari {{$permintaan->unit->nama}}</div>
-								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}" 
+								<table id="tableElm" data-server="VPS" data-unit="{{$permintaan->unit->id}}"
 									data-status="aktif" data-ajaxurl="{{route('permintaan.lihat.data')}}">
 									<thead>
 										<td>Id</td>

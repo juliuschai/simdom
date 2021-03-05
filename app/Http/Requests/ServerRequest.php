@@ -27,6 +27,8 @@ class ServerRequest extends FormRequest
             'deskripsi' => 'required|string|max:254',
             'unit' => 'required|string|max:254',
             'tipeUnit' => 'required|string|exists:tipe_units,nama',
+            'keperuntukan' => 'required|string|max:254',
+            'tipeKeperuntukan' => 'required|string|exists:tipe_units,nama',
             'no_rack' => 'nullable|string|max:254',
         ];
     }

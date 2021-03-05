@@ -12,7 +12,7 @@ class TipeUnit extends Model
      * nama
      */
     public $timestamps = false;
-    
+
     static function getDomainTemplateOptions()
     {
         return TipeUnit::select([DB::Raw('MIN(id) as min_id'), 'domain_template'])
@@ -21,9 +21,13 @@ class TipeUnit extends Model
             ->pluck('domain_template');
     }
 
-    static function getDropdownOptions()
+    /**
+     * Get data for dropdown options
+     * @param bool $keperuntukan true: get keperuntukan options; false: get non-keperuntukan options
+     */
+    static function getDropdownOptions($keperuntukan)
     {
-        return TipeUnit::orderBy('nama')->pluck('nama');
+        return TipeUnit::orderBy('nama')->where('keperuntukan', $keperuntukan)->pluck('nama');
     }
 
     function units()

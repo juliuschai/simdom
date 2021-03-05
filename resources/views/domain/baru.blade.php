@@ -113,13 +113,23 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="unit"
-									class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}<p
+								<label for="domainDiajukan"
+									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain yang Diinginkan') }}<p
 										style="color: red" class="d-inline">*</p></label>
+								<i class="fa fa-sticky-note-o domain"></i>
+								<div class="col-md-7">
+									<input id="domainDiajukan" type="text" name="domainDiajukan" value="{{old('domainDiajukan')}}"
+										class="form-control" placeholder="bem.its.ac.id; gemastik.its.ac.id; bapm.its.ac.id">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="unit" class="col-md-4 col-form-label text-md-left">{{ __('Fakultas/Departemen/Unit') }}
+                                    <p style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-window-maximize domain"></i>
 								<div class="col-md-7">
-									<two-select-with-textbox 
-										:seconds="{{$units}}" 
+									<two-select
+										:seconds="{{$units}}"
 										:firsts="{{$tipeUnits}}"
 										second-val="{{old('unit')}}"
 										first-val="{{old('tipeUnit')}}"
@@ -127,13 +137,32 @@
 										textbox-name-prop="unit"
 										first-name-prop="tipeUnit"
 										>
+									</two-select>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="keperuntukan"
+									class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
+										style="color: red" class="d-inline">*</p></label>
+								<i class="fa fa-window-maximize domain"></i>
+								<div class="col-md-7">
+									<two-select-with-textbox
+										:seconds="{{$keperuntukans}}"
+										:firsts="{{$tipeKeperuntukans}}"
+										second-val="{{old('keperuntukan')}}"
+										first-val="{{old('tipeKeperuntukan')}}"
+
+										textbox-name-prop="keperuntukan"
+										first-name-prop="tipeKeperuntukan"
+										>
 									</two-select-with-textbox>
 								</div>
 							</div>
 
 							<div class="form-group row">
-								<label for="surat"
-									class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}</label>
+								<label for="surat" class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}<p
+									style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-file booking" style="margin-left: -10px; margin-top: 10px"></i>
 								<div class="col-md-7">
 									<input style="border: none;" id="surat" type="file" name="surat"
@@ -147,9 +176,9 @@
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-7">
 									<select id="serverDomain" name="serverDomain" class="form-control" data-value="{{old('serverDomain')}}">
-										<option value="WHS">WHS/Zeus/CPanel</option>
-										<option value="VPS">VPS</option>
-										<option value="Colocation">Colocation</option>
+										<option value="WHS">CPanel (Website)</option>
+										<option value="VPS">VPS (Aplikasi dan SIM)</option>
+										<option value="Colocation">Server (Colocation)</option>
 									</select>
 								</div>
 							</div>

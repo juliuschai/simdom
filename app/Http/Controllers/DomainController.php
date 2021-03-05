@@ -35,10 +35,15 @@ class DomainController extends Controller
     function formBaru()
     {
         $user = User::findOrLogout(auth()->id());
-        $units = Unit::getDropdownOptions();
-        $tipeUnits = TipeUnit::getDropdownOptions();
 
-        return view('domain.baru', compact('user', 'units', 'tipeUnits'));
+        $units = Unit::getDropdownOptions(false);
+        $tipeUnits = TipeUnit::getDropdownOptions(false);
+
+        $keperuntukans = Unit::getDropdownOptions(true);
+        $tipeKeperuntukans = TipeUnit::getDropdownOptions(true);
+
+
+        return view('domain.baru', compact('user', 'units', 'tipeUnits', 'keperuntukans', 'tipeKeperuntukans'));
     }
 
     function simpanBaru(PermintaanRequest $req)
@@ -51,12 +56,17 @@ class DomainController extends Controller
     function formEdit(Domain $domain)
     {
         $user = User::findOrLogout(auth()->id());
-        $units = Unit::getDropdownOptions();
-        $tipeUnits = TipeUnit::getDropdownOptions();
+
+        $units = Unit::getDropdownOptions(false);
+        $tipeUnits = TipeUnit::getDropdownOptions(false);
+
+        $keperuntukans = Unit::getDropdownOptions(true);
+        $tipeKeperuntukans = TipeUnit::getDropdownOptions(true);
+
 
         return view(
             'domain.edit',
-            compact('user', 'units', 'tipeUnits', 'domain')
+            compact('user', 'units', 'tipeUnits', 'keperuntukans', 'tipeKeperuntukans', 'domain')
         );
     }
 

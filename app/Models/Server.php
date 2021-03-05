@@ -33,9 +33,11 @@ class Server extends Model
     function isiDariRequest($req)
     {
         $unit_id = Unit::getIdFromUnitOrCreate($req->unit, $req->tipeUnit);
+        $keperuntukan_id = Unit::getIdFromUnitOrCreate($req->keperuntukan, $req->tipeKeperuntukan);
 
         $this->fill([
             'unit_id' => $unit_id,
+            'keperuntukan_id' => $keperuntukan_id,
             'deskripsi' => $req->deskripsi,
             'no_rack' => $req->noRack,
         ]);
@@ -51,12 +53,12 @@ class Server extends Model
         return $server;
     }
 
-    function user() 
+    function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    function unit() 
+    function unit()
     {
         return $this->belongsTo('App\Models\Unit');
     }

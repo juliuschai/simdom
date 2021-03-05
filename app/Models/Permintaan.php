@@ -70,11 +70,13 @@ class Permintaan extends Model
         }
 
         $unit_id = Unit::getIdFromUnitOrCreate($req->unit, $req->tipeUnit);
+        $keperuntukan_id = Unit::getIdFromUnitOrCreate($req->keperuntukan, $req->tipeKeperuntukan);
 
         $permintaan = Permintaan::create([
             'domain_id' => $domain_id,
             'user_id' => auth()->id(),
             'unit_id' => $unit_id,
+            'keperuntukan_id' => $keperuntukan_id,
             'surat' => $file_path,
             'nama_domain' => $req->namaDomain,
             'deskripsi' => $req->deskripsi,
