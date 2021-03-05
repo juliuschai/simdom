@@ -131,6 +131,16 @@
 						@endadmin
 
 							<div class="form-group row">
+								<label for="domainDiajukan"
+									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain yang Diinginkan') }}</label>
+								<i class="fa fa-sticky-note-o domain"></i>
+								<div class="col-md-7">
+									<input id="domainDiajukan" type="text" name="domainDiajukan"
+										value="{{$permintaan->domain_diajukan}}" class="form-control" disabled>
+								</div>
+							</div>
+
+							<div class="form-group row">
 								<label for="namaDomain"
 									class="col-md-4 col-form-label text-md-left">{{ __('Nama Domain') }}<p
 									style="color: red" class="d-inline">*</p></label>

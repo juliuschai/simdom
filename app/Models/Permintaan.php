@@ -78,6 +78,7 @@ class Permintaan extends Model
             'unit_id' => $unit_id,
             'keperuntukan_id' => $keperuntukan_id,
             'surat' => $file_path,
+            'domain_diajukan' => $req->domainDiajukan,
             'nama_domain' => $req->namaDomain,
             'deskripsi' => $req->deskripsi,
             'server' => $req->serverDomain,
