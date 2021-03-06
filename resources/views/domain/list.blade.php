@@ -35,12 +35,37 @@
 				return confirm('Aktifasi domain?')" title="Aktifasi Domain"><i class="fa fa-power-off"></i></button>
 			</form>
 		</div>
-		@else
+
+		<div id="nonformalBtnTemplate" style="display: none;">
+			<form action="{{route('domain.nonformal', ['domain' => 0])}}" method="POST" class="d-inline">
+				@csrf
+				<button type="submit" class="btn btn-danger" style="padding: 3px 8px" onclick="
+				return confirm('Tandai domain sebagai formal?')" title="Tandai Formal"><i class="fa fa-briefcase"></i></button>
+			</form>
+		</div>
+
+		<div id="formalBtnTemplate" style="display: none;">
+			<form action="{{route('domain.formal', ['domain' => 0])}}" method="POST" class="d-inline">
+				@csrf
+				<button type="submit" class="btn btn-success" style="padding: 3px 8px" onclick="
+				return confirm('Cabut tanda formal domain?')" title="Tandai Non-formal"><i class="fa fa-briefcase"></i></button>
+			</form>
+		</div>
+
+        @else
 		<div id="nonaktifasiBtnTemplate" style="display: none;">
 			<a href=""></a>
 		</div>
-		
+
 		<div id="aktifasiBtnTemplate" style="display: none;">
+			<a href=""></a>
+		</div>
+
+        <div id="nonformalBtnTemplate" style="display: none;">
+			<a href=""></a>
+		</div>
+
+		<div id="formalBtnTemplate" style="display: none;">
 			<a href=""></a>
 		</div>
 		@endadmin
@@ -58,6 +83,7 @@
 					<th scope="col">IP</th>
 					<th scope="col">Status</th>
 					<th scope="col">Aktif</th>
+					<th scope="col">Formal</th>
 					<th scope="col">Dibuat</th>
 					<th scope="col">Aksi</th>
 				</tr>

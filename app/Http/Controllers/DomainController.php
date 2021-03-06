@@ -153,6 +153,43 @@ class DomainController extends Controller
             ->with('message', 'Status Domain: aktif');
     }
 
+    function nonformal(Domain $domain)
+    {
+        $permintaan = Permintaan::permintaanDariDomain(
+            $domain,
+            'Set domain menjadi nonformal',
+            true
+        );
+
+        $domain->formal = 'nonformal';
+        $domain->save();
+
+        EmailHelper::notifyStatus($permintaan, 'Domain berhasil ditandai nonformal');
+
+        return redirect()
+            ->back()
+            ->with('message', 'Status Domain: nonformal');
+    }
+
+    function formal(Domain $domain)
+    {
+        $permintaan = Permintaan::permintaanDariDomain(
+            $domain,
+            'Set domain menjadi formal',
+            true
+        );
+
+        $domain->formal = 'formal';
+        $domain->save();
+
+        EmailHelper::notifyStatus($permintaan, 'Domain berhasil ditandai formal');
+
+        return redirect()
+            ->back()
+            ->with('message', 'Status Domain: formal');
+    }
+
+
     function formExport() {
         return view('domain.export');
     }

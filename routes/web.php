@@ -93,6 +93,8 @@ Route::group(
                         // Set domain keaktifan domain
                         Route::post('/domain/{domain}/nonaktif', 'DomainController@nonaktifasi')->name('domain.nonaktifasi');
                         Route::post('/domain/{domain}/aktif', 'DomainController@aktifasi')->name('domain.aktifasi');
+                        Route::post('/domain/{domain}/nonformal', 'DomainController@nonformal')->name('domain.nonformal');
+                        Route::post('/domain/{domain}/formal', 'DomainController@formal')->name('domain.formal');
                         Route::get('/domain/export', 'DomainController@formExport')->name('domain.export');
                         Route::post('/domain/export', 'DomainController@downloadExport')->name('domain.export');
 

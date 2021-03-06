@@ -35,6 +35,7 @@ class Domain extends Model
                 'domains.ip',
                 'domains.status',
                 'domains.aktif',
+                'domains.formal',
                 'domains.created_at',
             ]);
     }
@@ -89,6 +90,11 @@ class Domain extends Model
         return $domain;
     }
 
+    function extend()
+    {
+        // TODO: implement
+    }
+
     static function export($req) {
         $query = DB::table('domains as d')
             ->join('users as u', 'u.id', '=', 'd.user_id')
@@ -116,7 +122,7 @@ class Domain extends Model
         $htmlString = view('domain.export_table', compact('datas'));
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
         $spreadsheet = $reader->loadFromString($htmlString);
-        
+
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
         $currentTime = Carbon::now('Asia/Jakarta')->format("Y-m-d_Hi");
         if (!file_exists(storage_path("app/export"))) {

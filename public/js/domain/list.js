@@ -4,6 +4,8 @@ var tableElm = $('#tableElm');
 var editBtn = $('#editBtnTemplate');
 var nonaktifasiBtn = $('#nonaktifasiBtnTemplate');
 var aktifasiBtn = $('#aktifasiBtnTemplate');
+var nonformalBtn = $('#nonformalBtnTemplate');
+var formalBtn = $('#formalBtnTemplate');
 
 var datatableRes = tableElm.DataTable({
 	processing: true,
@@ -78,6 +80,20 @@ var datatableRes = tableElm.DataTable({
 			visible: true,
 		},
 		{
+			title: 'Formal',
+			data: 'formal',
+			name: 'domains.formal',
+			searchable: true,
+			visible: true,
+            render: function (data, type, full, meta) {
+                if (data) {
+                    return 'formal';
+                } else {
+                    return 'nonformal';
+                }
+			},
+		},
+		{
 			title: 'Dibuat',
 			data: 'created_at',
 			name: 'domains.created_at',
@@ -96,10 +112,15 @@ var datatableRes = tableElm.DataTable({
 			render: function (data, type, full, meta) {
 				let res = '<div style="white-space: nowrap;">';
 				res += editBtn.createButton(full.id).html();
-				if (full.aktif === 'aktif') {
+				if (full.aktif === 'nonaktif') {
+                    res += aktifasiBtn.createButton(full.id).html();
+                } else {
 					res += nonaktifasiBtn.createButton(full.id).html();
+				}
+				if (full.formal == 'true') {
+					res += nonformalBtn.createButton(full.id).html();
 				} else {
-					res += aktifasiBtn.createButton(full.id).html();
+					res += formalBtn.createButton(full.id).html();
 				}
 				res += '</div>';
 				return res;
