@@ -68,7 +68,10 @@ class Domain extends Model
             $domain = new Domain();
             $domain->alias = $per->nama_domain;
             $domain->user_id = $per->user_id;
-            $domain->reminder = date('Y-m-d', strtotime("+6 months", strtotime(date("Y-m-d"))));
+            $domain->reminder = date(
+                'Y-m-d',
+                strtotime('+6 months', strtotime(date('Y-m-d')))
+            );
         } else {
             // Jika memperbaharui sebuah domain
             $domain = Domain::find($per->domain_id);
@@ -77,6 +80,7 @@ class Domain extends Model
 
         $domain->fill([
             'unit_id' => $per->unit_id,
+            'keperuntukan_id' => $per->keperuntukan_id,
             'ip' => $per->ip,
             'nama_domain' => $per->nama_domain,
             'deskripsi' => $per->deskripsi,
@@ -90,12 +94,20 @@ class Domain extends Model
         return $domain;
     }
 
+    // Extend waktu reminder dari domain sepanjang 6 bulan
     function extend()
     {
-        // TODO: implement
+        DB::statement("UPDATE domains
+            SET reminder = DATE_ADD(CURDATE(), INTERVAL 6 MONTH)
+            WHERE id = {$this->id}");
+
+        // refresh reminder field
+        $temp = $this->fresh();
+        $this->reminder = $temp->reminder;
     }
 
-    static function export($req) {
+    static function export($req)
+    {
         $query = DB::table('domains as d')
             ->join('users as u', 'u.id', '=', 'd.user_id')
             ->join('units', 'units.id', '=', 'd.unit_id')
@@ -123,10 +135,13 @@ class Domain extends Model
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
         $spreadsheet = $reader->loadFromString($htmlString);
 
-        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
-        $currentTime = Carbon::now('Asia/Jakarta')->format("Y-m-d_Hi");
-        if (!file_exists(storage_path("app/export"))) {
-            mkdir(storage_path("app/export"), 0777, true);
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter(
+            $spreadsheet,
+            'Xls'
+        );
+        $currentTime = Carbon::now('Asia/Jakarta')->format('Y-m-d_Hi');
+        if (!file_exists(storage_path('app/export'))) {
+            mkdir(storage_path('app/export'), 0777, true);
         }
         $filename = "domain_aktif_export_$currentTime.xls";
         $writer->save(storage_path("app/export/$filename"));
@@ -154,6 +169,12 @@ class Domain extends Model
     function unit()
     {
         return $this->belongsTo('App\Models\Unit');
+    }
+
+    function keperuntukan()
+    {
+        return $this->belongsTo('App\Models\Unit', 'keperuntukan_id', 'id');
+        // return $this->belongsTo('App\Models\Unit', 'keperuntukan_id', 'id');
     }
 
     function permintaans()

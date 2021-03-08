@@ -112,6 +112,7 @@ class Permintaan extends Model
             'domain_id' => $domain->id,
             'user_id' => auth()->id(),
             'unit_id' => $domain->unit_id,
+            'keperuntukan_id' => $domain->keperuntukan_id,
             'surat' => null,
             'nama_domain' => $domain->nama_domain,
             'deskripsi' => $domain->deskripsi,

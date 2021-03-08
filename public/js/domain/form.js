@@ -10,11 +10,7 @@ function populate() {
 
 function validate() {
 	if (!$('#deskripsi').val()) { alert('Deskripsi Domain tidak boleh kosong!'); return false; }
-	if (!$('#surat').val()) {
-		if (!confirm('Field surat koson! Apakah Anda yakin tidak memakai surat?')) {
-			return false;
-		}
-	}
+	if (!$('#surat').val()) { alert('Field surat tidak boleh kosong!'); return false; }
 	if (!$('#kapasitas').val()) { alert('Kapasitas tidak boleh kosong!'); return false; }
 	if (!$('#keterangan').val()) { alert('Keterangan tidak boleh kosong!'); return false; }
 	return true;

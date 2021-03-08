@@ -149,10 +149,10 @@
 									<two-select
 										:seconds="{{$units}}"
 										:firsts="{{$tipeUnits}}"
-										second-val="{{old('unit')}}"
-										first-val="{{old('tipeUnit')}}"
+										second-val="{{$domain->unit->nama}}"
+										first-val="{{$domain->unit->tipeUnit->nama}}"
 
-										textbox-name-prop="unit"
+										second-name-prop="unit"
 										first-name-prop="tipeUnit"
 										>
 									</two-select>
@@ -168,8 +168,8 @@
 									<two-select-with-textbox
 										:seconds="{{$keperuntukans}}"
 										:firsts="{{$tipeKeperuntukans}}"
-										second-val="{{old('keperuntukan')}}"
-										first-val="{{old('tipeKeperuntukan')}}"
+										second-val="{{$domain->keperuntukan?$domain->keperuntukan->nama:''}}"
+										first-val="{{$domain->keperuntukan?$domain->keperuntukan->tipeUnit->nama:''}}"
 
 										textbox-name-prop="keperuntukan"
 										first-name-prop="tipeKeperuntukan"
@@ -231,7 +231,7 @@
                                     class="col-md-4 col-form-label text-md-left">{{ __('Keterangan') }}</label>
                                 <i class="fa fa-inbox domain"></i>
                                 <div class="col-md-7">
-                                    <select id="keteranganSelect" onchange="keteranganUpdate()">
+                                    <select id="keteranganSelect" onchange="keteranganUpdate()" class="form-control">
                                         <option>Reset Password</option>
                                         <option>Ganti Domain</option>
                                         <option>Buat Domain Baru</option>
@@ -239,7 +239,9 @@
                                         <option>Lainnya</option>
                                     </select>
 									<textarea id="keterangan" type="text" name="keterangan" class="form-control" hidden="true"
-										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
+										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">
+                                            {{old('keterangan')??__('Reset Password')}}
+                                        </textarea>
                                 </div>
                             </div>
 
@@ -254,6 +256,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="reminder"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Reminder') }}</label>
+                                <i class="fa fa-inbox domain"></i>
+                                <div class="col-md-7">
+                                    <input id="reminder" type="text" value="{{$domain->reminder}}" class="form-control"
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <a href="{{ route('domain.extend', ['domain' => $domain->id]) }}">
+                                Extend domain 6 bulan
+                            </a>
+
+                            <div class="form-group row">
                                 <label for="aktif"
                                     class="col-md-4 col-form-label text-md-left">{{ __('Aktif') }}</label>
                                 <i class="fa fa-inbox domain"></i>
@@ -262,9 +278,8 @@
                                         disabled>
                                 </div>
                             </div>
-
                         </div>
-                        <button type="button" class="next action-button" onclick="submitForm()">Buat</button>
+                        <button type="button" class="action-button" onclick="submitForm()">Buat</button>
                         {{-- <input type="button" name="next" class="next action-button" value="Next" />  --}}
                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>

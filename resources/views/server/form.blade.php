@@ -130,8 +130,8 @@
 									<two-select
 										:seconds="{{$units}}"
 										:firsts="{{$tipeUnits}}"
-										second-val="{{old('unit')}}"
-										first-val="{{old('tipeUnit')}}"
+										second-val="{{$server->unit?$server->unit->nama:''}}"
+										first-val="{{$server->unit?$server->unit->tipeUnit->nama:''}}"
 
 										textbox-name-prop="unit"
 										first-name-prop="tipeUnit"
@@ -149,8 +149,8 @@
 									<two-select-with-textbox
 										:seconds="{{$keperuntukans}}"
 										:firsts="{{$tipeKeperuntukans}}"
-										second-val="{{old('keperuntukan')}}"
-										first-val="{{old('tipeKeperuntukan')}}"
+										second-val="{{$domain->keperuntukan?$domain->keperuntukan->nama:''}}"
+										first-val="{{$domain->keperuntukan?$domain->keperuntukan->tipeUnit->nama:''}}"
 
 										textbox-name-prop="keperuntukan"
 										first-name-prop="tipeKeperuntukan"

@@ -48,8 +48,8 @@ class PICReminder extends Command
             EmailHelper::notifyReminder($domain);
         }
         // Set the next domain for the next six months
-        DB::statement('UPDATE domains 
-            SET reminder = DATE_ADD(reminder, INTERVAL 6 MONTH)
+        DB::statement('UPDATE domains
+            SET aktif = "terlantar"
             WHERE reminder = CURDATE();');
 
         return 0;

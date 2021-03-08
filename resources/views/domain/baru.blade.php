@@ -202,7 +202,7 @@
 										style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-inbox domain"></i>
 								<div class="col-md-7">
-                                    <select id="keteranganSelect" onchange="keteranganUpdate()">
+                                    <select id="keteranganSelect" onchange="keteranganUpdate()" class="form-control">
                                         <option>Reset Password</option>
                                         <option>Ganti Domain</option>
                                         <option>Buat Domain Baru</option>
@@ -210,7 +210,9 @@
                                         <option>Lainnya</option>
                                     </select>
 									<textarea id="keterangan" type="text" name="keterangan" class="form-control" hidden="true"
-										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">{{old('keterangan')}}</textarea>
+										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">
+                                            {{old('keterangan')??__('Reset Password')}}
+                                        </textarea>
 								</div>
 							</div>
 

@@ -69,6 +69,7 @@ Route::group(
                         Route::post('/domain/{domain}/edit', 'DomainController@simpanEdit')->name('domain.edit');
                         Route::get('/domain/{domain}/transfer', 'DomainController@formTransfer')->name('domain.transfer');
                         Route::post('/domain/{domain}/transfer', 'DomainController@saveTransfer')->name('domain.transfer');
+                        Route::get('/domain/{domain}/extend', 'DomainController@extend')->name('domain.extend');
 
                         // Permintaan management
                         Route::get('/permintaan/{permintaan}/lihat', 'PermintaanController@lihat')->name('permintaan.lihat');

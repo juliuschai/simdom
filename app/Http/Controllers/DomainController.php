@@ -42,15 +42,25 @@ class DomainController extends Controller
         $keperuntukans = Unit::getDropdownOptions(true);
         $tipeKeperuntukans = TipeUnit::getDropdownOptions(true);
 
-
-        return view('domain.baru', compact('user', 'units', 'tipeUnits', 'keperuntukans', 'tipeKeperuntukans'));
+        return view(
+            'domain.baru',
+            compact(
+                'user',
+                'units',
+                'tipeUnits',
+                'keperuntukans',
+                'tipeKeperuntukans'
+            )
+        );
     }
 
     function simpanBaru(PermintaanRequest $req)
     {
         $permintaan = Permintaan::permintaanBaru($req);
 
-        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Permintaan buat domain berhasil!');
+        return redirect()
+            ->route('permintaan.lihat', $permintaan->id)
+            ->with('message', 'Permintaan buat domain berhasil!');
     }
 
     function formEdit(Domain $domain)
@@ -63,10 +73,16 @@ class DomainController extends Controller
         $keperuntukans = Unit::getDropdownOptions(true);
         $tipeKeperuntukans = TipeUnit::getDropdownOptions(true);
 
-
         return view(
             'domain.edit',
-            compact('user', 'units', 'tipeUnits', 'keperuntukans', 'tipeKeperuntukans', 'domain')
+            compact(
+                'user',
+                'units',
+                'tipeUnits',
+                'keperuntukans',
+                'tipeKeperuntukans',
+                'domain'
+            )
         );
     }
 
@@ -88,7 +104,9 @@ class DomainController extends Controller
 
         $permintaan = Permintaan::permintaanBaru($req, $domain->id);
 
-        return redirect()->route('permintaan.lihat', $permintaan->id)->with('message', 'Permintaan edit domain berhasil!');
+        return redirect()
+            ->route('permintaan.lihat', $permintaan->id)
+            ->with('message', 'Permintaan edit domain berhasil!');
     }
 
     function formTransfer(Domain $domain)
@@ -112,7 +130,11 @@ class DomainController extends Controller
         $domain->user_id = $user->id;
         $domain->save();
 
-        EmailHelper::notifyTransfer($domain->user->email, $user->email, $domain);
+        EmailHelper::notifyTransfer(
+            $domain->user->email,
+            $user->email,
+            $domain
+        );
 
         return redirect()->route('domain.list');
     }
@@ -164,7 +186,10 @@ class DomainController extends Controller
         $domain->formal = 'nonformal';
         $domain->save();
 
-        EmailHelper::notifyStatus($permintaan, 'Domain berhasil ditandai nonformal');
+        EmailHelper::notifyStatus(
+            $permintaan,
+            'Domain berhasil ditandai nonformal'
+        );
 
         return redirect()
             ->back()
@@ -182,19 +207,32 @@ class DomainController extends Controller
         $domain->formal = 'formal';
         $domain->save();
 
-        EmailHelper::notifyStatus($permintaan, 'Domain berhasil ditandai formal');
+        EmailHelper::notifyStatus(
+            $permintaan,
+            'Domain berhasil ditandai formal'
+        );
 
         return redirect()
             ->back()
             ->with('message', 'Status Domain: formal');
     }
 
+    function extend(Domain $domain)
+    {
+        $domain->extend();
 
-    function formExport() {
+        return redirect()
+            ->back()
+            ->with('message', 'Domain: extended');
+    }
+
+    function formExport()
+    {
         return view('domain.export');
     }
 
-    function  downloadExport(Request $req) {
+    function downloadExport(Request $req)
+    {
         return Domain::export($req);
     }
 }
