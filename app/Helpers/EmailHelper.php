@@ -31,7 +31,7 @@ class EmailHelper
     {
         if ($permintaan->domain) {
             // Kalau permintaan untuk edit domain, nama domain dari domain
-            $email = $permintaan->domain->nama;
+            $email = $permintaan->domain->nama_domain;
         } else {
             // Kalau permintaan untuk buat domain (belum ada domain), nama domain dari permintaan
             $email = $permintaan->nama;
@@ -51,7 +51,7 @@ class EmailHelper
     // kirim email pemberitahuan permintaan baru untuk admin
     static function permintaanBaruAdmin(Permintaan $permintaan)
     {
-        // Ambil semua admin yang subscribe ke email 
+        // Ambil semua admin yang subscribe ke email
         $emails = EmailHelper::getEmailListAdmin();
         $data = [
             'link' => route('permintaan.lihat', [
@@ -105,7 +105,7 @@ class EmailHelper
             \Log::warning($th);
         }
     }
-    
+
     // Send email ke user bahwa permintaan terdapat perubahan status ('diterima', 'selesai', 'ditolak')
     static function notifyStatus(Permintaan $permintaan, string $status) {
         $email = EmailHelper::getEmailUser($permintaan);
@@ -134,7 +134,7 @@ class EmailHelper
         $data = [
             'from' => $from,
             'to' => $to,
-            'domain' => $domain->nama,
+            'domain' => $domain->nama_domain,
         ];
 
         // Kirim ke pic lama
@@ -163,8 +163,9 @@ class EmailHelper
     static function notifyReminder(Domain $domain) {
         $email = $domain->user->email;
         $data = [
-            'nama' => $domain->nama,
-            'link' => route('domain.transfer', ['domain' => $domain->id])
+            'nama' => $domain->nama_domain,
+            'linkExtend' => route('domain.extend', ['domain' => $domain->id]),
+            'linkTransfer' => route('domain.transfer', ['domain' => $domain->id])
         ];
 
         try {

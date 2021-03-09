@@ -204,6 +204,7 @@
 								<div class="col-md-7">
                                     <select id="keteranganSelect" onchange="keteranganUpdate()" class="form-control">
                                         <option>Reset Password</option>
+                                        <option>Reaktifasi Domain</option>
                                         <option>Ganti Domain</option>
                                         <option>Buat Domain Baru</option>
                                         <option>Penambahakn Kuota</option>

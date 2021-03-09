@@ -1,5 +1,6 @@
-Anda masih menjadi PIC untuk domain:
-{{$nama}}
-
-Jika data PIC sudah tidak berlaku, silahkan transfer pic baru {{$link}}
-Jika data PIC masih benar, silahkan membiarkan email ini. masih berlaku, silahkan 
+Anda masih menjadi PIC untuk domain: <br>
+{{$nama}} <br>
+<br>
+Jika data PIC masih benar/berlaku, silahkan <a href="{{ $linkExtend }}">extend waktu reminder</a><br>
+<br>
+Jika data PIC sudah tidak berlaku, silahkan <a href="{{ $linkTransfer }}">transfer ke PIC baru</a><br>

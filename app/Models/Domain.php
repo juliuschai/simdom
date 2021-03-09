@@ -97,13 +97,16 @@ class Domain extends Model
     // Extend waktu reminder dari domain sepanjang 6 bulan
     function extend()
     {
-        DB::statement("UPDATE domains
-            SET reminder = DATE_ADD(CURDATE(), INTERVAL 6 MONTH)
-            WHERE id = {$this->id}");
+        $this->reminder = date(
+            'Y-m-d',
+            strtotime('+6 months', strtotime(date('Y-m-d')))
+        );
 
-        // refresh reminder field
-        $temp = $this->fresh();
-        $this->reminder = $temp->reminder;
+        if ($this->aktif == 'terlantar') {
+            $this->aktif = 'aktif';
+        }
+
+        $this->save();
     }
 
     static function export($req)

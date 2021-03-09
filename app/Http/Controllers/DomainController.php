@@ -222,7 +222,7 @@ class DomainController extends Controller
         $domain->extend();
 
         return redirect()
-            ->back()
+            ->route('domain.edit', $domain->id)
             ->with('message', 'Domain: extended');
     }
 
