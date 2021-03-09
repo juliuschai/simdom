@@ -171,7 +171,7 @@ class EmailHelper
         try {
             Mail::send('email.domain_reminder', $data, function ($message) use ($email) {
                 $message->to($email);
-                $message->subject('Simdom - Perubahan PIC');
+                $message->subject('Simdom - Reminder PIC');
             });
         } catch (\Throwable $th) {
             \Log::warning('Gagal mengemail user reminder PIC');
