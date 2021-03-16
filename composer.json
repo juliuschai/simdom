@@ -17,6 +17,7 @@
         "laravel/ui": "^2.1",
         "myits/openid-connect-client": "*",
         "phpoffice/phpspreadsheet": "^1.14",
+        "spatie/laravel-backup": "^6.15",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
