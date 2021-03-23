@@ -11,9 +11,17 @@
 		@endif
 
 		<!-- Action button templates -->
+		<div id="viewBtnTemplate" style="display: none;">
+			<a href="{{route('domain.view', ['domain' => 0])}}">
+				<button id="viewBtn" style="padding: 3px 8px; margin: 2px;" type="button" class="btn btn-primary" title="View Domain">
+					<i class="fa fa-search"></i>
+				</button>
+			</a>
+		</div>
+
 		<div id="editBtnTemplate" style="display: none;">
 			<a href="{{route('domain.edit', ['domain' => 0])}}">
-				<button id="editBtn" style="padding: 3px 8px" type="button" class="btn btn-warning" title="Edit Domain">
+				<button id="editBtn" style="padding: 3px 8px; margin: 2px;" type="button" class="btn btn-warning" title="Edit Domain">
 					<i class="fa fa-pencil"></i>
 				</button>
 			</a>

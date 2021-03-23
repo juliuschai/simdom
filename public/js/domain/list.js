@@ -1,6 +1,7 @@
 // domain list datatabel setup
 var tableElm = $('#tableElm');
 
+var viewBtn = $('#viewBtnTemplate');
 var editBtn = $('#editBtnTemplate');
 var nonaktifasiBtn = $('#nonaktifasiBtnTemplate');
 var aktifasiBtn = $('#aktifasiBtnTemplate');
@@ -111,6 +112,7 @@ var datatableRes = tableElm.DataTable({
 			visible: true,
 			render: function (data, type, full, meta) {
 				let res = '<div style="white-space: nowrap;">';
+				res += viewBtn.createButton(full.id).html();
 				res += editBtn.createButton(full.id).html();
 				if (full.aktif === 'nonaktif') {
                     res += aktifasiBtn.createButton(full.id).html();

@@ -63,6 +63,13 @@ class DomainController extends Controller
             ->with('message', 'Permintaan buat domain berhasil!');
     }
 
+    function view(Domain $domain)
+    {
+        $user = User::findOrFail($domain->user_id);
+
+        return view('domain.view', compact('user', 'domain'));
+    }
+
     function formEdit(Domain $domain)
     {
         $user = User::findOrLogout(auth()->id());

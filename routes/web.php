@@ -65,6 +65,8 @@ Route::group(
                     ],
                     function () {
                         // Domain management dari pemilik
+                        Route::get('/domain/{domain}/view', 'DomainController@view')->name('domain.view');
+
                         Route::get('/domain/{domain}/edit', 'DomainController@formEdit')->name('domain.edit');
                         Route::post('/domain/{domain}/edit', 'DomainController@simpanEdit')->name('domain.edit');
                         Route::get('/domain/{domain}/transfer', 'DomainController@formTransfer')->name('domain.transfer');

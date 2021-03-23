@@ -12,7 +12,7 @@ class PantauWebController extends Controller
     public function index(Request $request)
     {
         // dd($request->identifier);
-        // http://simdomdev.its.ac.id/pantauweb?identifier=EK8q2Yly&secret=3ui22cdqVCfVKY9C
+        // http://simdom.its.ac.id/pantauweb?identifier=value_in_env&secret=value_in_env
         if (
             $request->identifier != env("PANTAI_WEB_IDENTIFIER") ||
             $request->secret != env("PANTAI_WEB_SECRET")
