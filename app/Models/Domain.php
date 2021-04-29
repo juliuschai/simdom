@@ -177,7 +177,6 @@ class Domain extends Model
     function keperuntukan()
     {
         return $this->belongsTo('App\Models\Unit', 'keperuntukan_id', 'id');
-        // return $this->belongsTo('App\Models\Unit', 'keperuntukan_id', 'id');
     }
 
     function permintaans()

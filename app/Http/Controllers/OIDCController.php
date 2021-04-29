@@ -10,13 +10,13 @@ class OIDCController extends Controller
     function login(Request $request)
     {
         OIDCHelper::login();
-        return redirect()->route('home');
+        return redirect()->route('dashboard.chart');
     }
 
     function logout(Request $request)
     {
         OIDCHelper::logout();
-        return redirect()->route('home');
+        return redirect()->route('dashboard.chart');
     }
 
     /**

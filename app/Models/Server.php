@@ -62,4 +62,9 @@ class Server extends Model
     {
         return $this->belongsTo('App\Models\Unit');
     }
+
+    function keperuntukan()
+    {
+        return $this->belongsTo('App\Models\Unit', 'keperuntukan_id', 'id');
+    }
 }

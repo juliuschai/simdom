@@ -134,7 +134,7 @@
 										second-val="{{old('unit')}}"
 										first-val="{{old('tipeUnit')}}"
 
-										textbox-name-prop="unit"
+										second-name-prop="unit"
 										first-name-prop="tipeUnit"
 										>
 									</two-select>
