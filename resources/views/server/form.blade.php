@@ -140,25 +140,22 @@
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<label for="keperuntukan"
-									class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
-										style="color: red" class="d-inline">*</p></label>
+                            <div class="form-group row">
+                                <label for="tipeKeperuntukan"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
+                                    style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-window-maximize domain"></i>
-								<div class="col-md-7">
-									<two-select-with-textbox
-										:seconds="{{$keperuntukans}}"
-										:firsts="{{$tipeKeperuntukans}}"
-										second-val="{{$server->keperuntukan?$server->keperuntukan->nama:''}}"
-										first-val="{{$server->keperuntukan?$server->keperuntukan->tipeUnit->nama:''}}"
-
-										textbox-name-prop="keperuntukan"
-										first-name-prop="tipeKeperuntukan"
-										>
-									</two-select-with-textbox>
-								</div>
-							</div>
-
+                                <div class="col-md-7">
+                                    <select id="tipeKeperuntukanSelect" onchange="tipeKeperuntukanUpdate()" name="tipeKeperuntukan"
+                                        class="form-control" data-oldval="{{ $server->keperuntukan?$server->keperuntukan->tipeUnit->nama:'' }}">
+                                        @foreach ($tipeKeperuntukans as $tipeKeperuntukan)
+    										<option>{{ $tipeKeperuntukan }}</option>
+                                        @endforeach
+                                    </select>
+									<textarea id="keperuntukan" type="text" name="keperuntukan" class="form-control" hidden="true"
+                                    >{{ $server->keperuntukan?$server->keperuntukan->nama:'-' }}</textarea>
+                                </div>
+                            </div>
 
 							<div class="form-group row">
 								<label for="noRack"
@@ -185,4 +182,24 @@
 <script src="{{ asset('js/form/jquery.min.js') }}" defer></script>
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
 {{-- <script src="{{ asset('js/server/form.js') }}" defer></script> --}}
+<script>
+    // idk why we need to wait a little but before changing the select but yea
+    setTimeout(() => {
+        let sel = document.getElementById('tipeKeperuntukanSelect');
+        sel.value = sel.dataset.oldval;
+        tipeKeperuntukanUpdate()
+    }, 100);
+
+    function tipeKeperuntukanUpdate() {
+        const keperuntukanSelect = document.getElementById('tipeKeperuntukanSelect');
+        const keperuntukanTxt = document.getElementById('keperuntukan');
+        if (keperuntukanSelect.value == 'Lain-lain' || keperuntukanSelect.value == 'Pusat Studi') {
+            keperuntukanTxt.hidden = false;
+            keperuntukanTxt.value = '-';
+        } else {
+            keperuntukanTxt.hidden = true;
+        }
+    }
+
+</script>
 @endsection

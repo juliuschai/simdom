@@ -141,7 +141,25 @@
 								</div>
 							</div>
 
-							<div class="form-group row">
+
+                            <div class="form-group row">
+                                <label for="tipeKeperuntukan"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
+                                    style="color: red" class="d-inline">*</p></label>
+								<i class="fa fa-window-maximize domain"></i>
+                                <div class="col-md-7">
+                                    <select id="tipeKeperuntukanSelect" onchange="tipeKeperuntukanUpdate()" name="tipeKeperuntukan"
+                                        class="form-control" data-oldval="{{ old('tipeKeperuntukan') }}">
+                                        @foreach ($tipeKeperuntukans as $tipeKeperuntukan)
+    										<option>{{ $tipeKeperuntukan }}</option>
+                                        @endforeach
+                                    </select>
+									<textarea id="keperuntukan" type="text" name="keperuntukan" class="form-control" hidden="true"
+                                    >{{ old('keperuntukan')??'-' }}</textarea>
+                                </div>
+                            </div>
+
+                            {{-- <div class="form-group row">
 								<label for="keperuntukan"
 									class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
 										style="color: red" class="d-inline">*</p></label>
@@ -158,7 +176,7 @@
 										>
 									</two-select-with-textbox>
 								</div>
-							</div>
+							</div> --}}
 
 							<div class="form-group row">
 								<label for="surat" class="col-md-4 col-form-label text-md-left">{{ __('Surat') }}<p
@@ -211,9 +229,8 @@
                                         <option>Lainnya</option>
                                     </select>
 									<textarea id="keterangan" type="text" name="keterangan" class="form-control" hidden="true"
-										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">
-                                            {{old('keterangan')??__('Reset Password')}}
-                                        </textarea>
+										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;"
+                                        >{{old('keterangan')??__('Reset Password')}}</textarea>
 								</div>
 							</div>
 
@@ -235,6 +252,24 @@
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
 <script src="{{ asset('js/domain/form.js') }}" defer></script>
 <script>
+    // idk why we need to wait a little but before changing the select but yea
+    setTimeout(() => {
+        let sel = document.getElementById('tipeKeperuntukanSelect');
+        sel.value = sel.dataset.oldval;
+        tipeKeperuntukanUpdate()
+    }, 100);
+
+    function tipeKeperuntukanUpdate() {
+        const keperuntukanSelect = document.getElementById('tipeKeperuntukanSelect');
+        const keperuntukanTxt = document.getElementById('keperuntukan');
+        if (keperuntukanSelect.value == 'Lain-lain' || keperuntukanSelect.value == 'Pusat Studi') {
+            keperuntukanTxt.hidden = false;
+            keperuntukanTxt.value = '-';
+        } else {
+            keperuntukanTxt.hidden = true;
+        }
+    }
+
     function keteranganUpdate() {
         const keteranganSelect = document.getElementById('keteranganSelect');
         const keteranganTxt = document.getElementById('keterangan');

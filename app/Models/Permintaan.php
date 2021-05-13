@@ -70,7 +70,11 @@ class Permintaan extends Model
         }
 
         $unit_id = Unit::getIdFromUnitOrCreate($req->unit, $req->tipeUnit);
-        $keperuntukan_id = Unit::getIdFromUnitOrCreate($req->keperuntukan, $req->tipeKeperuntukan);
+        if ($req->keperuntukan) {
+            $keperuntukan_id = Unit::getIdFromUnitOrCreate($req->keperuntukan, $req->tipeKeperuntukan);
+        } else {
+            $keperuntukan_id = null;
+        }
 
         $permintaan = Permintaan::create([
             'domain_id' => $domain_id,
@@ -202,6 +206,11 @@ class Permintaan extends Model
     function unit()
     {
         return $this->belongsTo('App\Models\Unit');
+    }
+
+    function keperuntukan()
+    {
+        return $this->belongsTo('App\Models\Unit', 'keperuntukan_id', 'id');
     }
 
     function domain()

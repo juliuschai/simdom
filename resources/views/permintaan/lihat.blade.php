@@ -148,7 +148,7 @@
 								<div class="col-md-7" style="margin-right:10px;">
 									@admin
 									<admin-nama-domain-input :templates="{{$domain_templates}}"
-										sel-template-prop="{{$permintaan->unit->tipeUnit->domain_template}}"
+										sel-template-prop="{{$permintaan->keperuntukan?$permintaan->keperuntukan->tipeUnit->domain_template:''}}"
 										nama-domain-prop="{{$permintaan->nama_domain}}">
 									</admin-nama-domain-input>
 									@else
@@ -182,6 +182,18 @@
 									<input id="tipeUnit" type="text" value="{{$permintaan->unit->tipeUnit->nama}}"
 										class="form-control" disabled>
 									<input id="unit" type="text" value="{{$permintaan->unit->nama}}"
+										class="form-control" disabled>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="unit"
+									class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}</label>
+								<i class="fa fa-window-maximize domain"></i>
+								<div class="col-md-7">
+									<input id="tipeKeperuntukan" type="text" value="{{$permintaan->keperuntukan?$permintaan->keperuntukan->tipeUnit->nama:''}}"
+										class="form-control" disabled>
+									<input id="keperuntukan" type="text" value="{{$permintaan->keperuntukan?$permintaan->keperuntukan->nama:''}}"
 										class="form-control" disabled>
 								</div>
 							</div>

@@ -159,24 +159,22 @@
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<label for="keperuntukan"
-									class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
-										style="color: red" class="d-inline">*</p></label>
+                            <div class="form-group row">
+                                <label for="tipeKeperuntukan"
+                                    class="col-md-4 col-form-label text-md-left">{{ __('Keperuntukan') }}<p
+                                    style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-window-maximize domain"></i>
-								<div class="col-md-7">
-									<two-select-with-textbox
-										:seconds="{{$keperuntukans}}"
-										:firsts="{{$tipeKeperuntukans}}"
-										second-val="{{$domain->keperuntukan?$domain->keperuntukan->nama:''}}"
-										first-val="{{$domain->keperuntukan?$domain->keperuntukan->tipeUnit->nama:''}}"
-
-										textbox-name-prop="keperuntukan"
-										first-name-prop="tipeKeperuntukan"
-										>
-									</two-select-with-textbox>
-								</div>
-							</div>
+                                <div class="col-md-7">
+                                    <select id="tipeKeperuntukanSelect" onchange="tipeKeperuntukanUpdate()" name="tipeKeperuntukan"
+                                        class="form-control" data-oldval="{{ $domain->keperuntukan?$domain->keperuntukan->tipeUnit->nama:'' }}">
+                                        @foreach ($tipeKeperuntukans as $tipeKeperuntukan)
+    										<option>{{ $tipeKeperuntukan }}</option>
+                                        @endforeach
+                                    </select>
+									<textarea id="keperuntukan" type="text" name="keperuntukan" class="form-control" hidden="true"
+                                    >{{ $domain->keperuntukan?$domain->keperuntukan->nama:'-' }}</textarea>
+                                </div>
+                            </div>
 
                             @admin
                             <a href="{{route('domain.list', ['q' => $domain->unit->nama])}}">Lihat semua domain dari unit tersebut</a>
@@ -240,9 +238,8 @@
                                         <option>Lainnya</option>
                                     </select>
 									<textarea id="keterangan" type="text" name="keterangan" class="form-control" hidden="true"
-										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;">
-                                            {{old('keterangan')??__('Reset Password')}}
-                                        </textarea>
+										placeholder="Pembuatan domain baru; Penambahan kuota DB; Pergantian nama domain;"
+                                        >{{old('keterangan')??__('Reset Password')}}</textarea>
                                 </div>
                             </div>
 
@@ -296,6 +293,24 @@
 <script src="{{ asset('js/fieldset.js') }}" defer></script>
 <script src="{{ asset('js/domain/form.js') }}" defer></script>
 <script>
+    // idk why we need to wait a little but before changing the select but yea
+    setTimeout(() => {
+        let sel = document.getElementById('tipeKeperuntukanSelect');
+        sel.value = sel.dataset.oldval;
+        tipeKeperuntukanUpdate()
+    }, 100);
+
+    function tipeKeperuntukanUpdate() {
+        const keperuntukanSelect = document.getElementById('tipeKeperuntukanSelect');
+        const keperuntukanTxt = document.getElementById('keperuntukan');
+        if (keperuntukanSelect.value == 'Lain-lain' || keperuntukanSelect.value == 'Pusat Studi') {
+            keperuntukanTxt.hidden = false;
+            keperuntukanTxt.value = '-';
+        } else {
+            keperuntukanTxt.hidden = true;
+        }
+    }
+
     function keteranganUpdate() {
         const keteranganSelect = document.getElementById('keteranganSelect');
         const keteranganTxt = document.getElementById('keterangan');
