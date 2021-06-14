@@ -85,6 +85,7 @@ class Domain extends Model
             'nama_domain' => $per->nama_domain,
             'deskripsi' => $per->deskripsi,
             'server' => $per->server,
+            'no_rack' => $per->no_rack,
             'kapasitas' => $per->kapasitas,
             'status' => 'siap',
         ]);
@@ -128,6 +129,7 @@ class Domain extends Model
             'd.deskripsi as deskripsi',
             'd.ip as ip',
             'd.server as server',
+            'd.no_rack as no_rack',
             'd.kapasitas as kapasitas',
             'd.status as status',
             'd.aktif as aktif',

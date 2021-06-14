@@ -163,6 +163,16 @@
                             </div>
                         </div>
 
+                        @if($domain->no_rack)
+                        <div class="form-group row">
+                            <label for="noRack" class="col-md-4 col-form-label text-md-left">{{ __('No Rack') }}</label>
+                            <i class="fa fa-inbox domain"></i>
+                            <div class="col-md-7">
+                                <input id="noRack" type="text" value="{{$domain->no_rack}}" class="form-control" disabled>
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="form-group row">
                             <label for="kapasitas"
                                 class="col-md-4 col-form-label text-md-left">{{ __('Kapasitas (Kuota DB)') }}</label>

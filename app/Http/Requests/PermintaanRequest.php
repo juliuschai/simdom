@@ -32,6 +32,7 @@ class PermintaanRequest extends FormRequest
             'deskripsi' => 'required|string|max:254',
             'domainDiajukan' => 'nullable|string|max:254',
             'serverDomain' => 'required|string|in:WHS,VPS,Colocation',
+            'noRack' => 'required_if:serverDomain,Colocation|nullable|string',
             'kapasitas' => 'required|integer',
             'keterangan' => 'required|string|max:254',
         ];

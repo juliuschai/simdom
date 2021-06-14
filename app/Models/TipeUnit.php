@@ -27,7 +27,7 @@ class TipeUnit extends Model
      */
     static function getDropdownOptions($keperuntukan)
     {
-        return TipeUnit::orderBy('nama')->where('keperuntukan', $keperuntukan)->pluck('nama');
+        return TipeUnit::where('keperuntukan', $keperuntukan)->pluck('nama');
     }
 
     function units()

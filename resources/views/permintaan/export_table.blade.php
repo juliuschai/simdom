@@ -12,6 +12,7 @@
             <td>Deskrpsi</td>
             <td>IP</td>
             <td>Tipe Server</td>
+            <td>No Rack</td>
             <td>Kapasitas</td>
             <td>Status</td>
             <td>Keterangan</td>
@@ -35,6 +36,7 @@
 			<td>{{$data->deskripsi}}</td>
 			<td>{{$data->ip}}</td>
 			<td>{{$data->server}}</td>
+			<td>{{$data->no_rack}}</td>
 			<td>{{$data->kapasitas}}</td>
 			<td>{{$data->status}}</td>
 			<td>{{$data->keterangan}}</td>

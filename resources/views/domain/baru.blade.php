@@ -193,11 +193,23 @@
 									<p style="color: red" class="d-inline">*</p></label>
 								<i class="fa fa-server domain"></i>
 								<div class="col-md-7">
-									<select id="serverDomain" name="serverDomain" class="form-control" data-value="{{old('serverDomain')}}">
+									<select id="serverDomain" name="serverDomain" onchange="serverDomainUpdate()"
+                                        class="form-control" data-value="{{old('serverDomain')}}">
 										<option value="WHS">CPanel (Website)</option>
 										<option value="VPS">VPS (Aplikasi dan SIM)</option>
 										<option value="Colocation">Server (Colocation)</option>
 									</select>
+								</div>
+							</div>
+
+                            <div id="noRackField" class="form-group row">
+								<label for="noRack"
+									class="col-md-4 col-form-label text-md-left">{{ __('No Rack') }}<p
+										style="color: red" class="d-inline">*</p></label>
+								<i class="fa fa-sticky-note-o domain"></i>
+								<div class="col-md-7">
+									<input id="noRack" type="text" name="noRack" value="{{old('noRack')}}"
+										class="form-control" placeholder="">
 								</div>
 							</div>
 
@@ -257,7 +269,19 @@
         let sel = document.getElementById('tipeKeperuntukanSelect');
         sel.value = sel.dataset.oldval;
         tipeKeperuntukanUpdate()
+        serverDomainUpdate()
     }, 100);
+
+    function serverDomainUpdate() {
+        const serverDomainSelect = document.getElementById('serverDomain');
+        const noRackField = document.getElementById('noRackField');
+        console.log(serverDomainSelect.value);
+        if (serverDomainSelect.value == 'Colocation') {
+            noRackField.style.display = "block";
+        } else {
+            noRackField.style.display = "none";
+        }
+    }
 
     function tipeKeperuntukanUpdate() {
         const keperuntukanSelect = document.getElementById('tipeKeperuntukanSelect');
