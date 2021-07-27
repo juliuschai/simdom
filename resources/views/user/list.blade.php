@@ -34,7 +34,8 @@
                         <th class="text-center" scope="col">No. WA</th>
                         <th class="text-center" scope="col">Sivitas</th>
                         <th class="text-center" scope="col">Admin</th>
-                        <th class="text-center" scope="col">Notif</th>
+                        <th class="text-center" scope="col">Notif Layanan</th>
+                        <th class="text-center" scope="col">Notif Jaringan</th>
                         <th class="text-center" scope="col">Aksi</th>
                     </tr>
                 </thead>

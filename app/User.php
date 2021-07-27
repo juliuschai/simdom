@@ -44,7 +44,8 @@ class User extends Authenticatable
             'no_wa',
             'group',
             'role',
-            'email_notification',
+            'notif_layanan',
+            'notif_jaringan',
         ]);
     }
 

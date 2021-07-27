@@ -125,6 +125,10 @@
 							@csrf
 						@endif
 						@if($permintaan->status == 'diterima')
+						<form method="POST" action="{{route('permintaan.periksa', $permintaan->id)}}">
+							@csrf
+						@endif
+						@if($permintaan->status == 'diperiksa')
 						<form method="POST" action="{{route('permintaan.selesai', $permintaan->id)}}">
 							@csrf
 						@endif
@@ -154,7 +158,7 @@
 									@else
 									<input id="namaDomain" type="text" value="{{$permintaan->nama_domain}}"
 										class="form-control" disabled>
-									@endif
+									@endadmin
 								</div>
 							</div>
 
@@ -269,7 +273,6 @@
 							</div>
 
 							@admin
-							@if($permintaan->status == 'menunggu' || $permintaan->status == 'ditolak' || $permintaan->status == 'diterima')
 							<div class="form-group row">
 								<label for="ip"
 									class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
@@ -284,10 +287,24 @@
 							<button type="submit" class="next action-terima">Terima</button>
 							@endif
 							@if($permintaan->status == 'diterima')
-							<button type="submit" class="next action-selesai">Selesai</button>
+							<button type="submit" class="next action-selesai">Selesai Proses</button>
+							@endif
+							@if($permintaan->status == 'diperiksa')
+							<button type="submit" class="next action-selesai">Selesai Periksa</button>
 							@endif
 						</form>
-							@endif
+                            @else
+                            @if($permintaan->user->id == auth()->id())
+							<div class="form-group row">
+								<label for="ip"
+									class="col-md-4 col-form-label text-md-left">{{ __('IP Address') }}</label>
+								<i class="fa fa-inbox domain"></i>
+								<div class="col-md-7">
+									<input id="ip" name="ip" type="text" value="{{$permintaan->ip}}"
+										class="form-control" disabled>
+								</div>
+							</div>
+                            @endif
 							@endadmin
 
 							@admin

@@ -54,10 +54,18 @@
     </div>
 
     <div class="form-group row">
-        <label for="notif" class="col-md-4 col-form-label text-md-left">{{ __('Notif') }}</label>
+        <label for="notif_layanan" class="col-md-4 col-form-label text-md-left">{{ __('Notif Layanan') }}</label>
         <i class="fa fa-users domain"></i>
         <div class="col-md-6">
-            <input id="notif" type="text" class="form-control" value="{{$user->email_notification ? 'iya' : 'tidak'}}">
+            <input id="notif_layanan" type="text" class="form-control" value="{{$user->notif_layanan ? 'iya' : 'tidak'}}">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="notif_jaringan" class="col-md-4 col-form-label text-md-left">{{ __('Notif Jaringan') }}</label>
+        <i class="fa fa-users domain"></i>
+        <div class="col-md-6">
+            <input id="notif_jaringan" type="text" class="form-control" value="{{$user->notif_jaringan ? 'iya' : 'tidak'}}">
         </div>
     </div>
 
@@ -73,19 +81,32 @@
         @csrf
         <button type="submit" class="btn btn-success" style="margin-bottom: 5px; padding: 4px 8px;font-size: 11pt;">Jadikan User</button>
     </form>
-    @endif
 
-    {{-- Email notification --}}
-    @if($user->email_notification)
-    <form method="POST" action="{{ route('user.notif', ['user' => $user->id, 'notif' => 'false']) }}">
+    {{-- Email notification Tim Layanan --}}
+    @if($user->notif_layanan)
+    <form method="POST" action="{{ route('user.notif.layanan', ['user' => $user->id, 'notif' => 'false']) }}">
         @csrf
-        <button type="submit" class="btn btn-custom-warning" style="margin-bottom: 5px; padding: 4px 8px;font-size: 11pt;">Hentikan email notifikasi user</button>
+        <button type="submit" class="btn btn-custom-warning" style="margin-bottom: 5px; padding: 4px 8px;font-size: 11pt;">Hentikan email notifikasi tim layanan user</button>
     </form>
     @else
-    <form method="POST" action="{{ route('user.notif', ['user' => $user->id, 'notif' => 'true']) }}">
+    <form method="POST" action="{{ route('user.notif.layanan', ['user' => $user->id, 'notif' => 'true']) }}">
         @csrf
-        <button type="submit" class="btn btn-danger" style="padding: 4px 8px;font-size: 11pt;">Email notifikasi user untuk permintaan baru</button>
+        <button type="submit" class="btn btn-danger" style="padding: 4px 8px;font-size: 11pt;">Email notifikasi tim layanan user untuk permintaan baru</button>
     </form>
+    @endif
+
+    {{-- Email notification Tim jaringan --}}
+    @if($user->notif_jaringan)
+    <form method="POST" action="{{ route('user.notif.jaringan', ['user' => $user->id, 'notif' => 'false']) }}">
+        @csrf
+        <button type="submit" class="btn btn-custom-warning" style="margin-bottom: 5px; padding: 4px 8px;font-size: 11pt;">Hentikan email notifikasi tim jaringan user</button>
+    </form>
+    @else
+    <form method="POST" action="{{ route('user.notif.jaringan', ['user' => $user->id, 'notif' => 'true']) }}">
+        @csrf
+        <button type="submit" class="btn btn-danger" style="padding: 4px 8px;font-size: 11pt;">Email notifikasi tim jaringan user untuk permintaan baru</button>
+    </form>
+    @endif
     @endif
         </div>
     </div>

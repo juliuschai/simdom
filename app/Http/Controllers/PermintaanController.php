@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\EmailHelper;
 use App\Http\Requests\ExportRequest;
 use App\Http\Requests\PermintaanSelesaiRequest;
+use App\Http\Requests\PermintaanPeriksaRequest;
 use App\Http\Requests\PermintaanTerimaRequest;
 use App\Models\Domain;
 use App\Models\Permintaan;
@@ -81,6 +82,22 @@ class PermintaanController extends Controller
         return redirect()
             ->back()
             ->with('message', 'Permintan berhasil diterima');
+    }
+
+    function periksa(Permintaan $permintaan, PermintaanPeriksaRequest $req)
+    {
+        $permintaan->fill([
+            'nama_domain' => $req->namaDomain,
+            'ip' => $req->ip,
+            'status' => 'diperiksa'
+        ]);
+        $permintaan->save();
+
+        EmailHelper::notifyStatus($permintaan, 'Permintaan sedang diperiksa');
+
+        return redirect()
+            ->back()
+            ->with('message', 'Permintan berhasil selesai diproses');
     }
 
     function selesai(Permintaan $permintaan, PermintaanSelesaiRequest $req)

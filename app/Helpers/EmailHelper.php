@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailHelper
 {
-    static function test()
-    {
-        EmailHelper::getEmailListAdmin();
-    }
-
     static function getEmailUser(Permintaan $permintaan)
     {
         if ($permintaan->domain) {
@@ -40,9 +35,17 @@ class EmailHelper
         return $email;
     }
 
-    static function getEmailListAdmin()
+    static function getEmailListAdminLayanan()
     {
-        $emails = User::where('email_notification', true)
+        $emails = User::where('notif_layanan', true)
+            ->pluck('email')
+            ->toArray();
+        return $emails;
+    }
+
+    static function getEmailListAdminJaringan()
+    {
+        $emails = User::where('notif_jaringan', true)
             ->pluck('email')
             ->toArray();
         return $emails;
@@ -52,7 +55,7 @@ class EmailHelper
     static function permintaanBaruAdmin(Permintaan $permintaan)
     {
         // Ambil semua admin yang subscribe ke email
-        $emails = EmailHelper::getEmailListAdmin();
+        $emails = EmailHelper::getEmailListAdminLayanan(); // TODO:
         $data = [
             'link' => route('permintaan.lihat', [
                 'permintaan' => $permintaan->id,
@@ -108,7 +111,14 @@ class EmailHelper
 
     // Send email ke user bahwa permintaan terdapat perubahan status ('diterima', 'selesai', 'ditolak')
     static function notifyStatus(Permintaan $permintaan, string $status) {
-        $email = EmailHelper::getEmailUser($permintaan);
+        if ($status == 'Permintaan sedang diproses') {
+            $emails = EmailHelper::getEmailListAdminJaringan();
+        } else if ($status == 'Permintaan sedang diperiksa') {
+            $emails = EmailHelper::getEmailListAdminLayanan();
+        } else {
+            $emails = [];
+        }
+        $emails[] = EmailHelper::getEmailUser($permintaan);
 
         $data = [
             'status' => $status,
@@ -120,8 +130,8 @@ class EmailHelper
         ];
 
         try {
-            Mail::send('email.permintaan_status', $data, function ($message) use ($email) {
-                $message->to($email);
+            Mail::send('email.permintaan_status', $data, function ($message) use ($emails) {
+                $message->to($emails);
                 $message->subject('Simdom - Status Permintaan');
             });
         } catch (\Throwable $th) {

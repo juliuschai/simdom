@@ -103,6 +103,7 @@ Route::group(
 
                         // Ubah status Permintaan
                         Route::post('/permintaan/{permintaan}/terima', 'PermintaanController@terima')->name('permintaan.terima');
+                        Route::post('/permintaan/{permintaan}/periksa', 'PermintaanController@periksa')->name('permintaan.periksa');
                         Route::post('/permintaan/{permintaan}/selesai', 'PermintaanController@selesai')->name('permintaan.selesai');
                         Route::post('/permintaan/{permintaan}/tolak', 'PermintaanController@tolak')->name('permintaan.tolak');
                         Route::get('/permintaan/export', 'PermintaanController@formExport')->name('permintaan.export');
@@ -124,7 +125,8 @@ Route::group(
                         Route::get('/user/data', 'UserController@listData')->name('user.data');
                         Route::get('/user/{user}/lihat', 'UserController@lihat')->name('user.lihat');
                         Route::post('/user/{user}/role/{role}', 'UserController@setRole')->name('user.role');
-                        Route::post('/user/{user}/notif/{notif}', 'UserController@setNotif')->name('user.notif');
+                        Route::post('/user/{user}/notif/{notif}/layanan', 'UserController@setNotifLayanan')->name('user.notif.layanan');
+                        Route::post('/user/{user}/notif/{notif}/jaringan', 'UserController@setNotifJaringan')->name('user.notif.jaringan');
 
                         // Unit management
                         Route::get('/unit/list', 'UnitController@list')->name('unit.list');

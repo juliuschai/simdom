@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermintaanSelesaiRequest extends FormRequest
+class PermintaanPeriksaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class PermintaanSelesaiRequest extends FormRequest
     public function rules()
     {
         return [
-            'namaDomain' => 'nullable|string|max:254',
+            'namaDomain' => 'required|string|max:254',
             'ip' => 'nullable|ip'
         ];
     }

@@ -50,14 +50,25 @@ class UserController extends Controller
             ->with('message', "{$user->nama} peran user diubah");
     }
 
-    function setNotif(User $user, string $bool)
+    function setNotifLayanan(User $user, string $bool)
     {
         $bool = $bool == 'true'; // cast string sebagai boolean
-        $user->email_notification = $bool;
+        $user->notif_layanan = $bool;
         $user->save();
 
         return redirect()
             ->route('user.lihat', ['user' => $user->id])
-            ->with('message', "{$user->nama} notifikasi email diubah");
+            ->with('message', "{$user->nama} notifikasi untuk tim layanan berhasil diubah");
+    }
+
+    function setNotifJaringan(User $user, string $bool)
+    {
+        $bool = $bool == 'true'; // cast string sebagai boolean
+        $user->notif_jaringan = $bool;
+        $user->save();
+
+        return redirect()
+            ->route('user.lihat', ['user' => $user->id])
+            ->with('message', "{$user->nama} notifikasi untuk tim jaringan berhasil diubah");
     }
 }

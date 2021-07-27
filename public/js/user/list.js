@@ -57,9 +57,20 @@ tableElm.DataTable({
 			visible: true,
 		},
 		{
-			title: 'Notif',
-			data: 'email_notification',
-			name: 'email_notification',
+			title: 'Notif Layanan',
+			data: 'notif_layanan',
+			name: 'notif_layanan',
+			searchable: true,
+            visible: true,
+            render: function (data, type, full, meta) {
+                if (data == true) return 'Iya';
+                else return 'Tidak';
+            },
+		},
+		{
+			title: 'Notif Jaringan',
+			data: 'notif_jaringan',
+			name: 'notif_jaringan',
 			searchable: true,
             visible: true,
             render: function (data, type, full, meta) {

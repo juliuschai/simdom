@@ -37,7 +37,7 @@
 </head>
 <body>
     <div id="app">
-        
+
     <body class="nav-md admin">
     <div class="container body admin">
       <div class="main_container">
@@ -65,7 +65,7 @@
                   <li><a><i class="fa fa-edit"></i> Form <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('domain.baru') }}">Domain</a></li>
-                      <li><a href="{{ route('server.baru') }}">Server</a></li>
+                      {{-- <li><a href="{{ route('server.baru') }}">Server</a></li> --}}
                       @admin
                       <li><a href="{{ route('redirect.baru') }}">Redirect</a></li>
                       @endadmin
@@ -75,7 +75,7 @@
                     <ul class="nav child_menu">
                       <li><a href="{{ route('domain.list') }}">Domain</a></li>
                       <li><a href="{{ route('permintaan.list') }}">Permintaan</a></li>
-                      <li><a href="{{ route('server.list') }}">Server</a></li>
+                      {{-- <li><a href="{{ route('server.list') }}">Server</a></li> --}}
                       @admin
                       <li><a href="{{ route('redirect.list') }}">Redirect</a></li>
                       @endadmin
@@ -134,7 +134,7 @@
           </div>
         </div>
         <!-- /top navigation -->
-        
+
         <main>
             @yield('content')
         </main>

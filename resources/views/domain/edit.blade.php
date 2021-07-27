@@ -246,7 +246,7 @@
                                         <option>Reaktifasi Domain</option>
                                         <option>Ganti Domain</option>
                                         <option>Buat Domain Baru</option>
-                                        <option>Penambahakn Kuota</option>
+                                        <option>Penambahan Kuota</option>
                                         <option>Lainnya</option>
                                     </select>
 									<textarea id="keterangan" type="text" name="keterangan" class="form-control" hidden="true"

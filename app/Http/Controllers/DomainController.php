@@ -193,11 +193,6 @@ class DomainController extends Controller
         $domain->formal = 'nonformal';
         $domain->save();
 
-        EmailHelper::notifyStatus(
-            $permintaan,
-            'Domain berhasil ditandai nonformal'
-        );
-
         return redirect()
             ->back()
             ->with('message', 'Status Domain: nonformal');
@@ -213,11 +208,6 @@ class DomainController extends Controller
 
         $domain->formal = 'formal';
         $domain->save();
-
-        EmailHelper::notifyStatus(
-            $permintaan,
-            'Domain berhasil ditandai formal'
-        );
 
         return redirect()
             ->back()
